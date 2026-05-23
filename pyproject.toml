@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pmx-discrete-posterior"
+version = "0.1.1"
+description = "Laplace posterior probabilities for discrete pharmacometric states"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "LicenseRef-Proprietary-Research-Prototype"
+authors = [
+  {name = "AI-ready PMX benchmark engine contributors"}
+]
+keywords = [
+  "pharmacometrics",
+  "laplace-approximation",
+  "posterior-probability",
+  "adherence",
+  "therapeutic-drug-monitoring"
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Medical Science Apps."
+]
+dependencies = [
+  "numpy>=1.23"
+]
+
+[project.optional-dependencies]
+scipy = ["scipy>=1.9"]
+plots = ["matplotlib>=3.7"]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
