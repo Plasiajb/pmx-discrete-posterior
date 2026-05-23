@@ -156,6 +156,22 @@ class PublicApiContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             _posterior_function()(1.0, states, model, config)
 
+    def test_nonfinite_prior_and_duplicate_state_ids_are_rejected(self) -> None:
+        model = _build_model()
+        config = _build_config()
+        nonfinite_states = _build_states(
+            {"omega00": 0.25, "omega01": math.inf, "omega10": 0.25, "omega11": 0.25}
+        )
+        with self.assertRaises(ValueError):
+            _posterior_function()(1.0, nonfinite_states, model, config)
+
+        duplicate_states = (
+            pmx.DiscreteState(state_id="omega11", prior=0.5),
+            pmx.DiscreteState(state_id="omega11", prior=0.5),
+        )
+        with self.assertRaises(ValueError):
+            _posterior_function()(model.prediction("omega11", 0.0), duplicate_states, model, config)
+
     def test_vector_observation_is_explicitly_out_of_scope(self) -> None:
         model = _build_model()
         config = _build_config()
@@ -178,6 +194,65 @@ class PublicApiContractTests(unittest.TestCase):
             payload = _curve_function()([model.prediction("omega11", 0.0)], states, model, config)
             self.assertTrue(any("nonpositive_or_nonfinite_hessian" in row["warnings"] for row in payload["long_rows"]))
             self.assertTrue(any(bool(row["indeterminate"]) for row in payload["point_parameter_rows"]))
+
+    def test_optimizer_boundary_hit_and_unsuccessful_optimizer_are_indeterminate(self) -> None:
+        model = _build_model()
+        config = _build_config()
+        states = _build_states()
+        observation = model.prediction("omega11", 0.0)
+
+        boundary_result = pmx.BoundedMinimum(
+            x=config.eta_upper,
+            fun=0.0,
+            success=True,
+            method="mock_boundary",
+        )
+        with patch("pmx_discrete_posterior.engine.minimize_bounded", return_value=boundary_result):
+            result = _posterior_function()(observation, states, model, config)
+            self.assertTrue(result.indeterminate)
+            self.assertTrue(any("eta_hat_at_optimizer_boundary" in item for item in result.warnings))
+            self.assertTrue(all(diag.boundary_hit for diag in result.diagnostics.values()))
+
+        unsuccessful_result = pmx.BoundedMinimum(
+            x=0.0,
+            fun=0.0,
+            success=False,
+            method="mock_unsuccessful",
+            message="forced failure",
+        )
+        with patch("pmx_discrete_posterior.engine.minimize_bounded", return_value=unsuccessful_result):
+            result = _posterior_function()(observation, states, model, config)
+            self.assertTrue(result.indeterminate)
+            self.assertTrue(any("optimizer_reported_unsuccessful" in item for item in result.warnings))
+            self.assertTrue(all(not diag.optimizer_success for diag in result.diagnostics.values()))
+
+    def test_residual_and_omega_clamping_are_reported_as_warnings(self) -> None:
+        model = _build_model()
+        config_cls = _config_class()
+        config = config_cls(omega_variance=-1.0, residual_sd=0.0)
+        states = _build_states()
+
+        result = _posterior_function()(model.prediction("omega11", 0.0), states, model, config)
+
+        self.assertAlmostEqual(sum(result.posterior.values()), 1.0, places=10)
+        self.assertTrue(any("residual_sd_clamped" in item for item in result.warnings))
+        self.assertTrue(any("omega_variance_clamped" in item for item in result.warnings))
+
+    def test_state_permutation_preserves_posterior_after_remapping(self) -> None:
+        model = _build_model()
+        config = _build_config()
+        states = _build_states()
+        observation = model.prediction("omega10", 0.0)
+
+        result_original = _posterior_function()(observation, states, model, config)
+        result_reversed = _posterior_function()(observation, tuple(reversed(states)), model, config)
+
+        original = _posterior_dict(result_original)
+        reversed_posterior = _posterior_dict(result_reversed)
+        self.assertEqual(set(original), set(reversed_posterior))
+        for scenario in SCENARIOS:
+            self.assertAlmostEqual(original[scenario], reversed_posterior[scenario], places=12)
+        self.assertEqual(result_original.map_state_id, result_reversed.map_state_id)
 
     def test_oxc_state_metadata_exposes_event_level_taken_missed_semantics(self) -> None:
         states = _build_states()
