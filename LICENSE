@@ -1,0 +1,24 @@
+Controlled-Access Research Prototype License
+
+Copyright (c) 2026 AI-ready PMX benchmark engine contributors.
+All rights reserved.
+
+This software is a controlled-access research prototype. It is provided only
+for manuscript review, collaborator audit, reproducibility assessment, and
+related non-clinical research evaluation when explicit access has been granted
+by the copyright holder or corresponding project authors.
+
+No permission is granted to copy, redistribute, sublicense, sell, publish,
+commercially exploit, or incorporate this software into clinical decision
+support, regulated medical-device software, production healthcare workflows, or
+patient-care systems without a separate written agreement.
+
+The software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to warranties of merchantability, fitness
+for a particular purpose, non-infringement, accuracy, or clinical suitability.
+The authors are not liable for any claim, damages, or other liability arising
+from use of the software.
+
+This license is intentionally not an open-source license. If an open-source or
+public redistribution route is later selected, this file must be replaced by
+the author-approved license before public release.

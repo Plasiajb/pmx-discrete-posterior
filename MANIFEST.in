@@ -1,0 +1,6 @@
+include LICENSE
+include RELEASE_NOTES.md
+include CITATION.cff
+include PACKAGE_STATUS_20260521.md
+include GITHUB_RELEASE_CHECKLIST.md
+recursive-include examples *.py

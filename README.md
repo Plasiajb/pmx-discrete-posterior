@@ -1,6 +1,6 @@
 # pmx-discrete-posterior
 
-Small research package for model-conditional posterior probabilities over a finite set of pharmacometric states. The current implementation supports a one-ETA OXC validation path and an experimental multi-ETA stress-test path.
+Small research package for model-conditional posterior probabilities over a finite set of predefined discrete states in pharmacometric models. The current implementation supports a one-ETA OXC validation path and an experimental multi-ETA stress-test path.
 
 The probabilities are conditional on the model, candidate states, priors, IIV/RUV assumptions, covariates, dosing history, and observation. They are not direct evidence of true adherence and should not be used as standalone clinical decisions.
 
@@ -28,6 +28,29 @@ Pr(k | y) = prior_k * L_k / sum_j(prior_j * L_j)
 Zero prior mass is treated as a structural zero by default. Non-positive Hessian, optimizer-boundary, and optimizer-failure cases are marked as indeterminate in diagnostics rather than silently treated as fully valid posteriors.
 
 The package does not bundle NONMEM. NONMEM `$MIX`/`$MIXTURE` PMIX outputs are an optional licensed reference path outside the core Python calculation.
+
+## Release Status
+
+Version `0.1.1` is prepared as a controlled-access manuscript/reviewer release
+candidate. It is not an open-source release, not a public PyPI release, and not
+a clinical decision-support tool. This snapshot uses the included
+controlled-access research prototype license. Public/open-source relicensing,
+external repository visibility, DOI archiving, and journal-facing availability
+wording remain author decisions before external submission.
+
+## Installation
+
+From a checked-out repository:
+
+```bash
+python -m pip install -e ".[scipy,plots,test]"
+```
+
+From a local release wheel:
+
+```bash
+python -m pip install pmx_discrete_posterior-0.1.1-py3-none-any.whl
+```
 
 ## Minimal Usage
 

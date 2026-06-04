@@ -62,6 +62,39 @@ source_zip: see the current Phase112 SHA256SUMS.txt manifest
 
 Boundary: Phase112 supports local controlled-access manuscript/reviewer release/archive wording. It does not support public release, open-source release, PyPI/TestPyPI release, Zenodo/DOI release, or external journal availability wording until the author-approved repository/archive route and license terms are finalized.
 
+## 2026-06-04 GitHub Release Preparation Update
+
+The package has been prepared for a controlled-access GitHub release workflow.
+The formal package tag for a GitHub release should be `v0.1.1`, while the older
+`v0.1.1-manuscript-phase112` tag remains the local manuscript/reviewer archive
+tag.
+
+Release-preparation files added:
+
+```text
+LICENSE
+RELEASE_NOTES.md
+CITATION.cff
+MANIFEST.in
+GITHUB_RELEASE_CHECKLIST.md
+.github/workflows/ci.yml
+```
+
+Local release checks completed after these additions:
+
+```text
+compileall: exit code 0
+unittest discover: exit code 0; 24 tests OK
+wheel/sdist build: exit code 0
+twine check dist/*: PASSED
+sdist examples inclusion: confirmed
+```
+
+The included `LICENSE` is a controlled-access research prototype license, not
+an open-source license. Public repository visibility, Zenodo/DOI archiving,
+PyPI/TestPyPI publication, and any open-source relicensing remain separate
+author decisions.
+
 ## Public API
 
 - `DiscreteState`

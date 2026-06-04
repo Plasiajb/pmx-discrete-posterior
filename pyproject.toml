@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pmx-discrete-posterior"
 version = "0.1.1"
-description = "Laplace posterior probabilities for discrete pharmacometric states"
+description = "Laplace posterior probabilities for predefined discrete states in pharmacometric models"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "LicenseRef-Proprietary-Research-Prototype"
@@ -30,6 +30,10 @@ classifiers = [
 dependencies = [
   "numpy>=1.23"
 ]
+
+[project.urls]
+Homepage = "https://github.com/Plasiajb/pmx-discrete-posterior"
+Repository = "https://github.com/Plasiajb/pmx-discrete-posterior"
 
 [project.optional-dependencies]
 scipy = ["scipy>=1.9"]

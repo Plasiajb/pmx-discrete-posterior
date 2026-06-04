@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "pmx-discrete-posterior"
+message: "If you use this research prototype, please cite the associated manuscript or software release once available."
+type: software
+version: "0.1.1"
+date-released: "2026-06-04"
+abstract: "Laplace posterior probabilities for predefined discrete states in pharmacometric models."
+authors:
+  - name: "AI-ready PMX benchmark engine contributors"
+license: "LicenseRef-Proprietary-Research-Prototype"
+repository-code: "https://github.com/Plasiajb/pmx-discrete-posterior"
+keywords:
+  - pharmacometrics
+  - Laplace approximation
+  - posterior probability
+  - therapeutic drug monitoring
+  - adherence
