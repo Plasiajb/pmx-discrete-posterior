@@ -1,8 +1,8 @@
-# pmx_discrete_posterior Package Status - 2026-05-21
+# pmx_discrete_posterior Package Status - updated 2026-06-04
 
 ## Status
 
-`pmx_discrete_posterior` is now a project-local editable Python package for Laplace posterior probabilities over finite discrete pharmacometric states.
+`pmx_discrete_posterior` is a project-local Python package for Laplace posterior probabilities over predefined discrete states in pharmacometrics.
 
 Use current manuscript wording for the main validation:
 
@@ -10,7 +10,57 @@ Use current manuscript wording for the main validation:
 Python-based Laplace framework/prototype package, with OXC same-assumption validation focused on the one-ETA case and a supplementary multi-ETA stress test.
 ```
 
-Do not yet call it a mature general-purpose public package.
+Do not call it a mature general-purpose public package, an open-source package, a public GitHub/PyPI/DOI release, a NONMEM replacement, or a clinical decision-support tool.
+
+## 2026-06-04 Release Archive Update
+
+The package root is now a local git repository:
+
+```text
+path: D:/AI-ready PMX benchmark engine/pmx_discrete_posterior
+branch: main
+release tag: v0.1.1-manuscript-phase112
+release commit: recorded in the Phase112 RELEASE_INFO.md and SHA256SUMS.txt files
+previous tag: v0.1.1-manuscript
+remote: none configured
+version: 0.1.1
+license metadata: LicenseRef-Proprietary-Research-Prototype
+standalone LICENSE file: absent
+```
+
+A Phase112 controlled-access local manuscript/reviewer release archive was created:
+
+```text
+archive_root: JPKPD_IMA_Laplace_Manuscript_20260521/software_releases/phase112_pmx_discrete_posterior_v0.1.1_local_release_20260604/
+release_info: RELEASE_INFO.md
+sha256_manifest: SHA256SUMS.txt
+wheel: dist/pmx_discrete_posterior-0.1.1-py3-none-any.whl
+sdist: dist/pmx_discrete_posterior-0.1.1.tar.gz
+git_bundle: source_archives/pmx_discrete_posterior_v0.1.1-manuscript-phase112.git.bundle
+source_zip: source_archives/pmx_discrete_posterior_v0.1.1-manuscript-phase112_source.zip
+```
+
+Phase112 verification results:
+
+```text
+compileall: exit code 0
+unittest discover: exit code 0; 24 tests OK
+import check: exit code 0; __version__ == 0.1.1
+wheel/sdist build: exit code 0
+git bundle: exit code 0
+git source archive: exit code 0
+```
+
+Key Phase112 SHA-256 values:
+
+```text
+wheel: d2d0e5379e5777e89f239ca5fee14d227fd69f05739424a36957e51378903533
+sdist: dae426ef2629d6144bb22e4cb4b234f22405913dcda2552bcf854727aca470f5
+git_bundle: see the current Phase112 SHA256SUMS.txt manifest
+source_zip: see the current Phase112 SHA256SUMS.txt manifest
+```
+
+Boundary: Phase112 supports local controlled-access manuscript/reviewer release/archive wording. It does not support public release, open-source release, PyPI/TestPyPI release, Zenodo/DOI release, or external journal availability wording until the author-approved repository/archive route and license terms are finalized.
 
 ## Public API
 
@@ -140,7 +190,7 @@ Log: `JPKPD_IMA_Laplace_Manuscript_20260521/logs/phase65d_pmx_discrete_posterior
 
 Source manifest: `JPKPD_IMA_Laplace_Manuscript_20260521/tables/phase65d_package_source_manifest_20260522.csv`.
 
-The package root is not currently a git repository. Use the source manifest hash above as a local reproducibility checksum until a repository tag, release archive, or DOI is created.
+The historical Phase65D note above has been superseded by the Phase112 git and release-archive state. Use the Phase112 tag, archive root, `RELEASE_INFO.md`, and `SHA256SUMS.txt` manifest for current manuscript/reviewer reproducibility wording.
 
 ## Article Figure Rule
 
