@@ -1,6 +1,6 @@
 # Release Notes
 
-## v0.1.2 - Public open-source manuscript release
+## v0.1.3 - Public open-source manuscript release
 
 Date: 2026-06-04
 
@@ -39,3 +39,5 @@ public PyPI release.
 - The package calculations are conditional on the supplied model, candidate
   states, priors, variability assumptions, observations, and reference-route
   provenance.
+- Internal manuscript-status files are not included in the repository or source
+  distribution for this release.
