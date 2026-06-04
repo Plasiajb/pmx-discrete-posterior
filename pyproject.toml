@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pmx-discrete-posterior"
-version = "0.1.1"
+version = "0.1.2"
 description = "Laplace posterior probabilities for predefined discrete states in pharmacometric models"
 readme = "README.md"
 requires-python = ">=3.10"
-license = "LicenseRef-Proprietary-Research-Prototype"
+license = "MIT"
 authors = [
   {name = "AI-ready PMX benchmark engine contributors"}
 ]

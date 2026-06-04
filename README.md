@@ -31,13 +31,11 @@ The package does not bundle NONMEM. NONMEM `$MIX`/`$MIXTURE` PMIX outputs are an
 
 ## Release Status
 
-Version `0.1.1` is released through a private/controlled GitHub release for
-manuscript review, collaborator audit, and reproducibility assessment. It is not
-an open-source release, not a public PyPI release, and not a clinical
-decision-support tool. This snapshot uses the included controlled-access
-research prototype license. Public/open-source relicensing, DOI archiving,
-PyPI publication, and final journal-facing availability wording remain author
-decisions before external submission.
+Version `0.1.2` is available as a public open-source GitHub repository and
+release for manuscript review, collaborator audit, and reproducibility
+assessment. The package is distributed under the MIT License. It is not a public
+PyPI release, not a NONMEM replacement, and not a clinical decision-support
+tool. DOI archiving and PyPI publication remain separate author decisions.
 
 ## Installation
 
@@ -50,7 +48,7 @@ python -m pip install -e ".[scipy,plots,test]"
 From a local release wheel:
 
 ```bash
-python -m pip install pmx_discrete_posterior-0.1.1-py3-none-any.whl
+python -m pip install pmx_discrete_posterior-0.1.2-py3-none-any.whl
 ```
 
 ## Minimal Usage

@@ -10,7 +10,7 @@ Use current manuscript wording for the main validation:
 Python-based Laplace framework/prototype package, with OXC same-assumption validation focused on the one-ETA case and a supplementary multi-ETA stress test.
 ```
 
-Do not call it a mature general-purpose public package, an open-source package, a public GitHub/PyPI/DOI release, a NONMEM replacement, or a clinical decision-support tool.
+Do not call it a mature general-purpose package, a public PyPI/DOI release, a NONMEM replacement, or a clinical decision-support tool. After Phase116, the GitHub repository/release may be described as public and open source under the MIT License.
 
 ## 2026-06-04 Release Archive Update
 
@@ -64,8 +64,8 @@ Boundary: Phase112 supports local controlled-access manuscript/reviewer release/
 
 ## 2026-06-04 GitHub Release Update
 
-The package has been released through a private/controlled GitHub release for
-manuscript review, collaborator audit, and reproducibility assessment. The
+The package has been released through a public GitHub release for manuscript
+review, collaborator audit, and reproducibility assessment. The
 formal package tag for this GitHub release is `v0.1.1`, while the older
 `v0.1.1-manuscript-phase112` tag remains the local manuscript/reviewer archive
 tag.
@@ -91,10 +91,9 @@ twine check dist/*: PASSED
 sdist examples inclusion: confirmed
 ```
 
-The included `LICENSE` is a controlled-access research prototype license, not
-an open-source license. The GitHub release is private/controlled, not public.
-Zenodo/DOI archiving, PyPI/TestPyPI publication, and any open-source relicensing
-remain separate author decisions.
+The included `LICENSE` is MIT. The GitHub repository/release is public and open
+source for manuscript review and reproducibility assessment. Zenodo/DOI
+archiving and PyPI/TestPyPI publication remain separate author decisions.
 
 ## Public API
 

@@ -1,7 +1,7 @@
 # GitHub Release Checklist
 
-This checklist records the intended controlled-access GitHub release procedure
-for `pmx-discrete-posterior==0.1.1`.
+This checklist records the GitHub release procedure
+for `pmx-discrete-posterior==0.1.2`.
 
 ## Pre-Release Checks
 
@@ -13,15 +13,15 @@ python -m compileall -q src tests examples
 python -m unittest discover -s tests -v
 python -m build --sdist --wheel
 python -m twine check \
-  dist/pmx_discrete_posterior-0.1.1-py3-none-any.whl \
-  dist/pmx_discrete_posterior-0.1.1.tar.gz
+  dist/pmx_discrete_posterior-0.1.2-py3-none-any.whl \
+  dist/pmx_discrete_posterior-0.1.2.tar.gz
 ```
 
 Expected release assets:
 
 ```text
-dist/pmx_discrete_posterior-0.1.1-py3-none-any.whl
-dist/pmx_discrete_posterior-0.1.1.tar.gz
+dist/pmx_discrete_posterior-0.1.2-py3-none-any.whl
+dist/pmx_discrete_posterior-0.1.2.tar.gz
 dist/SHA256SUMS.txt
 ```
 
@@ -30,7 +30,7 @@ dist/SHA256SUMS.txt
 Use the formal package tag for the GitHub release:
 
 ```bash
-git tag -a v0.1.1 -m "pmx-discrete-posterior v0.1.1"
+git tag -a v0.1.2 -m "pmx-discrete-posterior v0.1.2"
 ```
 
 ## GitHub Remote
@@ -46,27 +46,26 @@ If the repository already exists:
 ```bash
 git remote add origin https://github.com/Plasiajb/pmx-discrete-posterior.git
 git push -u origin main
-git push origin v0.1.1
+git push origin v0.1.2
 ```
 
 ## GitHub Release
 
-Create a controlled-access GitHub release from the pushed tag. With GitHub CLI:
+Create the GitHub release from the pushed tag. With GitHub CLI:
 
 ```bash
-gh release create v0.1.1 dist/* \
-  --title "pmx-discrete-posterior v0.1.1" \
+gh release create v0.1.2 dist/* \
+  --title "pmx-discrete-posterior v0.1.2" \
   --notes-file RELEASE_NOTES.md \
   --verify-tag
 ```
 
-If using the GitHub web UI, create the release from tag `v0.1.1`, paste
+If using the GitHub web UI, create the release from tag `v0.1.2`, paste
 `RELEASE_NOTES.md`, and upload the two files in `dist/` plus
 `dist/SHA256SUMS.txt`.
 
 ## Boundary
 
-This release uses the included controlled-access research prototype license. Do
-not describe it as open source, public PyPI, Zenodo DOI, or clinical
-decision-support software unless those routes are separately approved and
-completed.
+This release uses the included MIT License. Do not describe it as public PyPI,
+Zenodo DOI, or clinical decision-support software unless those routes are
+separately approved and completed.

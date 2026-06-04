@@ -1,10 +1,10 @@
 # Release Notes
 
-## v0.1.1 - Controlled-access manuscript release
+## v0.1.2 - Public open-source manuscript release
 
 Date: 2026-06-04
 
-This private/controlled GitHub release archives the `pmx-discrete-posterior`
+This public GitHub release archives the open-source `pmx-discrete-posterior`
 research package used for the manuscript validation analyses.
 
 ### Included
@@ -26,15 +26,14 @@ research package used for the manuscript validation analyses.
 
 ### Boundary
 
-This is a controlled-access research prototype release for manuscript review
-and collaborator audit under the included controlled-access license. It is not a
-clinical decision-support tool, not a NONMEM replacement, and not an open-source
-or public PyPI release.
+This is a public open-source research package release under the MIT License. It
+is not a clinical decision-support tool, not a NONMEM replacement, and not a
+public PyPI release.
 
 ### Known Limitations
 
-- DOI/institutional archiving, PyPI publication, and any public/open-source
-  relicensing remain manuscript-submission decisions.
+- DOI/institutional archiving and PyPI publication remain manuscript-submission
+  decisions.
 - NONMEM runtime, compiler, and licensed local-environment artifacts are not
   redistributed.
 - The package calculations are conditional on the supplied model, candidate
