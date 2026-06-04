@@ -54,8 +54,8 @@ git source archive: exit code 0
 Key Phase112 SHA-256 values:
 
 ```text
-wheel: d2d0e5379e5777e89f239ca5fee14d227fd69f05739424a36957e51378903533
-sdist: dae426ef2629d6144bb22e4cb4b234f22405913dcda2552bcf854727aca470f5
+wheel: see the current Phase112 SHA256SUMS.txt manifest
+sdist: see the current Phase112 SHA256SUMS.txt manifest
 git_bundle: see the current Phase112 SHA256SUMS.txt manifest
 source_zip: see the current Phase112 SHA256SUMS.txt manifest
 ```
