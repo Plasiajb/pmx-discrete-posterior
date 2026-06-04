@@ -62,14 +62,15 @@ source_zip: see the current Phase112 SHA256SUMS.txt manifest
 
 Boundary: Phase112 supports local controlled-access manuscript/reviewer release/archive wording. It does not support public release, open-source release, PyPI/TestPyPI release, Zenodo/DOI release, or external journal availability wording until the author-approved repository/archive route and license terms are finalized.
 
-## 2026-06-04 GitHub Release Preparation Update
+## 2026-06-04 GitHub Release Update
 
-The package has been prepared for a controlled-access GitHub release workflow.
-The formal package tag for a GitHub release should be `v0.1.1`, while the older
+The package has been released through a private/controlled GitHub release for
+manuscript review, collaborator audit, and reproducibility assessment. The
+formal package tag for this GitHub release is `v0.1.1`, while the older
 `v0.1.1-manuscript-phase112` tag remains the local manuscript/reviewer archive
 tag.
 
-Release-preparation files added:
+Release files added:
 
 ```text
 LICENSE
@@ -91,9 +92,9 @@ sdist examples inclusion: confirmed
 ```
 
 The included `LICENSE` is a controlled-access research prototype license, not
-an open-source license. Public repository visibility, Zenodo/DOI archiving,
-PyPI/TestPyPI publication, and any open-source relicensing remain separate
-author decisions.
+an open-source license. The GitHub release is private/controlled, not public.
+Zenodo/DOI archiving, PyPI/TestPyPI publication, and any open-source relicensing
+remain separate author decisions.
 
 ## Public API
 

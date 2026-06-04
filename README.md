@@ -31,12 +31,13 @@ The package does not bundle NONMEM. NONMEM `$MIX`/`$MIXTURE` PMIX outputs are an
 
 ## Release Status
 
-Version `0.1.1` is prepared as a controlled-access manuscript/reviewer release
-candidate. It is not an open-source release, not a public PyPI release, and not
-a clinical decision-support tool. This snapshot uses the included
-controlled-access research prototype license. Public/open-source relicensing,
-external repository visibility, DOI archiving, and journal-facing availability
-wording remain author decisions before external submission.
+Version `0.1.1` is released through a private/controlled GitHub release for
+manuscript review, collaborator audit, and reproducibility assessment. It is not
+an open-source release, not a public PyPI release, and not a clinical
+decision-support tool. This snapshot uses the included controlled-access
+research prototype license. Public/open-source relicensing, DOI archiving,
+PyPI publication, and final journal-facing availability wording remain author
+decisions before external submission.
 
 ## Installation
 
