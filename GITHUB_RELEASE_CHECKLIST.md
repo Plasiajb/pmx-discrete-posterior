@@ -12,7 +12,9 @@ python -m pip install -e ".[scipy,plots,test]" build twine
 python -m compileall -q src tests examples
 python -m unittest discover -s tests -v
 python -m build --sdist --wheel
-python -m twine check dist/*
+python -m twine check \
+  dist/pmx_discrete_posterior-0.1.1-py3-none-any.whl \
+  dist/pmx_discrete_posterior-0.1.1.tar.gz
 ```
 
 Expected release assets:
