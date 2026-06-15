@@ -1,5 +1,52 @@
 # Release Notes
 
+## v0.1.4 - Posterior evidence reporting layer release
+
+Date: 2026-06-15
+
+This GitHub release updates the open-source `pmx-discrete-posterior` research
+package with a lightweight reporting layer for model-conditioned posterior
+evidence summaries.
+
+### Added
+
+- `NoCallRule` and `DEFAULT_NO_CALL_RULE` for prespecified weak-separation
+  reporting diagnostics.
+- `summarize_posterior_evidence()` to convert posterior results into stable
+  report objects containing MAP state, posterior margin, normalized entropy,
+  no-call status, numerical warnings, state rows, and provenance-friendly
+  metadata.
+- `posterior_to_long_rows()` and `posterior_to_wide_row()` for audit tables.
+- `build_case_card()` for manuscript/report wording that preserves the
+  model-conditioned boundary.
+- `threshold_sensitivity_panel()` and `reweight_prior_sensitivity()` for
+  reporting-rule and prior-sensitivity analyses from existing posterior
+  evidence.
+- `build_provenance_manifest()` for compact reproducibility metadata.
+
+### Changed
+
+- The public API now exports the reporting-layer objects and helpers.
+- The OXC PMIX-DV example test now writes to unique temporary directories to
+  avoid stale Windows file-lock interference.
+- README usage examples now include the reporting-layer workflow.
+
+### Verification
+
+- `python -m unittest discover -s tests -v`
+- `python -m pip wheel . -w dist --no-deps --no-build-isolation`
+- `python -c "import setuptools.build_meta as bm; print(bm.build_sdist('dist'))"`
+- Wheel and sdist metadata inspected as version `0.1.4`.
+- `dist/SHA256SUMS.txt` generated for release assets.
+
+### Boundary
+
+This release does not change the Laplace engine. It adds a reporting layer for
+auditable posterior evidence summaries. It is not a clinical decision-support
+tool, not a NONMEM replacement, not a public PyPI release, and does not include
+private FOCE-like manuscript diagnostics that have not been promoted into the
+public package API.
+
 ## v0.1.3 - Public open-source manuscript release
 
 Date: 2026-06-04

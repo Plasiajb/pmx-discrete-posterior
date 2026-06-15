@@ -5,6 +5,7 @@ import importlib.util
 import shutil
 import sys
 import unittest
+import uuid
 from collections import defaultdict
 from pathlib import Path
 
@@ -28,9 +29,7 @@ def _load_example_module():
 class Oxc4PmixDvExampleTests(unittest.TestCase):
     def test_example_generates_normalized_curve_csv_summary_and_png(self) -> None:
         module = _load_example_module()
-        output_dir = PROJECT_ROOT / "tests" / "_tmp_oxc4_pmix_dv_example"
-        if output_dir.exists():
-            shutil.rmtree(output_dir)
+        output_dir = PROJECT_ROOT / "tests" / "_tmp_oxc4_pmix_dv_example_runs" / uuid.uuid4().hex
         try:
             code = module.main(["--output-dir", str(output_dir), "--points", "9"])
             self.assertEqual(code, 0)
@@ -57,7 +56,7 @@ class Oxc4PmixDvExampleTests(unittest.TestCase):
                 self.assertAlmostEqual(sum(float(row["PMIX"]) for row in point_rows), 1.0, places=10)
         finally:
             if output_dir.exists():
-                shutil.rmtree(output_dir)
+                shutil.rmtree(output_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":

@@ -31,7 +31,7 @@ The package does not bundle NONMEM. NONMEM `$MIX`/`$MIXTURE` PMIX outputs are an
 
 ## Release Status
 
-Version `0.1.3` is available as a public open-source GitHub repository and
+Version `0.1.4` is available as a public open-source GitHub repository and
 release for manuscript review, collaborator audit, and reproducibility
 assessment. The package is distributed under the MIT License. It is not a public
 PyPI release, not a NONMEM replacement, and not a clinical decision-support
@@ -48,7 +48,7 @@ python -m pip install -e ".[scipy,plots,test]"
 From a local release wheel:
 
 ```bash
-python -m pip install pmx_discrete_posterior-0.1.3-py3-none-any.whl
+python -m pip install pmx_discrete_posterior-0.1.4-py3-none-any.whl
 ```
 
 ## Minimal Usage
@@ -87,6 +87,35 @@ print(result.posterior)
 curve = build_laplace_curve_payload([2.5, 6.3, 11.7, 15.5], states, model, config)
 print(curve["long_rows"][0])
 ```
+
+## Posterior Evidence Reporting Layer
+
+The package also exposes a lightweight reporting layer for manuscript and audit
+workflows. It does not change the Laplace calculation; it summarizes an existing
+posterior result into report-ready fields:
+
+```python
+from pmx_discrete_posterior import (
+    NoCallRule,
+    build_case_card,
+    posterior_to_long_rows,
+    posterior_to_wide_row,
+    summarize_posterior_evidence,
+)
+
+rule = NoCallRule(rule_id="NC_DEFAULT", margin_threshold=0.10, entropy_threshold=0.80)
+report = summarize_posterior_evidence(result, rule=rule, case_metadata={"case_id": "example"})
+print(report.map_state_id, report.margin, report.normalized_entropy, report.no_call)
+print(build_case_card(report)["interpretation"])
+rows = posterior_to_long_rows(report)
+wide = posterior_to_wide_row(report)
+```
+
+The reporting layer is intended to support model-conditioned posterior evidence
+summaries: posterior vector, MAP state, posterior margin, normalized entropy,
+no-call status, numerical warnings, and provenance fields. The default no-call
+rule is a prespecified reporting diagnostic for weak posterior separation, not a
+validated clinical abstention rule.
 
 ## OXC4 PMIX-DV Plot
 
