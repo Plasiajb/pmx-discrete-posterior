@@ -1,0 +1,57 @@
+﻿case_id,family,subfamily,core,state_count,laplace_valid,ghq_stable,native_valid,ghq_order,ghq_source,three_route_eligible,description
+TAC001,reference,two_eta_reference,True,4,True,True,True,241,original_sequence,True,Reference reduced model
+TAC002,model_variability,cl_f_l_h,True,4,True,True,True,241,original_sequence,True,cl_f_l_h multiplied by 0.8
+TAC003,model_variability,cl_f_l_h,False,4,True,True,True,241,original_sequence,True,cl_f_l_h multiplied by 1.2
+TAC004,model_variability,v1_f_l,True,4,True,True,True,241,original_sequence,True,v1_f_l multiplied by 0.8
+TAC005,model_variability,v1_f_l,False,4,True,True,True,241,original_sequence,True,v1_f_l multiplied by 1.2
+TAC006,model_variability,q_f_l_h,True,4,True,True,True,241,original_sequence,True,q_f_l_h multiplied by 0.8
+TAC007,model_variability,q_f_l_h,False,4,True,True,True,241,original_sequence,True,q_f_l_h multiplied by 1.2
+TAC008,model_variability,v2_f_l,True,4,True,True,True,241,original_sequence,True,v2_f_l multiplied by 0.8
+TAC009,model_variability,v2_f_l,False,4,True,True,True,241,original_sequence,True,v2_f_l multiplied by 1.2
+TAC010,model_variability,ka_h,True,4,True,True,True,241,original_sequence,True,ka_h multiplied by 0.8
+TAC011,model_variability,ka_h,False,4,True,True,True,241,original_sequence,True,ka_h multiplied by 1.2
+TAC012,model_variability,lag,True,4,True,True,True,241,original_sequence,True,Lag 0.2 h
+TAC013,model_variability,lag,False,4,True,True,True,241,original_sequence,True,Lag 0.8 h
+TAC014,model_variability,eta_cl_cv,True,4,True,True,True,121,original_sequence,True,eta_cl_cv = 0.2
+TAC015,model_variability,eta_cl_cv,False,4,True,True,True,641,prespecified_high_order_continuation,True,eta_cl_cv = 0.45
+TAC016,model_variability,eta_v1_cv,True,4,True,True,True,241,original_sequence,True,eta_v1_cv = 0.3
+TAC017,model_variability,eta_v1_cv,False,4,True,True,True,241,original_sequence,True,eta_v1_cv = 0.65
+TAC018,model_variability,joint_iiv,True,4,True,True,True,641,prespecified_high_order_continuation,True,Both ETA CVs moderately raised
+TAC019,model_variability,proportional_ruv,True,4,True,True,True,241,original_sequence,True,Proportional SD 0.25
+TAC020,model_variability,additive_ruv,True,4,True,True,True,241,original_sequence,True,Additive SD 0.10 ng/mL
+TAC021,model_variability,joint_low_ruv,False,4,True,True,True,641,prespecified_high_order_continuation,True,Narrow likelihood numerical sentinel
+TAC022,model_variability,eta_correlation,True,4,True,True,True,241,original_sequence,True,"ETA correlation -0.3; numerical sensitivity, not literature covariance"
+TAC023,model_variability,eta_correlation,True,4,True,True,True,241,original_sequence,True,"ETA correlation 0.3; numerical sensitivity, not literature covariance"
+TAC024,candidate_prior,two_states,True,2,True,True,True,241,original_sequence,True,Only neither/both recent doses
+TAC025,candidate_prior,two_states,False,2,True,True,True,241,original_sequence,True,Only one of two recent doses
+TAC026,candidate_prior,favor_11,False,4,True,True,True,241,original_sequence,True,favor_11
+TAC027,candidate_prior,favor_00,False,4,True,True,True,241,original_sequence,True,favor_00
+TAC028,candidate_prior,moderate_unequal,True,4,True,True,True,241,original_sequence,True,moderate_unequal
+TAC029,candidate_prior,structural_zero,False,4,True,True,True,241,original_sequence,True,structural_zero
+TAC030,candidate_prior,eight_uniform,True,8,True,True,True,241,original_sequence,True,"Three chronological recent doses (-12,0,12); history ends at -24 h"
+TAC031,candidate_prior,eight_unequal,False,8,True,True,True,241,original_sequence,True,"Three chronological recent doses (-12,0,12); history ends at -24 h"
+TAC032,dose_history,all_amounts,True,4,True,True,True,241,original_sequence,True,All recorded doses 2.5 mg; DV unchanged
+TAC033,dose_history,all_amounts,False,4,True,True,True,241,original_sequence,True,All recorded doses 7.5 mg; DV unchanged
+TAC034,dose_history,first_amount,False,4,True,True,True,241,original_sequence,True,Earlier recent dose 2.5 mg
+TAC035,dose_history,second_amount,False,4,True,True,True,241,original_sequence,True,Later recent dose 7.5 mg
+TAC036,dose_history,recent_time,False,4,True,True,True,241,original_sequence,True,"Recent doses at (-2.0, 12.0); prior history unchanged"
+TAC037,dose_history,recent_time,True,4,True,True,True,241,original_sequence,True,"Recent doses at (2.0, 12.0); prior history unchanged"
+TAC038,dose_history,recent_time,False,4,True,True,True,241,original_sequence,True,"Recent doses at (0.0, 10.0); prior history unchanged"
+TAC039,dose_history,recent_time,True,4,True,True,True,241,original_sequence,True,"Recent doses at (0.0, 14.0); prior history unchanged"
+TAC040,dose_history,history_window,False,4,True,True,True,241,original_sequence,True,Exactly 24 fixed prior doses
+TAC041,dose_history,history_window,True,4,True,True,True,241,original_sequence,True,Exactly 60 fixed prior doses
+TAC042,dose_history,history_window,False,4,True,True,True,241,original_sequence,True,Exactly 0 fixed prior doses
+TAC043,dose_history,interval,False,4,True,True,True,241,original_sequence,True,"q8 prior history and recent doses at 0,8; DV at 24 unchanged"
+TAC044,observation,time_fixed_dv,False,4,True,True,True,241,original_sequence,True,"Single observation at 13.0 h; fixed DV 12, not regenerated"
+TAC045,observation,time_fixed_dv,False,4,True,True,True,241,original_sequence,True,"Single observation at 14.0 h; fixed DV 12, not regenerated"
+TAC046,observation,time_fixed_dv,True,4,True,True,True,241,original_sequence,True,"Single observation at 16.0 h; fixed DV 12, not regenerated"
+TAC047,observation,time_fixed_dv,False,4,True,True,True,241,original_sequence,True,"Single observation at 20.0 h; fixed DV 12, not regenerated"
+TAC048,observation,time_fixed_dv,False,4,True,True,True,241,original_sequence,True,"Single observation at 36.0 h; fixed DV 12, not regenerated"
+TAC049,observation,joint_count,True,4,True,True,True,641,prespecified_high_order_continuation,True,Fixed numerical observations; one shared individual ETA pair
+TAC050,observation,joint_count,False,4,True,True,True,641,prespecified_high_order_continuation,True,Fixed numerical observations; one shared individual ETA pair
+TAC051,observation,joint_count,False,4,True,True,True,641,prespecified_high_order_continuation,True,Fixed numerical observations; one shared individual ETA pair
+TAC052,observation,dv,False,4,True,True,True,241,original_sequence,True,Fixed single DV 6.0 ng/mL
+TAC053,observation,dv,True,4,True,True,True,241,original_sequence,True,Fixed single DV 10.0 ng/mL
+TAC054,observation,dv,False,4,True,True,True,241,original_sequence,True,Fixed single DV 18.0 ng/mL
+TAC055,observation,joint_dv,False,4,True,True,True,641,prespecified_high_order_continuation,True,"Joint DV perturbation at 14,24 h"
+TAC056,observation,pre_lag,False,4,True,True,True,241,original_sequence,True,Observation before later dose absorption begins; fixed DV unchanged

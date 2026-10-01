@@ -1,0 +1,88 @@
+{
+  "case": {
+    "case": "SCN003",
+    "analysis_id": "SCN003__hill219_profile_v2",
+    "numeric_target_changed": false,
+    "numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d",
+    "prior_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d",
+    "profile_regenerated": false,
+    "candidate_states": [
+      {
+        "state_id": "omega00",
+        "prior": 0.25,
+        "subpop": 1
+      },
+      {
+        "state_id": "omega01",
+        "prior": 0.25,
+        "subpop": 2
+      },
+      {
+        "state_id": "omega10",
+        "prior": 0.25,
+        "subpop": 3
+      },
+      {
+        "state_id": "omega11",
+        "prior": 0.25,
+        "subpop": 4
+      }
+    ],
+    "input": "inputs/SCN003__hill219_profile_v2/current_input.json",
+    "source_input_sha256": "5c346503cc0f8e30a23b678a5720ca16c83feee62e67d22dc5db6bc553c8dc0e",
+    "public_input_sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d",
+    "parent_source_input_sha256": "47a94159168dbc45366868b2a884afd3134fc153c6849159362f8653e568f68d",
+    "family": "Model and variability perturbations",
+    "source_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d",
+    "parent_source_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d",
+    "parent_public_input": "../historical/v1_1/oxc_primary_gamma219/inputs/SCN003__gamma219_v1/current_input.json",
+    "parent_analysis_id": "SCN003__gamma219_v1"
+  },
+  "repeat_1_bindings": [
+    {
+      "case": "SCN003",
+      "route": "package_laplace",
+      "scientific_repeat": 1,
+      "actual_repeat": 1,
+      "execution_analysis_id": "SCN003__gamma219_v1",
+      "execution_origin": "verified_reuse",
+      "result": "../historical/v1_1/oxc_primary_gamma219/raw/package_primary/SCN003__gamma219_v1/package_laplace/order_041/repeat_001/result.json",
+      "source_result_sha256": "c5aa1812c766e1fe720246574b6fe577edd1cc7b35ecddacf0e9e7237a1091bf",
+      "public_result_sha256": "eafcd8e045d6794f93ccaa58070a4a061d8a5af7f1698cf9b976ef18b43be162",
+      "executed_input_sha256": "47a94159168dbc45366868b2a884afd3134fc153c6849159362f8653e568f68d",
+      "public_input_sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d",
+      "current_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d",
+      "parent_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d"
+    },
+    {
+      "case": "SCN003",
+      "route": "aghq41",
+      "scientific_repeat": 1,
+      "actual_repeat": 1,
+      "execution_analysis_id": "SCN003__gamma219_v1",
+      "execution_origin": "verified_reuse",
+      "result": "../historical/v1_1/oxc_primary_gamma219/raw/package_primary/SCN003__gamma219_v1/aghq41/order_041/repeat_001/result.json",
+      "source_result_sha256": "57fb68d297e8d6ff53b8b87e660e97b09fde9838f354184a1f995e11d7adfcf2",
+      "public_result_sha256": "891332a7c5a917f6da8d3b4e04a826f651fe8d8c843d8826a7fb52d64826a45a",
+      "executed_input_sha256": "47a94159168dbc45366868b2a884afd3134fc153c6849159362f8653e568f68d",
+      "public_input_sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d",
+      "current_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d",
+      "parent_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d"
+    },
+    {
+      "case": "SCN003",
+      "route": "nonmem_pmix",
+      "scientific_repeat": 1,
+      "actual_repeat": 1,
+      "execution_analysis_id": "SCN003__gamma219_v1",
+      "execution_origin": "verified_reuse",
+      "result": "../historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/result.json",
+      "source_result_sha256": "ab1fea5a72ec7c7757fed8397ae5c1b7a39eaf366592669e6dba1dafac484b10",
+      "public_result_sha256": "a7cb11ab31f73e02f4269b699be369144e2e55ed454493546ab7047209b60006",
+      "executed_input_sha256": "47a94159168dbc45366868b2a884afd3134fc153c6849159362f8653e568f68d",
+      "public_input_sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d",
+      "current_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d",
+      "parent_numeric_target_sha256": "2b86481b1c6720900e9404ce4e10fd06baf0d72320195f25623faa0818302b6d"
+    }
+  ]
+}

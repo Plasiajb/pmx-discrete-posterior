@@ -1,0 +1,316 @@
+{
+  "status": "PASS",
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "runner_sha256": "c8c3ae23cb969926dc7fda8316133b18db781a750769cffb3de33c299812d5fa",
+  "subset_manifest_sha256": "043b41a8d8eeb7ddbe9c925eaee9af99c3a9332369f457ab147c7db27f5fb90c",
+  "requirements_sha256": "74548674defdcc92df87c4a9958b7cc0a49c366d8037ce34892938588ba265bd",
+  "source_unchanged": true,
+  "source_audit": {
+    "status": "PASS",
+    "byte_exact_ESM_members": 46,
+    "TAC_files_equal_to_clone_after_checkout_line_ending_normalization": 6,
+    "inference_model_files_equal_between_frozen_trees_and_normalized_clone": [
+      "api.py",
+      "engine.py",
+      "multieta.py",
+      "oxc.py"
+    ],
+    "V26_OXC_reporting_layer_differs_from_tag_preserved_unmodified": [
+      "__init__.py",
+      "reporting.py"
+    ],
+    "source_archive_sha256": "a7bdaef0e80e50ee931f1895bf1f6c0dcb388e22301171bb162ec99718781b88"
+  },
+  "commands": [
+    {
+      "name": "tamper_check_0",
+      "entry": "run_demo.py",
+      "arguments": [
+        "verify"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "elapsed_seconds": 0.13953559997025877,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "tamper_check_0.log"
+    },
+    {
+      "name": "tamper_check_1",
+      "entry": "run_demo.py",
+      "arguments": [
+        "verify"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "elapsed_seconds": 0.10752469999715686,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "tamper_check_1.log"
+    },
+    {
+      "name": "oxc_both",
+      "entry": "run_demo.py",
+      "arguments": [
+        "oxc",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.777356399979908,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "oxc_both.log"
+    },
+    {
+      "name": "tac_both",
+      "entry": "run_demo.py",
+      "arguments": [
+        "tac",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.8589329000096768,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "tac_both.log"
+    },
+    {
+      "name": "oxc_laplace",
+      "entry": "run_demo.py",
+      "arguments": [
+        "oxc",
+        "--case",
+        "SCN003",
+        "--route",
+        "laplace",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.7543863999890164,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "oxc_laplace.log",
+      "comparisons": {
+        "posterior": 0.0,
+        "log_evidence": 0.0
+      }
+    },
+    {
+      "name": "oxc_ghq",
+      "entry": "run_demo.py",
+      "arguments": [
+        "oxc",
+        "--case",
+        "SCN003",
+        "--route",
+        "ghq",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.7954829999944195,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "oxc_ghq.log",
+      "comparisons": {
+        "posterior": 0.0,
+        "log_evidence": 0.0
+      }
+    },
+    {
+      "name": "tac_laplace",
+      "entry": "run_demo.py",
+      "arguments": [
+        "tac",
+        "--case",
+        "TAC001",
+        "--route",
+        "laplace",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.8064305000007153,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "tac_laplace.log",
+      "comparisons": {
+        "posterior": 0.0
+      }
+    },
+    {
+      "name": "tac_ghq",
+      "entry": "run_demo.py",
+      "arguments": [
+        "tac",
+        "--case",
+        "TAC001",
+        "--route",
+        "ghq",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.819795899966266,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "tac_ghq.log",
+      "comparisons": {
+        "posterior": 0.0,
+        "log_evidence": 0.0
+      }
+    },
+    {
+      "name": "covariance_guards",
+      "entry": "frozen/tac/scripts/test_inference_domain.py",
+      "arguments": [],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.7920589999994263,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "covariance_guards.log",
+      "tests": 8,
+      "negative_entry_calls": 40,
+      "positive_controls": [
+        "diagonal SPD analytic Gaussian",
+        "correlated SPD analytic Gaussian"
+      ]
+    },
+    {
+      "name": "unsupported_0",
+      "entry": "run_demo.py",
+      "arguments": [
+        "oxc",
+        "--case",
+        "SCN043",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "elapsed_seconds": 0.0959333999780938,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "unsupported_0.log"
+    },
+    {
+      "name": "unsupported_1",
+      "entry": "run_demo.py",
+      "arguments": [
+        "tac",
+        "--case",
+        "TAC046",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "elapsed_seconds": 0.09310149995144457,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "unsupported_1.log"
+    },
+    {
+      "name": "unsupported_2",
+      "entry": "run_demo.py",
+      "arguments": [
+        "oxc",
+        "--route",
+        "native",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "elapsed_seconds": 0.09475029999157414,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "unsupported_2.log"
+    },
+    {
+      "name": "unsupported_3",
+      "entry": "run_demo.py",
+      "arguments": [
+        "tac",
+        "--nodes",
+        "641",
+        "--output",
+        "<fresh-output>"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "elapsed_seconds": 0.0940783999976702,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "unsupported_3.log"
+    },
+    {
+      "name": "verify",
+      "entry": "run_demo.py",
+      "arguments": [
+        "verify"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.11116640002001077,
+      "source_guard": "audit-hook enforced",
+      "python_flags": [
+        "-I",
+        "-B"
+      ],
+      "output_log": "verify.log"
+    }
+  ],
+  "scope": "Windows; same scientific environment; no clean dependency installation or Linux verification"
+}

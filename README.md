@@ -51,6 +51,20 @@ From a local release wheel:
 python -m pip install pmx_discrete_posterior-0.1.4-py3-none-any.whl
 ```
 
+## Manuscript Review Demos
+
+The [oxcarbazepine and tacrolimus demos](examples/manuscript_demos/README.md)
+provide two reproducible cases from the current manuscript analysis. Each case
+includes its inputs, frozen calculation code, saved reference results, and
+checks for a newly computed posterior vector. The oxcarbazepine case explicitly
+uses a Hill coefficient of 219; the tacrolimus case uses the guarded covariance
+interface for the two-compartment model.
+
+These demos have their own dependency instructions and source manifest. They
+run without a NONMEM installation. Any NONMEM probabilities shown by a demo
+are saved comparator results, not a new NONMEM execution. The examples below
+remain general package examples and are separate from the manuscript demos.
+
 ## Minimal Usage
 
 ```python

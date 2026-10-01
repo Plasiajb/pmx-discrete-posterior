@@ -1,0 +1,35 @@
+{
+  "time_origin_h": -1440.0,
+  "native_time_rule": "TIME=original_time-time_origin_h",
+  "lag_rule": "ALAG1 only; dose times are NOT pre-lagged",
+  "lagged_f1_rule": "CALLFL=-2 and $BIND DSEQ=DOSE retain the initiating dose tag at lagged delivery",
+  "history_rule": "finite zero initial condition; each known dose once; no SS/ADDL",
+  "simultaneous_order": "dose before observation; oral depot has no instantaneous central jump",
+  "state_order": [
+    {
+      "SUBPOP": 1,
+      "state_id": "00",
+      "prior": 0.25
+    },
+    {
+      "SUBPOP": 2,
+      "state_id": "01",
+      "prior": 0.25
+    },
+    {
+      "SUBPOP": 3,
+      "state_id": "10",
+      "prior": 0.25
+    },
+    {
+      "SUBPOP": 4,
+      "state_id": "11",
+      "prior": 0.25
+    }
+  ],
+  "DSEQ": "0=shared historical dose or observation; 1..N=chronological recent dose",
+  "prediction_only": false,
+  "eta_rule": "native shared individual ETA(1:2)",
+  "scope": "native_posterior",
+  "scenario_sha256": "691adf6d273df5480bb85a8b22d77210dbffa219883da09b380652324856c6d1"
+}

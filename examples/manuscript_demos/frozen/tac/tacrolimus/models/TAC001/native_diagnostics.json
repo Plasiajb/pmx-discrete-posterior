@@ -1,0 +1,234 @@
+{
+  "eligible": true,
+  "status": "accepted",
+  "nonmem_version": "7.5.0",
+  "reviewed_version": "7.5.0",
+  "missing_evidence": [],
+  "failed_checks": [],
+  "required_markers": {
+    "maxeval_zero": true,
+    "laplacian_evaluation": true,
+    "fixed_parameter_omission": true,
+    "conditional_estimates": true,
+    "laplacian": true,
+    "interaction": true,
+    "final_estimates": true,
+    "listing_completion": true,
+    "listing_stop_time": true,
+    "command_start": true,
+    "command_completion": true
+  },
+  "messages": {
+    "failures": [],
+    "unresolved": [],
+    "expected": [
+      {
+        "source": "model.lst",
+        "line": 34,
+        "text": "$ERROR",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "model.lst",
+        "line": 61,
+        "text": "WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "model.lst",
+        "line": 63,
+        "text": "(WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.",
+        "code": "nmtran_warning_2_population"
+      },
+      {
+        "source": "model.lst",
+        "line": 65,
+        "text": "(WARNING  66) WITH \"LAPLACIAN\" AND \"INTERACTION\", \"NUMERICAL\" AND \"SLOW\"",
+        "code": "nmtran_warning_66_supplied_options"
+      },
+      {
+        "source": "model.lst",
+        "line": 100,
+        "text": "0DEFAULT THETA BOUNDARY TEST OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "model.lst",
+        "line": 104,
+        "text": "0DEFAULT OMEGA BOUNDARY TEST OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "model.lst",
+        "line": 106,
+        "text": "0DEFAULT SIGMA BOUNDARY TEST OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "model.lst",
+        "line": 124,
+        "text": "0TABLES STEP OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "model.lst",
+        "line": 183,
+        "text": "0ERROR SUBROUTINE CALLED WITH EVERY EVENT RECORD.",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "model.lst",
+        "line": 190,
+        "text": "ESTIMATION STEP OMITTED:                 YES",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.log",
+        "line": 8,
+        "text": "WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.log",
+        "line": 10,
+        "text": "(WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.",
+        "code": "nmtran_warning_2_population"
+      },
+      {
+        "source": "command.log",
+        "line": 12,
+        "text": "(WARNING  66) WITH \"LAPLACIAN\" AND \"INTERACTION\", \"NUMERICAL\" AND \"SLOW\"",
+        "code": "nmtran_warning_66_supplied_options"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 1,
+        "text": "$ERROR",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 2,
+        "text": "WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 3,
+        "text": "(WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.",
+        "code": "nmtran_warning_2_population"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 4,
+        "text": "(WARNING  66) WITH \"LAPLACIAN\" AND \"INTERACTION\", \"NUMERICAL\" AND \"SLOW\"",
+        "code": "nmtran_warning_66_supplied_options"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 5,
+        "text": "0DEFAULT THETA BOUNDARY TEST OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 6,
+        "text": "0DEFAULT OMEGA BOUNDARY TEST OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 7,
+        "text": "0DEFAULT SIGMA BOUNDARY TEST OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 8,
+        "text": "0TABLES STEP OMITTED:    NO",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 9,
+        "text": "0ERROR SUBROUTINE CALLED WITH EVERY EVENT RECORD.",
+        "code": "expected_route_message"
+      },
+      {
+        "source": "command.diagnostic_lines",
+        "line": 10,
+        "text": "ESTIMATION STEP OMITTED:                 YES",
+        "code": "expected_route_message"
+      }
+    ]
+  },
+  "latent_diagnostics": {
+    "failures": [],
+    "missing": [],
+    "states": [
+      {
+        "subpop": 1,
+        "state_id": "00",
+        "prior": 0.25,
+        "failures": [],
+        "missing": [],
+        "checks": [
+          "phm_finite_ETA(1)",
+          "phm_finite_ETA(2)",
+          "phm_finite_OBJ",
+          "phm_ETC_positive_definite",
+          "shm_ETC_not_reported"
+        ],
+        "status": "accepted"
+      },
+      {
+        "subpop": 2,
+        "state_id": "01",
+        "prior": 0.25,
+        "failures": [],
+        "missing": [],
+        "checks": [
+          "phm_finite_ETA(1)",
+          "phm_finite_ETA(2)",
+          "phm_finite_OBJ",
+          "phm_ETC_positive_definite",
+          "shm_ETC_not_reported"
+        ],
+        "status": "accepted"
+      },
+      {
+        "subpop": 3,
+        "state_id": "10",
+        "prior": 0.25,
+        "failures": [],
+        "missing": [],
+        "checks": [
+          "phm_finite_ETA(1)",
+          "phm_finite_ETA(2)",
+          "phm_finite_OBJ",
+          "phm_ETC_positive_definite",
+          "shm_ETC_not_reported"
+        ],
+        "status": "accepted"
+      },
+      {
+        "subpop": 4,
+        "state_id": "11",
+        "prior": 0.25,
+        "failures": [],
+        "missing": [],
+        "checks": [
+          "phm_finite_ETA(1)",
+          "phm_finite_ETA(2)",
+          "phm_finite_OBJ",
+          "phm_ETC_positive_definite",
+          "shm_ETC_not_reported"
+        ],
+        "status": "accepted"
+      }
+    ]
+  },
+  "global_optimization_certified": false,
+  "scope": "Recognized failure screen plus finite state diagnostics; not global optimization or integration accuracy",
+  "unknown_policy": "Exclude from comparisons pending documented scientific diagnostic review; no automatic override"
+}

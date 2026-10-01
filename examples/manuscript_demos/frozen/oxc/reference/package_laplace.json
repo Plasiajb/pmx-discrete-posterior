@@ -1,0 +1,198 @@
+{
+  "case": "SCN003",
+  "analysis_id": "SCN003__gamma219_v1",
+  "route": "package_laplace",
+  "repeat": 1,
+  "nodes": null,
+  "input_sha256": "47a94159168dbc45366868b2a884afd3134fc153c6849159362f8653e568f68d",
+  "registry_sha256": "1ce9292d18eeda75be92bd7a2d9e8c48e406303a4ff57e189e70900842e8c135",
+  "source_lock_sha256": "06aa972dbf122624e49fbaaa278b34032d69d60ce0502b61b4f8dcf4a275e1f9",
+  "started_utc": "2026-09-28T08:00:40.121367+00:00",
+  "command": [
+    "[private-source-65d9fba35788]",
+    "manuscript_revision_execution_20260928/10_oxc_gamma219_primary/execute.py",
+    "package"
+  ],
+  "fresh_evaluation": true,
+  "posterior": {
+    "omega00": 0.006296645607555445,
+    "omega01": 0.11929098467368178,
+    "omega10": 0.5230692862165469,
+    "omega11": 0.351343083502216
+  },
+  "log_marginals": {
+    "omega00": -6.585526753230941,
+    "omega01": -3.643978043872374,
+    "omega10": -2.1658298678690704,
+    "omega11": -2.56378060963306
+  },
+  "diagnostics": {
+    "omega00": {
+      "state_id": "omega00",
+      "eta_hat": [
+        -0.12187500000000005
+      ],
+      "psi_hat": 5.373762652169286,
+      "laplace_log_likelihood": -6.585526753230941,
+      "log_prior": -1.3862943611198906,
+      "log_weight": -7.971821114350832,
+      "hessian_logdet": 4.261405268532657,
+      "hessian_min_eigenvalue": 70.90956044564223,
+      "pred_at_eta_hat": [
+        3.50066058288444
+      ],
+      "residual_sd_at_eta_hat": [
+        2.992
+      ],
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "boundary_hit": false,
+      "valid_laplace": true,
+      "indeterminate": false,
+      "warnings": []
+    },
+    "omega01": {
+      "state_id": "omega01",
+      "eta_hat": [
+        -0.10156250000000003
+      ],
+      "psi_hat": 2.2652650953765696,
+      "laplace_log_likelihood": -3.643978043872374,
+      "log_prior": -1.3862943611198906,
+      "log_weight": -5.030272404992265,
+      "hessian_logdet": 4.595302963400954,
+      "hessian_min_eigenvalue": 99.01812987322955,
+      "pred_at_eta_hat": [
+        7.538868331444508
+      ],
+      "residual_sd_at_eta_hat": [
+        2.992
+      ],
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "boundary_hit": false,
+      "valid_laplace": true,
+      "indeterminate": false,
+      "warnings": []
+    },
+    "omega10": {
+      "state_id": "omega10",
+      "eta_hat": [
+        -0.009937500000000002
+      ],
+      "psi_hat": 0.7490332194029568,
+      "laplace_log_likelihood": -2.1658298678690704,
+      "log_prior": -1.3862943611198906,
+      "log_weight": -3.552124228988961,
+      "hessian_logdet": 4.671470363341573,
+      "hessian_min_eigenvalue": 106.85474227667413,
+      "pred_at_eta_hat": [
+        11.52746210337046
+      ],
+      "residual_sd_at_eta_hat": [
+        2.992
+      ],
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "boundary_hit": false,
+      "valid_laplace": true,
+      "indeterminate": false,
+      "warnings": []
+    },
+    "omega11": {
+      "state_id": "omega11",
+      "eta_hat": [
+        0.05206250000000002
+      ],
+      "psi_hat": 1.0422037810004054,
+      "laplace_log_likelihood": -2.56378060963306,
+      "log_prior": -1.3862943611198906,
+      "log_weight": -3.9500749707529508,
+      "hessian_logdet": 4.881030723674654,
+      "hessian_min_eigenvalue": 131.766408673073,
+      "pred_at_eta_hat": [
+        13.88758331289084
+      ],
+      "residual_sd_at_eta_hat": [
+        2.992
+      ],
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "boundary_hit": false,
+      "valid_laplace": true,
+      "indeterminate": false,
+      "warnings": []
+    }
+  },
+  "vector_gate": {
+    "valid": true,
+    "checks": {
+      "count": true,
+      "unique": true,
+      "keyset": true,
+      "order": true,
+      "finite": true,
+      "range": true,
+      "sum": true
+    },
+    "raw_sum": 1.0000000000000002,
+    "sum_tolerance": 1e-06,
+    "raw_pairs": [
+      [
+        "omega00",
+        0.006296645607555445
+      ],
+      [
+        "omega01",
+        0.11929098467368178
+      ],
+      [
+        "omega10",
+        0.5230692862165469
+      ],
+      [
+        "omega11",
+        0.351343083502216
+      ]
+    ],
+    "normalized": {
+      "omega00": 0.0062966456075554435,
+      "omega01": 0.11929098467368175,
+      "omega10": 0.5230692862165468,
+      "omega11": 0.35134308350221594
+    },
+    "normalization_factor": 0.9999999999999998,
+    "max_printed_correction": 1.1102230246251565e-16
+  },
+  "mode_ok": true,
+  "finite_marginals": true,
+  "structural_zeros": true,
+  "eligible": true,
+  "config": {
+    "omega_covariance": [
+      [
+        0.012245714245884425
+      ]
+    ],
+    "additive_sd": 2.992,
+    "proportional_sd": 0.0,
+    "eta_lower": -5.0,
+    "eta_upper": 5.0,
+    "optimizer_method": "Nelder-Mead",
+    "optimizer_maxiter": 1000,
+    "derivative_step_min": 0.0001,
+    "derivative_step_scale": 0.0001,
+    "positive_floor": 1e-12,
+    "prior_policy": "structural_zero"
+  },
+  "candidate_order": [
+    "omega00",
+    "omega01",
+    "omega10",
+    "omega11"
+  ],
+  "adapter": "gamma219_stable_ratio_v1",
+  "package_version": "0.1.4",
+  "elapsed_seconds": 0.004423499995027669,
+  "finished_utc": "2026-09-28T08:00:40.125872+00:00"
+}

@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "date": "2026-10-01",
+  "platform": "Windows",
+  "runtime": {
+    "python": "3.12.0",
+    "numpy": "2.5.2",
+    "scipy": "1.16.2"
+  },
+  "fresh_dependency_installation": true,
+  "fresh_virtual_environment_without_system_site_packages": true,
+  "dependency_installation": "pip install --no-cache-dir -r requirements.txt; from PyPI wheels",
+  "relocated_path_with_spaces": true,
+  "source_unchanged_during_tests": true,
+  "fresh_commands": [
+    {
+      "case": "verify",
+      "exit_code": 0,
+      "elapsed_s": 0.11000000004423782
+    },
+    {
+      "case": "oxc",
+      "exit_code": 0,
+      "elapsed_s": 0.6559999999590218
+    },
+    {
+      "case": "tac",
+      "exit_code": 0,
+      "elapsed_s": 0.7030000000377186
+    }
+  ],
+  "runner_sha256": "c8c3ae23cb969926dc7fda8316133b18db781a750769cffb3de33c299812d5fa",
+  "subset_manifest_sha256": "043b41a8d8eeb7ddbe9c925eaee9af99c3a9332369f457ab147c7db27f5fb90c",
+  "requirements_sha256": "74548674defdcc92df87c4a9958b7cc0a49c366d8037ce34892938588ba265bd",
+  "wrapper_contract_tests": 11,
+  "original_covariance_tests": 8,
+  "negative_covariance_attempts_rejected_before_core": 40,
+  "analytic_positive_controls": 2,
+  "four_separate_route_replays": {
+    "oxc_laplace": {
+      "posterior": 0.0,
+      "log_evidence": 0.0
+    },
+    "oxc_ghq": {
+      "posterior": 0.0,
+      "log_evidence": 0.0
+    },
+    "tac_laplace": {
+      "posterior": 0.0
+    },
+    "tac_ghq": {
+      "posterior": 0.0,
+      "log_evidence": 0.0
+    }
+  },
+  "evidence": [
+    {
+      "file": "validation/fresh_windows_environment.json",
+      "sha256": "39ddacbc05f382217cb1e77587974eb5773363ee112ae3d1f1a9091d825c5d6c"
+    },
+    {
+      "file": "validation/wrapper_contract_tests.json",
+      "sha256": "3ae3d98f423c880b47331c20da15353a347e414793c66c0762399b88dcde89ca"
+    }
+  ],
+  "guard_scope": "CPython audit hook denies network, child processes and external project files; not an OS sandbox.",
+  "snapshot_note": "Fresh-environment evidence binds the final runner, requirements and frozen payload. Validation metadata were updated afterward; hashes inside raw receipts describe the tested snapshot.",
+  "linux_verified": false,
+  "macos_verified": false,
+  "live_nonmem_executed": false,
+  "full_grid_executed": false,
+  "original_scientific_source_modified": false
+}

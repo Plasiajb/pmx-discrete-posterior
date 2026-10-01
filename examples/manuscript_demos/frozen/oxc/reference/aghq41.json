@@ -1,0 +1,134 @@
+{
+  "case": "SCN003",
+  "analysis_id": "SCN003__gamma219_v1",
+  "route": "aghq41",
+  "repeat": 1,
+  "nodes": 41,
+  "input_sha256": "47a94159168dbc45366868b2a884afd3134fc153c6849159362f8653e568f68d",
+  "registry_sha256": "1ce9292d18eeda75be92bd7a2d9e8c48e406303a4ff57e189e70900842e8c135",
+  "source_lock_sha256": "06aa972dbf122624e49fbaaa278b34032d69d60ce0502b61b4f8dcf4a275e1f9",
+  "started_utc": "2026-09-28T08:00:40.244514+00:00",
+  "command": [
+    "[private-source-65d9fba35788]",
+    "manuscript_revision_execution_20260928/10_oxc_gamma219_primary/execute.py",
+    "package"
+  ],
+  "fresh_evaluation": true,
+  "posterior": {
+    "omega00": 0.006261507961770166,
+    "omega01": 0.11924557965913014,
+    "omega10": 0.5228031826323492,
+    "omega11": 0.3516897297467504
+  },
+  "log_marginals": {
+    "omega00": -6.592470293298784,
+    "omega01": -3.6457062766300563,
+    "omega10": -2.167686268464896,
+    "omega11": -2.5641420005536273
+  },
+  "diagnostics": {
+    "omega00": {
+      "eta_hat": -0.12187500000000005,
+      "hessian": 70.90956044564223,
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "valid_mode": true,
+      "warnings": []
+    },
+    "omega01": {
+      "eta_hat": -0.10156250000000003,
+      "hessian": 99.01812987322955,
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "valid_mode": true,
+      "warnings": []
+    },
+    "omega10": {
+      "eta_hat": -0.009937500000000002,
+      "hessian": 106.85474227667413,
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "valid_mode": true,
+      "warnings": []
+    },
+    "omega11": {
+      "eta_hat": 0.05206250000000002,
+      "hessian": 131.766408673073,
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully.",
+      "valid_mode": true,
+      "warnings": []
+    }
+  },
+  "vector_gate": {
+    "valid": true,
+    "checks": {
+      "count": true,
+      "unique": true,
+      "keyset": true,
+      "order": true,
+      "finite": true,
+      "range": true,
+      "sum": true
+    },
+    "raw_sum": 0.9999999999999999,
+    "sum_tolerance": 1e-06,
+    "raw_pairs": [
+      [
+        "omega00",
+        0.006261507961770166
+      ],
+      [
+        "omega01",
+        0.11924557965913014
+      ],
+      [
+        "omega10",
+        0.5228031826323492
+      ],
+      [
+        "omega11",
+        0.3516897297467504
+      ]
+    ],
+    "normalized": {
+      "omega00": 0.0062615079617701665,
+      "omega01": 0.11924557965913016,
+      "omega10": 0.5228031826323493,
+      "omega11": 0.35168972974675045
+    },
+    "normalization_factor": 1.0000000000000002,
+    "max_printed_correction": 1.1102230246251565e-16
+  },
+  "mode_ok": true,
+  "finite_marginals": true,
+  "structural_zeros": true,
+  "eligible": true,
+  "config": {
+    "omega_covariance": [
+      [
+        0.012245714245884425
+      ]
+    ],
+    "additive_sd": 2.992,
+    "proportional_sd": 0.0,
+    "eta_lower": -5.0,
+    "eta_upper": 5.0,
+    "optimizer_method": "Nelder-Mead",
+    "optimizer_maxiter": 1000,
+    "derivative_step_min": 0.0001,
+    "derivative_step_scale": 0.0001,
+    "positive_floor": 1e-12,
+    "prior_policy": "structural_zero"
+  },
+  "candidate_order": [
+    "omega00",
+    "omega01",
+    "omega10",
+    "omega11"
+  ],
+  "adapter": "gamma219_stable_ratio_v1",
+  "package_version": "0.1.4",
+  "elapsed_seconds": 0.005292500005452894,
+  "finished_utc": "2026-09-28T08:00:40.251060+00:00"
+}

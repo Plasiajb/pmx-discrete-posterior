@@ -1,0 +1,406 @@
+{
+  "case": "SCN003",
+  "analysis_id": "SCN003__gamma219_v1",
+  "phase": "formal",
+  "variant": "centered",
+  "repeat": 1,
+  "offset": 2.4937554372832,
+  "input_sha256": "47a94159168dbc45366868b2a884afd3134fc153c6849159362f8653e568f68d",
+  "registry_sha256": "1ce9292d18eeda75be92bd7a2d9e8c48e406303a4ff57e189e70900842e8c135",
+  "source_lock_sha256": "06aa972dbf122624e49fbaaa278b34032d69d60ce0502b61b4f8dcf4a275e1f9",
+  "expected_states": [
+    {
+      "state_id": "omega00",
+      "prior": 0.25,
+      "subpop": 1
+    },
+    {
+      "state_id": "omega01",
+      "prior": 0.25,
+      "subpop": 2
+    },
+    {
+      "state_id": "omega10",
+      "prior": 0.25,
+      "subpop": 3
+    },
+    {
+      "state_id": "omega11",
+      "prior": 0.25,
+      "subpop": 4
+    }
+  ],
+  "directory": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001",
+  "generated_control_sha256": "d6b5309e636a460cc1d8759fee750afd82433bfd9e708d17c21ec7bff8c7ae84",
+  "data_sha256": "8884dea096c34ade4e0ccb09cda0c746789517ca2086018642c61f1b54a7de09",
+  "phm": {
+    "header": [
+      "SUBJECT_NO",
+      "ID",
+      "SUBPOP",
+      "PMIX",
+      "ETA(1)",
+      "ETC(1,1)",
+      "OBJ"
+    ],
+    "rows": [
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 1.0,
+        "PMIX": 0.006296562422788328,
+        "ETA(1)": -0.12189457595889593,
+        "ETC(1,1)": 0.014102276645684452,
+        "OBJ": 8.83943473746635
+      },
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 2.0,
+        "PMIX": 0.11928778708636945,
+        "ETA(1)": -0.10159191263660983,
+        "ETC(1,1)": 0.010098746494747967,
+        "OBJ": 2.9563645072361684
+      },
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 3.0,
+        "PMIX": 0.5230730876038052,
+        "ETA(1)": -0.009907174196581917,
+        "ETC(1,1)": 0.009358752855248018,
+        "OBJ": 9.761940372374212e-09
+      },
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 4.0,
+        "PMIX": 0.3513425628870369,
+        "ETA(1)": 0.052070804265692924,
+        "ETC(1,1)": 0.007589261366922638,
+        "OBJ": 0.7959189917390215
+      }
+    ],
+    "raw_rows": [
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "1",
+        "PMIX": "6.2965624227883281E-03",
+        "ETA(1)": "-1.2189457595889593E-01",
+        "ETC(1,1)": "1.4102276645684452E-02",
+        "OBJ": "8.8394347374663500"
+      },
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "2",
+        "PMIX": "1.1928778708636945E-01",
+        "ETA(1)": "-1.0159191263660983E-01",
+        "ETC(1,1)": "1.0098746494747967E-02",
+        "OBJ": "2.9563645072361684"
+      },
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "3",
+        "PMIX": "5.2307308760380522E-01",
+        "ETA(1)": "-9.9071741965819169E-03",
+        "ETC(1,1)": "9.3587528552480179E-03",
+        "OBJ": "9.76194037237421153E-009"
+      },
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "4",
+        "PMIX": "3.5134256288703691E-01",
+        "ETA(1)": "5.2070804265692924E-02",
+        "ETC(1,1)": "7.5892613669226380E-03",
+        "OBJ": "0.79591899173902148"
+      }
+    ],
+    "errors": []
+  },
+  "shm": {
+    "header": [
+      "SUBJECT_NO",
+      "ID",
+      "SUBPOP",
+      "PMIX",
+      "ETS(1)"
+    ],
+    "rows": [
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 1.0,
+        "PMIX": 0.006296562422788328,
+        "ETS(1)": 1.01
+      },
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 2.0,
+        "PMIX": 0.11928778708636945,
+        "ETS(1)": 1.01
+      },
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 3.0,
+        "PMIX": 0.5230730876038052,
+        "ETS(1)": 1.01
+      },
+      {
+        "SUBJECT_NO": 1.0,
+        "ID": 1.0,
+        "SUBPOP": 4.0,
+        "PMIX": 0.3513425628870369,
+        "ETS(1)": 1.01
+      }
+    ],
+    "raw_rows": [
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "1",
+        "PMIX": "6.2965624227883281E-03",
+        "ETS(1)": "1.010000"
+      },
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "2",
+        "PMIX": "1.1928778708636945E-01",
+        "ETS(1)": "1.010000"
+      },
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "3",
+        "PMIX": "5.2307308760380522E-01",
+        "ETS(1)": "1.010000"
+      },
+      {
+        "SUBJECT_NO": "1",
+        "ID": "1",
+        "SUBPOP": "4",
+        "PMIX": "3.5134256288703691E-01",
+        "ETS(1)": "1.010000"
+      }
+    ],
+    "errors": []
+  },
+  "native_gate": {
+    "phm": {
+      "identity": true,
+      "finite_range": true,
+      "sum": 0.9999999999999999,
+      "sum_error": 1.1102230246251565e-16,
+      "structural_zeros": true,
+      "valid": true
+    },
+    "shm": {
+      "identity": true,
+      "finite_range": true,
+      "sum": 0.9999999999999999,
+      "sum_error": 1.1102230246251565e-16,
+      "structural_zeros": true,
+      "valid": true
+    },
+    "parity": true,
+    "parity_max": 0.0,
+    "eligible": true,
+    "tolerance": 1e-10
+  },
+  "diagnostic_gate": {
+    "eligible": true,
+    "status": "accepted",
+    "nonmem_version": "7.5.0",
+    "reviewed_version": "7.5.0",
+    "missing_evidence": [],
+    "failed_checks": [],
+    "required_markers": {
+      "maxeval_zero": true,
+      "laplacian_evaluation": true,
+      "fixed_parameter_omission": true,
+      "conditional_estimates": true,
+      "laplacian": true,
+      "interaction": true,
+      "final_estimates": true,
+      "listing_completion": true,
+      "listing_stop_time": true,
+      "command_start": true,
+      "command_completion": true
+    },
+    "messages": {
+      "failures": [],
+      "unresolved": [],
+      "expected": [
+        {
+          "source": "model.lst",
+          "line": 65,
+          "text": "WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1",
+          "code": "expected_route_message"
+        },
+        {
+          "source": "model.lst",
+          "line": 67,
+          "text": "(WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.",
+          "code": "nmtran_warning_2_population"
+        },
+        {
+          "source": "model.lst",
+          "line": 69,
+          "text": "(WARNING  66) WITH \"LAPLACIAN\" AND \"INTERACTION\", \"NUMERICAL\" AND \"SLOW\"",
+          "code": "nmtran_warning_66_supplied_options"
+        },
+        {
+          "source": "model.lst",
+          "line": 102,
+          "text": "0DEFAULT THETA BOUNDARY TEST OMITTED:    NO",
+          "code": "expected_route_message"
+        },
+        {
+          "source": "model.lst",
+          "line": 104,
+          "text": "0DEFAULT OMEGA BOUNDARY TEST OMITTED:    NO",
+          "code": "expected_route_message"
+        },
+        {
+          "source": "model.lst",
+          "line": 106,
+          "text": "0DEFAULT SIGMA BOUNDARY TEST OMITTED:    NO",
+          "code": "expected_route_message"
+        },
+        {
+          "source": "model.lst",
+          "line": 124,
+          "text": "0TABLES STEP OMITTED:    NO",
+          "code": "expected_route_message"
+        },
+        {
+          "source": "model.lst",
+          "line": 151,
+          "text": "ESTIMATION STEP OMITTED:                 YES",
+          "code": "expected_route_message"
+        },
+        {
+          "source": "command.log",
+          "line": 11,
+          "text": "WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1",
+          "code": "expected_route_message"
+        },
+        {
+          "source": "command.log",
+          "line": 13,
+          "text": "(WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.",
+          "code": "nmtran_warning_2_population"
+        },
+        {
+          "source": "command.log",
+          "line": 15,
+          "text": "(WARNING  66) WITH \"LAPLACIAN\" AND \"INTERACTION\", \"NUMERICAL\" AND \"SLOW\"",
+          "code": "nmtran_warning_66_supplied_options"
+        }
+      ]
+    },
+    "latent_diagnostics": {
+      "failures": [],
+      "missing": [],
+      "states": [
+        {
+          "subpop": 1,
+          "state_id": "omega00",
+          "prior": 0.25,
+          "failures": [],
+          "missing": [],
+          "checks": [
+            "phm_finite_ETA(1)",
+            "phm_finite_OBJ",
+            "phm_ETC_positive_definite",
+            "shm_ETC_not_reported"
+          ],
+          "status": "accepted"
+        },
+        {
+          "subpop": 2,
+          "state_id": "omega01",
+          "prior": 0.25,
+          "failures": [],
+          "missing": [],
+          "checks": [
+            "phm_finite_ETA(1)",
+            "phm_finite_OBJ",
+            "phm_ETC_positive_definite",
+            "shm_ETC_not_reported"
+          ],
+          "status": "accepted"
+        },
+        {
+          "subpop": 3,
+          "state_id": "omega10",
+          "prior": 0.25,
+          "failures": [],
+          "missing": [],
+          "checks": [
+            "phm_finite_ETA(1)",
+            "phm_finite_OBJ",
+            "phm_ETC_positive_definite",
+            "shm_ETC_not_reported"
+          ],
+          "status": "accepted"
+        },
+        {
+          "subpop": 4,
+          "state_id": "omega11",
+          "prior": 0.25,
+          "failures": [],
+          "missing": [],
+          "checks": [
+            "phm_finite_ETA(1)",
+            "phm_finite_OBJ",
+            "phm_ETC_positive_definite",
+            "shm_ETC_not_reported"
+          ],
+          "status": "accepted"
+        }
+      ]
+    },
+    "global_optimization_certified": false,
+    "scope": "Recognized failure screen plus finite state diagnostics; not global optimization or integration accuracy",
+    "unknown_policy": "Exclude from comparisons pending documented scientific diagnostic review; no automatic override"
+  },
+  "process_eligible": true,
+  "native_eligible": true,
+  "native_input_precision_eligible": true,
+  "command": {
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "runner.bat"
+    ],
+    "cwd": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001",
+    "timeout_seconds": 180,
+    "started_utc": "2026-09-28T08:15:44.572499+00:00",
+    "returncode": 0,
+    "timed_out": false,
+    "cleanup": null,
+    "environment": {
+      "TEMP": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001/temp",
+      "TMP": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001/temp",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "pid": 30724,
+    "process_tree_contained": true,
+    "elapsed_seconds": 3.942675700003747,
+    "finished_utc": "2026-09-28T08:15:48.515372+00:00"
+  },
+  "normalization_applied": false,
+  "native_files": {
+    "phm": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001/model.phm",
+    "shm": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001/model.shm",
+    "lst": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001/model.lst"
+  }
+}

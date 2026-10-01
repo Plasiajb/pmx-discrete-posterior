@@ -1,0 +1,6 @@
+TABLE NO.     1: Laplacian Conditional Estimation with Interaction (Evaluation): Problem=1 Subproblem=0 Superproblem1=0 Iteration1=0 Superproblem2=0 Iteration2=0
+ SUBJECT_NO               ID                       SUBPOP                   PMIX                     ETS(1)    ETS(2)
+            1                                    1            1               1.7834886189713192E-01  1.010000  1.010000
+            1                                    1            2               2.4514831594339556E-01  1.010000  1.010000
+            1                                    1            3               2.7552546970244679E-01  1.010000  1.010000
+            1                                    1            4               3.0097735245702584E-01  1.010000  1.010000

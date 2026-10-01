@@ -1,0 +1,33 @@
+{
+  "native_table_binary64_equal": true,
+  "expected": [
+    {
+      "ID": 1.0,
+      "TIME": 24.0,
+      "DV": 12.0,
+      "MDV": 0.0,
+      "WT": 25.0,
+      "AGE": 8.0,
+      "HT": 127.0
+    }
+  ],
+  "actual": [
+    {
+      "ID": 1.0,
+      "TIME": 24.0,
+      "DV": 12.0,
+      "MDV": 0.0,
+      "WT": 25.0,
+      "AGE": 8.0,
+      "HT": 127.0,
+      "IPRED": 11.526997752726274,
+      "PRED": -0.2584069325874574,
+      "RES": 0.0,
+      "WRES": 0.0
+    }
+  ],
+  "fit_source": {
+    "path": "raw_runs/formal/SCN003__gamma219_v1/centered/repeat_001/scn003_oxc_pmix_laplacian.fit",
+    "sha256": "5a19fa99afdd5d47a276dbfd064b7c0cbf9f79d45a11be29db34e072770c9548"
+  }
+}

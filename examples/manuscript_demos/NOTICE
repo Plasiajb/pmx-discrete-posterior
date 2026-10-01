@@ -1,0 +1,23 @@
+Manuscript reviewer demo subset, wrapper revision 1.
+
+The frozen ESM sources declaring pmx_discrete_posterior 0.1.4 are distributed
+unchanged under the MIT License. V26's OXC reporting/export layer has existing
+FSRS10 additions; it is not byte-identical to the tagged reporting layer.
+The inference/model core is preserved. Original notices are preserved at:
+  frozen/oxc/LICENSE
+  frozen/tac/source/pmx_discrete_posterior_v0.1.4/LICENSE
+
+The current OXC source carries the MIT notice in frozen/oxc/LICENSE.
+The new wrapper and project-authored study adapters and numerical fixtures
+are distributed with this project's MIT-licensed reviewer examples. Original
+copyright notices and provenance remain intact; no ownership of cited model
+publications or NONMEM software is claimed.
+
+Only allowlisted public ESM members are included. No NONMEM executable,
+compiler, license key, third-party font, private document or full archive is
+distributed. Native model text and saved numeric output are evidence from
+previous runs, not a NONMEM installation or evidence of a fresh native run.
+
+The wrapper is separate from the frozen scientific implementation. Its
+single-case restrictions, integrity checks and reporting are not a release
+fix to core v0.1.4. Numerical examples are not clinical decision support.

@@ -1,0 +1,235 @@
+{
+  "model": {
+    "model_id": "OXC_MHD_one_compartment_oral",
+    "drug": "OXC/MHD",
+    "structure": "one-compartment oral model; first-order absorption; first-order elimination",
+    "prediction_unit": "mg/L",
+    "v_l": 14.7,
+    "ka_h": 0.83,
+    "theta_cl_base_l_h": 1.68,
+    "theta_wt_exp_base": 0.624,
+    "theta_wt_exp_max_dec": 0.233,
+    "theta_wt_exp_hill": 219.0,
+    "theta_wt_exp_half": 8.97,
+    "wt_exp_formula": "theta_wt_exp_base - theta_wt_exp_max_dec * WT^theta_wt_exp_hill / (theta_wt_exp_half^theta_wt_exp_hill + WT^theta_wt_exp_hill)",
+    "cl_typical_formula": "theta_cl_base_l_h * (WT / 70)^wt_exp",
+    "iiv": {
+      "eta": "ETA_CL",
+      "model": "CL_i = CL_typical * exp(ETA_CL)",
+      "cv": 0.111,
+      "omega_variance": 0.012245714245884425
+    },
+    "ruv": {
+      "additive_sd_mg_l": 2.992,
+      "proportional_sd": 0.0,
+      "baseline_reason": "dashboard-mirrored near-off RUV; literature additive SD 2.992 mg/L is a sensitivity level"
+    },
+    "scenario_parameter_note": "RUV override from scenario row: additive_sd_mg_l=2.992",
+    "source_note": "Lin et al. model-aligned OXC/MHD benchmark; DOI 10.1007/s00228-018-2600-8; current formal claim remains source-locked benchmark until full source audit."
+  },
+  "patient": {
+    "age_years": 8,
+    "weight_kg": 25,
+    "height_cm": 127
+  },
+  "time_zero": {
+    "steady_state_at_time_zero": true,
+    "nonmem_dose_time_zero_epsilon_h": 0.0001,
+    "note": "Input dose event at 0 h is retained for user-facing semantics and exported as 0.0001 h for NONMEM datasets."
+  },
+  "dose_events_input": [
+    {
+      "id": "dose_001",
+      "time_h": 0,
+      "dose_mg": 300
+    },
+    {
+      "id": "dose_002",
+      "time_h": 12,
+      "dose_mg": 300
+    }
+  ],
+  "dose_events_for_nonmem": [
+    {
+      "id": "dose_001",
+      "time_h": 0,
+      "dose_mg": 300,
+      "input_time_h": 0.0,
+      "nonmem_time_h": 0.0001,
+      "nonmem_time_adjustment": "time_zero_to_0.0001"
+    },
+    {
+      "id": "dose_002",
+      "time_h": 12,
+      "dose_mg": 300,
+      "input_time_h": 12.0,
+      "nonmem_time_h": 12.0,
+      "nonmem_time_adjustment": "none"
+    }
+  ],
+  "observation_events": [
+    {
+      "id": "obs_001",
+      "time_h": 24,
+      "dv_mg_l": 12,
+      "enabled": true
+    }
+  ],
+  "candidate_definition": {
+    "candidate_ids": [
+      "omega00",
+      "omega01",
+      "omega10",
+      "omega11"
+    ],
+    "candidate_order": [
+      "omega00",
+      "omega01",
+      "omega10",
+      "omega11"
+    ],
+    "included_candidates": [
+      "omega00",
+      "omega01",
+      "omega10",
+      "omega11"
+    ],
+    "excluded_candidates": [],
+    "binary_code_convention": "omegaXY where X is the later scheduled dose event and Y is the earlier scheduled dose event; 1=given, 0=missed.",
+    "candidate_event_map": {
+      "omega00": {
+        "candidate_id": "omega00",
+        "assignments": [
+          {
+            "bit_index": 0,
+            "bit_order": "latest_to_older",
+            "bit_value": "0",
+            "dose_state": "missed",
+            "event_id": "dose_002",
+            "event_label": "dose_002",
+            "time_h": 12,
+            "dose_mg": 300
+          },
+          {
+            "bit_index": 1,
+            "bit_order": "latest_to_older",
+            "bit_value": "0",
+            "dose_state": "missed",
+            "event_id": "dose_001",
+            "event_label": "dose_001",
+            "time_h": 0,
+            "dose_mg": 300
+          }
+        ],
+        "given_dose_events": []
+      },
+      "omega01": {
+        "candidate_id": "omega01",
+        "assignments": [
+          {
+            "bit_index": 0,
+            "bit_order": "latest_to_older",
+            "bit_value": "0",
+            "dose_state": "missed",
+            "event_id": "dose_002",
+            "event_label": "dose_002",
+            "time_h": 12,
+            "dose_mg": 300
+          },
+          {
+            "bit_index": 1,
+            "bit_order": "latest_to_older",
+            "bit_value": "1",
+            "dose_state": "given",
+            "event_id": "dose_001",
+            "event_label": "dose_001",
+            "time_h": 0,
+            "dose_mg": 300
+          }
+        ],
+        "given_dose_events": [
+          {
+            "id": "dose_001",
+            "time_h": 0,
+            "dose_mg": 300
+          }
+        ]
+      },
+      "omega10": {
+        "candidate_id": "omega10",
+        "assignments": [
+          {
+            "bit_index": 0,
+            "bit_order": "latest_to_older",
+            "bit_value": "1",
+            "dose_state": "given",
+            "event_id": "dose_002",
+            "event_label": "dose_002",
+            "time_h": 12,
+            "dose_mg": 300
+          },
+          {
+            "bit_index": 1,
+            "bit_order": "latest_to_older",
+            "bit_value": "0",
+            "dose_state": "missed",
+            "event_id": "dose_001",
+            "event_label": "dose_001",
+            "time_h": 0,
+            "dose_mg": 300
+          }
+        ],
+        "given_dose_events": [
+          {
+            "id": "dose_002",
+            "time_h": 12,
+            "dose_mg": 300
+          }
+        ]
+      },
+      "omega11": {
+        "candidate_id": "omega11",
+        "assignments": [
+          {
+            "bit_index": 0,
+            "bit_order": "latest_to_older",
+            "bit_value": "1",
+            "dose_state": "given",
+            "event_id": "dose_002",
+            "event_label": "dose_002",
+            "time_h": 12,
+            "dose_mg": 300
+          },
+          {
+            "bit_index": 1,
+            "bit_order": "latest_to_older",
+            "bit_value": "1",
+            "dose_state": "given",
+            "event_id": "dose_001",
+            "event_label": "dose_001",
+            "time_h": 0,
+            "dose_mg": 300
+          }
+        ],
+        "given_dose_events": [
+          {
+            "id": "dose_002",
+            "time_h": 12,
+            "dose_mg": 300
+          },
+          {
+            "id": "dose_001",
+            "time_h": 0,
+            "dose_mg": 300
+          }
+        ]
+      }
+    }
+  },
+  "prior_vector": {
+    "omega00": 0.25,
+    "omega01": 0.25,
+    "omega10": 0.25,
+    "omega11": 0.25
+  }
+}

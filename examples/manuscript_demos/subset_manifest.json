@@ -1,0 +1,379 @@
+{
+  "schema": "manuscript-demo-subset-v1",
+  "source_release": "JPKPD_Submission_v1.2_20261001 / V26",
+  "source_archive": "ESM_2.zip",
+  "source_archive_sha256": "a7bdaef0e80e50ee931f1895bf1f6c0dcb388e22301171bb162ec99718781b88",
+  "nested_archive": {
+    "member": "historical/v1_1/archive/ESM_2_v16.zip",
+    "sha256": "3e310dc43d8440631f9bd7429b6b3f072870501dc90ed1fb6691d9b2577611d2"
+  },
+  "scope": "Allowlisted SCN003 and TAC001 subset, not a complete ESM verification",
+  "files": {
+    "frozen/oxc/source/portable_adapter.py": {
+      "sha256": "988c330e1c188eba2437b4a63d71749b3500bc86b2ffd4d971117a1322c4b6b1",
+      "bytes": 10373,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/source/portable_adapter.py",
+      "source_sha256": "988c330e1c188eba2437b4a63d71749b3500bc86b2ffd4d971117a1322c4b6b1"
+    },
+    "frozen/oxc/source/portable_support.py": {
+      "sha256": "1dc52b7c23b4f94b374ed9a1470e61e5fe1d3e89e41a57f4df00037953feb664",
+      "bytes": 11302,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/source/portable_support.py",
+      "source_sha256": "1dc52b7c23b4f94b374ed9a1470e61e5fe1d3e89e41a57f4df00037953feb664"
+    },
+    "frozen/oxc/source/portable_gates.py": {
+      "sha256": "b43dc85e2c146364fa42e38f651434144021757c3a6a62d2fcf7798206f51d5d",
+      "bytes": 7286,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/source/portable_gates.py",
+      "source_sha256": "b43dc85e2c146364fa42e38f651434144021757c3a6a62d2fcf7798206f51d5d"
+    },
+    "frozen/oxc/vendor/pmx_discrete_posterior/__init__.py": {
+      "sha256": "4057f17b68749df313e00b841da17c97425820a9224bb58e30fc915bcf770a73",
+      "bytes": 2993,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/vendor/pmx_discrete_posterior/__init__.py",
+      "source_sha256": "4057f17b68749df313e00b841da17c97425820a9224bb58e30fc915bcf770a73"
+    },
+    "frozen/oxc/vendor/pmx_discrete_posterior/api.py": {
+      "sha256": "db375640cdd8dfdb6945dfbb197b1216a2bf0d8daeb42cf462a0694a19bcafa2",
+      "bytes": 3023,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/vendor/pmx_discrete_posterior/api.py",
+      "source_sha256": "db375640cdd8dfdb6945dfbb197b1216a2bf0d8daeb42cf462a0694a19bcafa2"
+    },
+    "frozen/oxc/vendor/pmx_discrete_posterior/engine.py": {
+      "sha256": "d5833c4cd3b5050e12f27a233cca64112e08a1c2de46665c6aff05ce40b374a1",
+      "bytes": 14585,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/vendor/pmx_discrete_posterior/engine.py",
+      "source_sha256": "d5833c4cd3b5050e12f27a233cca64112e08a1c2de46665c6aff05ce40b374a1"
+    },
+    "frozen/oxc/vendor/pmx_discrete_posterior/multieta.py": {
+      "sha256": "0f4bc74e354c37e40b00fa1c6b8bd34c69e215412a69ac6f125a9c1e4f183036",
+      "bytes": 14752,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/vendor/pmx_discrete_posterior/multieta.py",
+      "source_sha256": "0f4bc74e354c37e40b00fa1c6b8bd34c69e215412a69ac6f125a9c1e4f183036"
+    },
+    "frozen/oxc/vendor/pmx_discrete_posterior/oxc.py": {
+      "sha256": "a2dd825c2a1d094aa4254c88aadf15b271ab505de7a25604b9579b254e37ea8c",
+      "bytes": 7047,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/vendor/pmx_discrete_posterior/oxc.py",
+      "source_sha256": "a2dd825c2a1d094aa4254c88aadf15b271ab505de7a25604b9579b254e37ea8c"
+    },
+    "frozen/oxc/vendor/pmx_discrete_posterior/reporting.py": {
+      "sha256": "7e4a8a4e9b2cebd1f39ec89b111475db2c39647ce8e7f991adcdff828ed244c3",
+      "bytes": 25180,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/vendor/pmx_discrete_posterior/reporting.py",
+      "source_sha256": "7e4a8a4e9b2cebd1f39ec89b111475db2c39647ce8e7f991adcdff828ed244c3"
+    },
+    "frozen/oxc/LICENSE": {
+      "sha256": "04ae07a09928ab19c96214abcd3896453bed0fa25024bc71f1d8fa3d2dcbbbb9",
+      "bytes": 1099,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/LICENSE",
+      "source_sha256": "04ae07a09928ab19c96214abcd3896453bed0fa25024bc71f1d8fa3d2dcbbbb9"
+    },
+    "frozen/oxc/current_input.json": {
+      "sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d",
+      "bytes": 6221,
+      "kind": "byte_exact",
+      "archive_member": "oxc_current_hill219/inputs/SCN003__hill219_profile_v2/current_input.json",
+      "source_sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d"
+    },
+    "frozen/oxc/parent_input.json": {
+      "sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d",
+      "bytes": 6221,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/inputs/SCN003__gamma219_v1/current_input.json",
+      "source_sha256": "0b8eb61421d4ae892bb8fd25bee6b35d4b1a41517bc1f885f4bbc00899aed78d"
+    },
+    "frozen/oxc/selected_records.json": {
+      "sha256": "ada862b291b8f0cf7b096de1b7ea81d3b68fef0d7edef3f4decaeb10dfb8343e",
+      "bytes": 4470,
+      "kind": "lossless_record_selection",
+      "sources": [
+        {
+          "archive_member": "oxc_current_hill219/registry.json",
+          "source_sha256": "195b250492a142cb9fb6afbcd1e6595eda672062e185c5b9df3417193b6b34b3"
+        },
+        {
+          "archive_member": "oxc_current_hill219/run_bindings.json",
+          "source_sha256": "a54d98d929347ddba3b7caeede9b7feec78f1bcfa69cc95e4b3612e9d21892c8"
+        }
+      ],
+      "selector": "registry.cases[case=SCN003]; run_bindings.slots[case=SCN003,scientific_repeat=1]"
+    },
+    "frozen/oxc/reference/package_laplace.json": {
+      "sha256": "eafcd8e045d6794f93ccaa58070a4a061d8a5af7f1698cf9b976ef18b43be162",
+      "bytes": 5373,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/package_primary/SCN003__gamma219_v1/package_laplace/order_041/repeat_001/result.json",
+      "source_sha256": "eafcd8e045d6794f93ccaa58070a4a061d8a5af7f1698cf9b976ef18b43be162"
+    },
+    "frozen/oxc/reference/aghq41.json": {
+      "sha256": "891332a7c5a917f6da8d3b4e04a826f651fe8d8c843d8826a7fb52d64826a45a",
+      "bytes": 3547,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/package_primary/SCN003__gamma219_v1/aghq41/order_041/repeat_001/result.json",
+      "source_sha256": "891332a7c5a917f6da8d3b4e04a826f651fe8d8c843d8826a7fb52d64826a45a"
+    },
+    "frozen/oxc/saved_nonmem/result.json": {
+      "sha256": "a7cb11ab31f73e02f4269b699be369144e2e55ed454493546ab7047209b60006",
+      "bytes": 10866,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/result.json",
+      "source_sha256": "a7cb11ab31f73e02f4269b699be369144e2e55ed454493546ab7047209b60006"
+    },
+    "frozen/oxc/saved_nonmem/model.mod": {
+      "sha256": "d6b5309e636a460cc1d8759fee750afd82433bfd9e708d17c21ec7bff8c7ae84",
+      "bytes": 1548,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/model.mod",
+      "source_sha256": "d6b5309e636a460cc1d8759fee750afd82433bfd9e708d17c21ec7bff8c7ae84"
+    },
+    "frozen/oxc/saved_nonmem/model.phm": {
+      "sha256": "43090c7830d83b9f871a4e5f7a0f9730065fc8a1358d7540b7d2bedae4a57ee0",
+      "bytes": 1020,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/model.phm",
+      "source_sha256": "43090c7830d83b9f871a4e5f7a0f9730065fc8a1358d7540b7d2bedae4a57ee0"
+    },
+    "frozen/oxc/saved_nonmem/model.shm": {
+      "sha256": "b208fc602868369e4538a16b183c1f3b2b269eb3c14497292ab6ca5ceca8fdc2",
+      "bytes": 720,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/model.shm",
+      "source_sha256": "b208fc602868369e4538a16b183c1f3b2b269eb3c14497292ab6ca5ceca8fdc2"
+    },
+    "frozen/oxc/saved_nonmem/scn003_oxc_pmix_laplacian.csv": {
+      "sha256": "8884dea096c34ade4e0ccb09cda0c746789517ca2086018642c61f1b54a7de09",
+      "bytes": 44,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/scn003_oxc_pmix_laplacian.csv",
+      "source_sha256": "8884dea096c34ade4e0ccb09cda0c746789517ca2086018642c61f1b54a7de09"
+    },
+    "frozen/oxc/saved_nonmem/input_precision_audit.json": {
+      "sha256": "1db781b32688ba1f85a75b5498e46d4f89881c292b68ec34eccac74b1abd6592",
+      "bytes": 4487,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/input_precision_audit.json",
+      "source_sha256": "1db781b32688ba1f85a75b5498e46d4f89881c292b68ec34eccac74b1abd6592"
+    },
+    "frozen/oxc/saved_nonmem/native_input_echo_audit.json": {
+      "sha256": "9eee536f896cea8cac687523f71fdbcca25f9daec4638efa90b57e005286b4b2",
+      "bytes": 672,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/native_input_echo_audit.json",
+      "source_sha256": "9eee536f896cea8cac687523f71fdbcca25f9daec4638efa90b57e005286b4b2"
+    },
+    "frozen/oxc/saved_nonmem/state_order.csv": {
+      "sha256": "71e872a66201cc698a0b44558028cc57ac820836e97689d10dd0027bc65d9eb0",
+      "bytes": 1737,
+      "kind": "byte_exact",
+      "archive_member": "historical/v1_1/oxc_primary_gamma219/raw/native/formal/SCN003__gamma219_v1/centered/repeat_001/state_order.csv",
+      "source_sha256": "71e872a66201cc698a0b44558028cc57ac820836e97689d10dd0027bc65d9eb0"
+    },
+    "frozen/tac/scripts/supported_inference.py": {
+      "sha256": "81d4b62ef35a43506ba8533b6ba5ded8e6b163ab3e79bca444928f53fe34ab11",
+      "bytes": 3166,
+      "kind": "byte_exact",
+      "archive_member": "scripts/supported_inference.py",
+      "source_sha256": "81d4b62ef35a43506ba8533b6ba5ded8e6b163ab3e79bca444928f53fe34ab11",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/scripts/inference_smoke.py": {
+      "sha256": "ecad0f1715963db9ae625233cd89818ead0e3157f3f33b7d1c465c609f4e620a",
+      "bytes": 8628,
+      "kind": "byte_exact",
+      "archive_member": "scripts/inference_smoke.py",
+      "source_sha256": "ecad0f1715963db9ae625233cd89818ead0e3157f3f33b7d1c465c609f4e620a",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/scripts/test_inference_domain.py": {
+      "sha256": "bb4ace61ab2860b783bb739ad39389eef0c6c4bda7bbcb7de15b87f467794fad",
+      "bytes": 4987,
+      "kind": "byte_exact",
+      "archive_member": "scripts/test_inference_domain.py",
+      "source_sha256": "bb4ace61ab2860b783bb739ad39389eef0c6c4bda7bbcb7de15b87f467794fad",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/scripts/precision_reproduce.py": {
+      "sha256": "f9bf41e7dd1802ed92d723377e880816c82bcb6803aaa7fa6187ae5de57b4ee8",
+      "bytes": 9521,
+      "kind": "byte_exact",
+      "archive_member": "scripts/precision_reproduce.py",
+      "source_sha256": "f9bf41e7dd1802ed92d723377e880816c82bcb6803aaa7fa6187ae5de57b4ee8",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/study_adapters/adapter.py": {
+      "sha256": "9ecf4b8cf68e1e15d5aef0903cf8724341d23516888a714edcf0ce6653b64389",
+      "bytes": 12064,
+      "kind": "byte_exact",
+      "archive_member": "source/study_adapters/adapter.py",
+      "source_sha256": "9ecf4b8cf68e1e15d5aef0903cf8724341d23516888a714edcf0ce6653b64389",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/study_adapters/routes.py": {
+      "sha256": "a40bbfbb5a71c3edda2c404b066e647939a1c7b0e129e64c23690f08a7d4c9ce",
+      "bytes": 8638,
+      "kind": "byte_exact",
+      "archive_member": "source/study_adapters/routes.py",
+      "source_sha256": "a40bbfbb5a71c3edda2c404b066e647939a1c7b0e129e64c23690f08a7d4c9ce",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/study_adapters/scenarios.py": {
+      "sha256": "71834eadbe48c2b40e647db42613a615bc4812e253c91b76d3061402c93cf72d",
+      "bytes": 5644,
+      "kind": "byte_exact",
+      "archive_member": "source/study_adapters/scenarios.py",
+      "source_sha256": "71834eadbe48c2b40e647db42613a615bc4812e253c91b76d3061402c93cf72d",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/pmx_discrete_posterior_v0.1.4/LICENSE": {
+      "sha256": "04ae07a09928ab19c96214abcd3896453bed0fa25024bc71f1d8fa3d2dcbbbb9",
+      "bytes": 1099,
+      "kind": "byte_exact",
+      "archive_member": "source/pmx_discrete_posterior_v0.1.4/LICENSE",
+      "source_sha256": "04ae07a09928ab19c96214abcd3896453bed0fa25024bc71f1d8fa3d2dcbbbb9",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/__init__.py": {
+      "sha256": "a5a347b193347895e1a881af3798f4efdd3bd72045c1b64079e577503f77373d",
+      "bytes": 2743,
+      "kind": "byte_exact",
+      "archive_member": "source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/__init__.py",
+      "source_sha256": "a5a347b193347895e1a881af3798f4efdd3bd72045c1b64079e577503f77373d",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/api.py": {
+      "sha256": "db375640cdd8dfdb6945dfbb197b1216a2bf0d8daeb42cf462a0694a19bcafa2",
+      "bytes": 3023,
+      "kind": "byte_exact",
+      "archive_member": "source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/api.py",
+      "source_sha256": "db375640cdd8dfdb6945dfbb197b1216a2bf0d8daeb42cf462a0694a19bcafa2",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/engine.py": {
+      "sha256": "d5833c4cd3b5050e12f27a233cca64112e08a1c2de46665c6aff05ce40b374a1",
+      "bytes": 14585,
+      "kind": "byte_exact",
+      "archive_member": "source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/engine.py",
+      "source_sha256": "d5833c4cd3b5050e12f27a233cca64112e08a1c2de46665c6aff05ce40b374a1",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/multieta.py": {
+      "sha256": "0f4bc74e354c37e40b00fa1c6b8bd34c69e215412a69ac6f125a9c1e4f183036",
+      "bytes": 14752,
+      "kind": "byte_exact",
+      "archive_member": "source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/multieta.py",
+      "source_sha256": "0f4bc74e354c37e40b00fa1c6b8bd34c69e215412a69ac6f125a9c1e4f183036",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/oxc.py": {
+      "sha256": "a2dd825c2a1d094aa4254c88aadf15b271ab505de7a25604b9579b254e37ea8c",
+      "bytes": 7047,
+      "kind": "byte_exact",
+      "archive_member": "source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/oxc.py",
+      "source_sha256": "a2dd825c2a1d094aa4254c88aadf15b271ab505de7a25604b9579b254e37ea8c",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/reporting.py": {
+      "sha256": "a203a6c12d11aff290e8ca12a7c16d46d1981487ec8d2d2ddca9b145638a1ceb",
+      "bytes": 20641,
+      "kind": "byte_exact",
+      "archive_member": "source/pmx_discrete_posterior_v0.1.4/src/pmx_discrete_posterior/reporting.py",
+      "source_sha256": "a203a6c12d11aff290e8ca12a7c16d46d1981487ec8d2d2ddca9b145638a1ceb",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/tacrolimus/scenario_settings.json": {
+      "sha256": "fa5d20a1895e09a0e5b5326c3c7d170a2bc3e56db57038bf41ad8835611cbf83",
+      "bytes": 248215,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/scenario_settings.json",
+      "source_sha256": "fa5d20a1895e09a0e5b5326c3c7d170a2bc3e56db57038bf41ad8835611cbf83",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip",
+      "matching_outer_member": "historical/v1_1/tacrolimus/scenario_settings.json"
+    },
+    "frozen/tac/tacrolimus/scenario_coverage.csv": {
+      "sha256": "0b870de32241ecd5a113a7e13a40541cee8c6e18acd98fd93a343d91f826a093",
+      "bytes": 6992,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/scenario_coverage.csv",
+      "source_sha256": "0b870de32241ecd5a113a7e13a40541cee8c6e18acd98fd93a343d91f826a093",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip",
+      "matching_outer_member": "historical/v1_1/tacrolimus/scenario_coverage.csv"
+    },
+    "frozen/tac/tacrolimus/posterior_vectors.csv": {
+      "sha256": "2053242f4df2ce713a0a7dc0592c8b970334461baab636c9c3c3ea2be18a5031",
+      "bytes": 39279,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/posterior_vectors.csv",
+      "source_sha256": "2053242f4df2ce713a0a7dc0592c8b970334461baab636c9c3c3ea2be18a5031",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip",
+      "matching_outer_member": "historical/v1_1/tacrolimus/posterior_vectors.csv"
+    },
+    "frozen/tac/tacrolimus/ghq_orders.csv": {
+      "sha256": "7be117d23922bd6cc56d02eb86a9228866674fb73dc247fde3f7687c9ea5dcf5",
+      "bytes": 104876,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/ghq_orders.csv",
+      "source_sha256": "7be117d23922bd6cc56d02eb86a9228866674fb73dc247fde3f7687c9ea5dcf5",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip",
+      "matching_outer_member": "historical/v1_1/tacrolimus/ghq_orders.csv"
+    },
+    "frozen/tac/tacrolimus/models/TAC001/data.csv": {
+      "sha256": "62e36be1873449f08df6b12bfa9dfaadc9cb8eed92233b7502fe2e45017b307b",
+      "bytes": 3405,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/models/TAC001/data.csv",
+      "source_sha256": "62e36be1873449f08df6b12bfa9dfaadc9cb8eed92233b7502fe2e45017b307b",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/tacrolimus/models/TAC001/mapping.json": {
+      "sha256": "ba61257bc41da12f34b701ba4e915c51838d1eb938eb53d08924b2228d4ebc83",
+      "bytes": 1079,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/models/TAC001/mapping.json",
+      "source_sha256": "ba61257bc41da12f34b701ba4e915c51838d1eb938eb53d08924b2228d4ebc83",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/tacrolimus/models/TAC001/model.mod": {
+      "sha256": "8acbdc59bde3ccb4a3c019285ff07827337a63987a3de5ddb632a7c92cea0677",
+      "bytes": 1231,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/models/TAC001/model.mod",
+      "source_sha256": "8acbdc59bde3ccb4a3c019285ff07827337a63987a3de5ddb632a7c92cea0677",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/tacrolimus/models/TAC001/model.phm": {
+      "sha256": "9be4dc62d0cb32ebb438f4b13a303dae6b36ca2da8a64a94856c41190813da59",
+      "bytes": 1390,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/models/TAC001/model.phm",
+      "source_sha256": "9be4dc62d0cb32ebb438f4b13a303dae6b36ca2da8a64a94856c41190813da59",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/tacrolimus/models/TAC001/model.shm": {
+      "sha256": "6a90e6e86db9da735cca710891dbc130c33b0a7c68387a105b4ea9469e3be81e",
+      "bytes": 770,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/models/TAC001/model.shm",
+      "source_sha256": "6a90e6e86db9da735cca710891dbc130c33b0a7c68387a105b4ea9469e3be81e",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    },
+    "frozen/tac/tacrolimus/models/TAC001/native_diagnostics.json": {
+      "sha256": "89f9322031d38923198f766bea5b1b0e7b54c7148b63e8e6c12d747ef94c7a23",
+      "bytes": 6623,
+      "kind": "byte_exact",
+      "archive_member": "tacrolimus/models/TAC001/native_diagnostics.json",
+      "source_sha256": "89f9322031d38923198f766bea5b1b0e7b54c7148b63e8e6c12d747ef94c7a23",
+      "nested_archive_member": "historical/v1_1/archive/ESM_2_v16.zip"
+    }
+  }
+}

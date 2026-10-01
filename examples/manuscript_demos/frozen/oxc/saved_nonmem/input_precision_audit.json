@@ -1,0 +1,186 @@
+{
+  "policy": "roundtrip_binary64_from_current_JSON_17sig_v1",
+  "all_serialized_values_exact": true,
+  "numeric_ledger": [
+    {
+      "role": "model.theta_cl_base_l_h",
+      "value": 1.68,
+      "token": "1.6799999999999999",
+      "binary64_hex": "0x1.ae147ae147ae1p+0",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "model.v_l",
+      "value": 14.7,
+      "token": "14.699999999999999",
+      "binary64_hex": "0x1.d666666666666p+3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "model.ka_h",
+      "value": 0.83,
+      "token": "0.82999999999999996",
+      "binary64_hex": "0x1.a8f5c28f5c28fp-1",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "model.theta_wt_exp_base",
+      "value": 0.624,
+      "token": "0.624",
+      "binary64_hex": "0x1.3f7ced916872bp-1",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "model.theta_wt_exp_max_dec",
+      "value": 0.233,
+      "token": "0.23300000000000001",
+      "binary64_hex": "0x1.dd2f1a9fbe76dp-3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "model.theta_wt_exp_hill",
+      "value": 219.0,
+      "token": "219",
+      "binary64_hex": "0x1.b600000000000p+7",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "model.theta_wt_exp_half",
+      "value": 8.97,
+      "token": "8.9700000000000006",
+      "binary64_hex": "0x1.1f0a3d70a3d71p+3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "DOSE_MG",
+      "value": 300.0,
+      "token": "300",
+      "binary64_hex": "0x1.2c00000000000p+8",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "TAU_H",
+      "value": 12.0,
+      "token": "12",
+      "binary64_hex": "0x1.8000000000000p+3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "prior.omega00",
+      "value": 0.25,
+      "token": "0.25",
+      "binary64_hex": "0x1.0000000000000p-2",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "prior.omega01",
+      "value": 0.25,
+      "token": "0.25",
+      "binary64_hex": "0x1.0000000000000p-2",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "prior.omega10",
+      "value": 0.25,
+      "token": "0.25",
+      "binary64_hex": "0x1.0000000000000p-2",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "prior.omega11",
+      "value": 0.25,
+      "token": "0.25",
+      "binary64_hex": "0x1.0000000000000p-2",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "OMEGA",
+      "value": 0.012245714245884425,
+      "token": "0.012245714245884425",
+      "binary64_hex": "0x1.91447f19e2d56p-7",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "SIGMA_SD_squared",
+      "value": 8.952064,
+      "token": "8.952064",
+      "binary64_hex": "0x1.1e774eebf65dcp+3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "dose_zero_time_epsilon",
+      "value": 0.0001,
+      "token": "0.0001",
+      "binary64_hex": "0x1.a36e2eb1c432dp-14",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "dose_12_time",
+      "value": 12.0,
+      "token": "12",
+      "binary64_hex": "0x1.8000000000000p+3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "observation_record_1.ID",
+      "value": 1.0,
+      "token": "1",
+      "binary64_hex": "0x1.0000000000000p+0",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "observation_record_1.TIME",
+      "value": 24.0,
+      "token": "24",
+      "binary64_hex": "0x1.8000000000000p+4",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "observation_record_1.DV",
+      "value": 12.0,
+      "token": "12",
+      "binary64_hex": "0x1.8000000000000p+3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "observation_record_1.MDV",
+      "value": 0.0,
+      "token": "0",
+      "binary64_hex": "0x0.0p+0",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "observation_record_1.WT",
+      "value": 25.0,
+      "token": "25",
+      "binary64_hex": "0x1.9000000000000p+4",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "observation_record_1.AGE",
+      "value": 8.0,
+      "token": "8",
+      "binary64_hex": "0x1.0000000000000p+3",
+      "roundtrip_exact": true
+    },
+    {
+      "role": "observation_record_1.HT",
+      "value": 127.0,
+      "token": "127",
+      "binary64_hex": "0x1.fc00000000000p+6",
+      "roundtrip_exact": true
+    }
+  ],
+  "expected_observation_records": [
+    {
+      "ID": 1.0,
+      "TIME": 24.0,
+      "DV": 12.0,
+      "MDV": 0.0,
+      "WT": 25.0,
+      "AGE": 8.0,
+      "HT": 127.0
+    }
+  ],
+  "event_history_state_mapping_checked": true
+}
