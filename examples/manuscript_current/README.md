@@ -14,8 +14,9 @@ or the separate [profile-bound GHQ workflow](research_ghq/README.md).
 Research GHQ `2026.10.18.2` requires this checkout, not the old package `0.1.4`
 wheel; no package installation is needed. Its 218 profiles include 217
 historically accepted configurations and the historical `TAC_C078` failure,
-not 218 newly accepted runs. Fresh public sampled replay remains pending;
-earlier Laplace and GHQ reference evidence is in [VALIDATION.md](VALIDATION.md).
+not 218 newly accepted runs. Six fresh public GHQ samples matched formal raw
+results exactly; their full-vector evidence and the earlier Laplace/reference
+checks are in [VALIDATION.md](VALIDATION.md).
 
 ## Setup
 

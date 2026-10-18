@@ -32,3 +32,55 @@ relocated execution without author-local source or expected-result access.
 These checks concern numerical reproduction, not clinical validity or a proof
 of exact integration. Other operating systems and dependency versions have not
 been included in this replay.
+
+## Public GHQ Sensitivity Sample
+
+Research GHQ `2026.10.18.2` was published in commit
+`30555f53ce0d4583c0eefdc7f65176ed04676634` and fetched into a new GitHub clone.
+Six prespecified cases were computed from that public checkout with the pinned
+environment above. No local source overlays, saved posterior answers or old
+checkpoints were used. All 349 tracked files were unchanged after execution.
+
+| Case | Coverage | States | Elapsed seconds | Max. absolute difference from formal raw R1 |
+|---|---|---:|---:|---:|
+| OXC_C003 | Reference | 4 | 0.969 | 0 |
+| OXC_C024 | Clearance IIV; GHQ02 supplement | 4 | 1.594 | 0 |
+| OXC_C025 | Clearance IIV; GHQ02 supplement | 4 | 1.594 | 0 |
+| OXC_C083 | Three-dose candidate window | 8 | 1.266 | 0 |
+| TAC_C134 | One-dose candidate window | 2 | 7.656 | 0 |
+| TAC_C055 | Central-volume IOV | 4 | 108.406 | 0 |
+
+All six attempts passed native diagnostic checks. All 26 unmodified posterior
+components exactly matched the archived GHQ first repeat. Direct comparison of
+the raw vector with the normalized five-repeat mean also passed the componentwise
+criterion above; a separately normalized fresh-versus-mean comparison is retained
+as an additional check. Formal comparators were read after each calculation exited.
+Full vectors, state labels, differences, hashes, budgets and environment are in
+[ghq_replay_sample.json](ghq_replay_sample.json), which inference does not read.
+
+Five cases used `run_ghq_demo.py run`; TAC_C134 used the complete input/profile
+script produced by `export-python`. For example, from the repository root:
+
+```text
+python -B examples/manuscript_current/run_ghq_demo.py run OXC_C024 --output new_oxc_c024
+python -B examples/manuscript_current/run_ghq_demo.py export-python TAC_C134 --output tac_c134.py
+python -B tac_c134.py --repo . --output new_tac_c134
+```
+
+The same public checkout's portable reader suite passed 12 tests; one symlink
+test was skipped because this Windows account could not create symlinks.
+It covers all 218 input/profile bindings and five fixed plans, inert inspection,
+complete exports, output protection and mocked failure handling. Two opt-in
+OXC smoke calculations are separate from the six-case comparison above.
+
+```text
+python -B -m unittest discover -s examples/manuscript_current -p test_ghq_reader.py -v
+```
+
+Set `GHQ_TEST_RUN_OXC=1` to include the two smoke calculations; otherwise those
+are skipped. This is a sampled replay, not a new full-matrix or five-repeat run.
+The five expensive TAC fixed-grid cases, including C079, are supplied and
+source/profile-checked but were not recomputed in this public sample. TAC_C078
+retains its historical failure declaration and was not among these six attempts.
+Measured times describe this host/run, not runtime guarantees. Later documentation
+and evidence commits do not change the tested numerical code.
