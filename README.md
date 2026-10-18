@@ -45,6 +45,8 @@ tool. DOI archiving and PyPI publication remain separate author decisions.
 The current manuscript examples require this updated source checkout. The
 original `0.1.4` release wheel does not contain the new explicit numerical
 configuration or current scenario catalog; it is not an interchangeable snapshot.
+The separate research GHQ module is version `2026.10.18.2`, not package `0.1.4`.
+It needs the source checkout and pinned dependencies, but no package installation.
 
 ## Installation
 
@@ -69,6 +71,14 @@ includes resolved model, variability, observation, candidate-history and prior
 inputs. The Python-Laplace entry computes the full posterior vector and retains
 numerical diagnostics. TAC uses correlated IIV and occasion-specific IOV; the
 near-zero residual case remains in the catalog with its numerical failure.
+
+The separate [current GHQ reference and sensitivity examples](examples/manuscript_current/research_ghq/README.md)
+use `run_ghq_demo.py` to inspect, export or compute one pinned case. All 218
+designs are configured; 217 were historically accepted, with `TAC_C078` retained
+as a historical failure. These counts are not fresh public-replay results.
+Inspect resource allowances first: some TAC fixed grids allow about six hours
+and billions of points, without a hard runtime guarantee. See the
+[validation record](examples/manuscript_current/VALIDATION.md) for measured replay scope.
 
 The [historical two-case demos](examples/manuscript_demos/README.md) retain the
 October 1 analysis and its original validation records. They are not substitutes

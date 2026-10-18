@@ -1,5 +1,9 @@
 # Two Manuscript Reviewer Demos
 
+Historical October 1, 2026 two-case examples. For the current 218-design OXC/TAC
+reference and sensitivity examples, with separate Laplace and GHQ entries, see
+[current examples](../manuscript_current/README.md).
+
 Self-contained, fixed-input Python replays of **OXC SCN003 (current Hill=219)**
 and **tacrolimus TAC001**. Each runs Laplace and GHQ, checks diagnostics, and
 compares its full posterior with saved manuscript references. No repository

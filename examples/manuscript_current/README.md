@@ -1,4 +1,4 @@
-# Current Manuscript Python-Laplace Examples
+# Current Manuscript Laplace And GHQ Examples
 
 This entry computes the frozen October 2026 evaluation models from complete
 synthetic inputs through [model_adapters](model_adapters). It contains 218 design
@@ -6,6 +6,16 @@ records: 83 OXC and 135 TAC. The references are `OXC_C003` and `TAC_C003`.
 The formal record has 217 valid cases and one numerical failure, `TAC_C078`.
 These are expected coverage counts, not a claim that a new execution has passed.
 The historical October 1 two-case entry remains in [manuscript_demos](../manuscript_demos).
+
+Choose the [Python-Laplace commands](#python-laplace-commands-and-outputs) below
+or the separate [profile-bound GHQ workflow](research_ghq/README.md).
+`run_demo.py` remains Laplace-only; `run_ghq_demo.py` provides GHQ
+`list`, `show`, `run` and `export-python`, with no GHQ batch command.
+Research GHQ `2026.10.18.2` requires this checkout, not the old package `0.1.4`
+wheel; no package installation is needed. Its 218 profiles include 217
+historically accepted configurations and the historical `TAC_C078` failure,
+not 218 newly accepted runs. Fresh public sampled replay remains pending;
+earlier Laplace and GHQ reference evidence is in [VALIDATION.md](VALIDATION.md).
 
 ## Setup
 
@@ -38,7 +48,7 @@ On POSIX, use `python3.12 -m venv /short/path/.venv` and that environment's
 access is needed. BLAS/OpenMP thread limits are set to 1 before NumPy is imported.
 Use a fresh Python process, not a notebook with another checkout already loaded.
 
-## Commands And Outputs
+## Python-Laplace Commands And Outputs
 
 ```powershell
 & $py -B examples/manuscript_current/run_demo.py --help
@@ -139,8 +149,10 @@ curvature audit. These are optimizer settings, not replay-comparison tolerances.
 Source identities are in
 [extraction_manifest.json](model_adapters/extraction_manifest.json).
 
-The separate [GHQ research extension](research_ghq/README.md) provides the formal
-OXC/TAC reference integration route. It does not replace the older public GHQ
+The separate [GHQ research extension](research_ghq/README.md) provides pinned
+OXC/TAC reference and sensitivity configurations. Inspect its resource warnings
+before running: fixed-grid TAC allowances reach about six hours and billions of
+points, without a hard runtime guarantee. It does not replace the older public GHQ
 API or remove that API's dimension limit.
 
 These examples reproduce the specified evaluation models and numerical settings.
