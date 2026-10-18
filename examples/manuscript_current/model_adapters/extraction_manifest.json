@@ -1,0 +1,62 @@
+{
+  "_common.py": {
+    "source_name": "common.py",
+    "source_sha256": "0ef828ec4ba5e786d6ed86b076fc0523438833dc5d8bb536441f58d27819ae1b",
+    "functions_ast_sha256": {
+      "require": "0f4163611ce0bc40358ee49a9ef0fc10b5a6a2c2f0ec03bd30dfdc6b54a6af7f",
+      "canonical": "376efca104f5c51270ae50f41be538bd0bdebf05cea3afbb89d489a5abf1a287",
+      "digest": "f75e2a2ec1c8bb2ca2f86b95156f8a70546862e1407fa32594faf810f11a1430"
+    },
+    "export_sha256": "4450bb392c670fdfca9a4670067aadfa0872a40a4fa723a2601ec85eb141ef86"
+  },
+  "oxc_model.py": {
+    "source_name": "adapter.py",
+    "source_sha256": "6ac00114be1b5fe4f830ce06fe76728b8cbad5e6befabfb4520fd7cb123897b8",
+    "functions_ast_sha256": {
+      "no_truth": "d759bb35ea98af4bf62304f957985b377585402129ecf59a21e37693dc07892a",
+      "validate": "41bc48adb3525787f2cbfe962170adeaf3a17e5607d30e30c978d32e7cf792d5",
+      "rate": "e8d91c862d98ad1e6e6d6645b2cf76522eedc986fc2e007d215f68e4c74e87da",
+      "concentration": "4e6ca5362cd07c62c8f44c7d131ff0205efc99726be011d08928095889b29153",
+      "Model": "3a5da38625e33911bf95706c9819c661491ea25b07f39e75c90f09fc06afc72a"
+    },
+    "export_sha256": "559f55a2f98d3e3d72e0a15ebd3f6ae7f495d572b85cda165708826a31d5b5ec"
+  },
+  "oxc_laplace.py": {
+    "source_name": "numerical.py",
+    "source_sha256": "675bb28dcfbc606f2efcd30b4ada8787589bcb22d5246f5cc07e32858f1e823c",
+    "functions_ast_sha256": {
+      "laplace": "8d77599ba5e16eabf0e7d6ec10d3565488c136af320cde1378ea91269d665cc0"
+    },
+    "export_sha256": "926879cb6385394e64b8753365c17f56a6fc67b80ed3aede7016812fdc3142b4"
+  },
+  "tac_model.py": {
+    "source_name": "adapter.py",
+    "source_sha256": "0fe18bc59dd6c2be5053719069f8b95a3ffb1070b5346c55038cc24f6f8702b7",
+    "functions_ast_sha256": {
+      "canonical": "872ab87bf491618607f71627e3d5dcee4ae68fb76338f1cfbdf3464574d81957",
+      "digest": "369c0fba894afef48ddd789f89ec1d1587691c5237631d7f2191e36b31df1c43",
+      "clock_add": "542da686a719b462db4a293d143cc2437271f6575e239023a90637ae2765f7a6",
+      "ResolvedCase": "6775d22107dab7b3d15bd4bc21a07c94896bc7308ee819cc68c37adc9fcab785",
+      "covariance": "bcbb98bbabffbd3c0ea458773a6c102eddb0adf2a4fd95a9e9015b5b801efd90",
+      "kinetics": "e2dd24e3f586f1f31216e0b0442b8051ea800cc22f74cc8e28a31b7e753fe4d3",
+      "_transition": "b52f161a82d3cf458f79dd18037ac8a2783c33623acab986479d49dead9c2585",
+      "periodic_initial": "adfde6aa8bb8e9f20e9c3a1bb10e0fe9886ca5bf1dadf160f1af1d5d820c3e39",
+      "_predict": "85a90d034fdc5ee9303b6977226ac84e354e1e2c929cf145cfec59b8bb507e3c",
+      "predict": "c85c1fc5c05d833375db14c0a9dc5de7d2fa09422140155904e9f871deebc965",
+      "predict_expm": "5eeca5632adf1aa30559db3bfe5cd8c6124cb1925e4d5431bec5a337ec71d734"
+    },
+    "export_sha256": "13149050fb38faf62f4e5a7f64d8c859c2c64bfcc0cc761639f3da302525ac2c"
+  },
+  "tac_laplace.py": {
+    "source_name": "package_worker.py",
+    "source_sha256": "7ba76eda02bae94b508b91313e43bf8970eb7efa691d15bca0a87644311b3e78",
+    "functions_ast_sha256": {
+      "run": "e5f82c24b4950e409935ef3694f5d7abebc903b7ca2f3fa38802f6900c3cc023"
+    },
+    "portability_edits": [
+      "Remove author-local sys.path insertion and directory assertion",
+      "Report actual installed package path"
+    ],
+    "export_sha256": "cc0991bc6afa5fa0e57d8a8e848e8007fd5a9e81224de82b107d448524c1430d"
+  }
+}

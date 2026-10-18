@@ -1,0 +1,153 @@
+{
+  "schema": "tac_resolved_v1",
+  "numeric_id": "tac_dfa06e83867aa89aaba952f014a3b0dd780eb91689a88af564a82f9b6b1e1115",
+  "parameters": {
+    "CL": 25.5,
+    "V1": 113.0,
+    "Q": 67.9,
+    "V2": 1060.0,
+    "ka": 0.35,
+    "lag": 0.44,
+    "WT": 70.0
+  },
+  "fixed": {
+    "X": 0,
+    "HEM": 0.33,
+    "POD": 22.7,
+    "Pred": 155.5,
+    "theta_CYP3A5": 1.6,
+    "theta_HEM": -1.01,
+    "theta_POD": -0.0021,
+    "theta_Pred": -0.0028,
+    "POD_cap": 180,
+    "WT_exponent": 0.75,
+    "normalization_weight": 70
+  },
+  "slots": [
+    12
+  ],
+  "shared_last": -12.0,
+  "shared_dose": 6.0,
+  "tau": 12.0,
+  "states": [
+    {
+      "state_event_id": "state_bea944b6715d34b12470e0ef9259c6c15373136195fabdb27a516272f85a461c",
+      "manuscript_id": "omega_0",
+      "machine_bitstring": "0",
+      "prior": 0.5,
+      "events": []
+    },
+    {
+      "state_event_id": "state_668d420cb98db7098b1d153d82f70f5b4f2a40e5ed6b9115f196828957b1e5f4",
+      "manuscript_id": "omega_1",
+      "machine_bitstring": "1",
+      "prior": 0.5,
+      "events": [
+        {
+          "nominal_slot_h": 12.0,
+          "time_h": 12.0,
+          "amount_mg": 6.0
+        }
+      ]
+    }
+  ],
+  "omega": [
+    [
+      0.08344460695463439,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.19805053857439603,
+      -0.01671233240450257,
+      0.13615474483258513,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      -0.01671233240450257,
+      0.5873621303556349,
+      -0.004502486522586959,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.13615474483258513,
+      -0.004502486522586959,
+      0.20422654773754803,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.08562800390349452,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.955597979744738,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.08562800390349452,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.955597979744738
+    ]
+  ],
+  "eta_order": [
+    "Clearance IIV",
+    "Central-volume IIV",
+    "Peripheral-volume IIV",
+    "Absorption-rate IIV",
+    "Clearance IOV@occ_-12",
+    "Central-volume IOV@occ_-12",
+    "Clearance IOV@occ_12",
+    "Central-volume IOV@occ_12"
+  ],
+  "residual_sd": 0.183,
+  "times": [
+    24.0
+  ],
+  "observations": [
+    12.0
+  ]
+}

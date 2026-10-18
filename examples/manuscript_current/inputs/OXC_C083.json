@@ -1,0 +1,538 @@
+{
+  "model": {
+    "model_id": "Lin_OXC_MHD_Hill219",
+    "compartments": [
+      "depot",
+      "central"
+    ],
+    "analyte": "MHD",
+    "dose_unit": "mg",
+    "concentration_unit": "mg/L",
+    "parameters": {
+      "CL_p": 1.68,
+      "V_p": 14.7,
+      "ka": 0.83,
+      "BW": 25.0
+    },
+    "fixed": {
+      "k0": 0.624,
+      "kmax": 0.233,
+      "k50": 8.97,
+      "gamma": 219,
+      "normalization_weight": 70
+    },
+    "relationships": {
+      "CL": "CL_p*(BW/70)**(k0-kmax*BW**gamma/(k50**gamma+BW**gamma))*exp(eta_CL)",
+      "V": "V_p",
+      "ka": "ka",
+      "concentration": "A_central/V_p"
+    },
+    "covariates_constant_over_record": true
+  },
+  "initialization": {
+    "definition_status": "author_approved",
+    "interval_h": 12,
+    "shared_last_dose_h": -24,
+    "initial_state_time_h": -24,
+    "initial_state_phase": "immediately_before_shared_last_dose",
+    "initial_dose_event": {
+      "event_id": "shared_last",
+      "nominal_slot_h": -24,
+      "time_h": -24,
+      "local_time_h": -12,
+      "local_nominal_slot_h": -12,
+      "amount_mg": 300.0,
+      "route": "oral",
+      "compartment": "depot"
+    },
+    "earlier_history": {
+      "interval_h": 12,
+      "dose_mg": 300.0,
+      "last_implicit_dose_h": -36,
+      "extends_to": "minus_infinity"
+    },
+    "explicit_occasion_slots_h": [],
+    "no_0h_dose_in_one_dose_window": false,
+    "numerical_initial_state": null,
+    "time_axes": {
+      "time_h_axis": "manuscript_study",
+      "local_axis": "earliest_candidate_slot_is_zero",
+      "manuscript_to_local_offset_h": 12,
+      "manuscript_candidate_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "local_candidate_slots_h": [
+        0,
+        12,
+        24
+      ],
+      "manuscript_shared_last_h": -24,
+      "local_shared_last_h": -12,
+      "manuscript_last_implicit_dose_h": -36,
+      "local_last_implicit_dose_h": -24,
+      "all_events_and_observations_shift_equally": true,
+      "native_runtime_axis_adapter_verified": false
+    },
+    "method": "analytic_steady_state",
+    "conditioning": "individual_eta_CL",
+    "iov_present": false
+  },
+  "variability": {
+    "iiv_order": [
+      "Clearance IIV"
+    ],
+    "iiv_omega": [
+      [
+        0.0122457142458844
+      ]
+    ],
+    "iiv_correlation": [
+      [
+        1
+      ]
+    ],
+    "iov_order": [],
+    "iov_omega_per_occasion": [],
+    "iov_occasion_ids": [],
+    "joint_order": [
+      "Clearance IIV"
+    ],
+    "joint_omega": [
+      [
+        0.0122457142458844
+      ]
+    ],
+    "source_reference_log_variances": {
+      "Clearance IIV": 0.0122457142458844
+    },
+    "distribution": "zero_mean_multivariate_normal_log_effects"
+  },
+  "residual": {
+    "model": "additive",
+    "sd": 2.992,
+    "variance": 8.952064,
+    "additive_component_present": true,
+    "residual_floor": null,
+    "normal_zero_mean": true
+  },
+  "candidate_states": [
+    {
+      "manuscript_id": "omega_000",
+      "machine_chronological_bits": [
+        0,
+        0,
+        0
+      ],
+      "machine_bitstring": "000",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": false
+        }
+      ],
+      "dose_events": [],
+      "state_event_id": "state_853dd5bb2810e9a1c9f53c5f22fd53fedc8f72b8f4b389fe9ccc1a310bc861a6"
+    },
+    {
+      "manuscript_id": "omega_001",
+      "machine_chronological_bits": [
+        1,
+        0,
+        0
+      ],
+      "machine_bitstring": "100",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": false
+        }
+      ],
+      "dose_events": [
+        {
+          "event_id": "slot_-12",
+          "nominal_slot_h": -12,
+          "time_h": -12,
+          "local_time_h": 0,
+          "local_nominal_slot_h": 0,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "state_event_id": "state_0e1b0f527210a4f9edbcf5716c1bf4e395f52051b6333661d0d69bbd97a9719c"
+    },
+    {
+      "manuscript_id": "omega_010",
+      "machine_chronological_bits": [
+        0,
+        1,
+        0
+      ],
+      "machine_bitstring": "010",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": false
+        }
+      ],
+      "dose_events": [
+        {
+          "event_id": "slot_0",
+          "nominal_slot_h": 0,
+          "time_h": 0,
+          "local_time_h": 12,
+          "local_nominal_slot_h": 12,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "state_event_id": "state_9402bd1cb6711bbbf6cc731c0b08934ae3752edb768e491f4a6fbf112077ba62"
+    },
+    {
+      "manuscript_id": "omega_011",
+      "machine_chronological_bits": [
+        1,
+        1,
+        0
+      ],
+      "machine_bitstring": "110",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": false
+        }
+      ],
+      "dose_events": [
+        {
+          "event_id": "slot_-12",
+          "nominal_slot_h": -12,
+          "time_h": -12,
+          "local_time_h": 0,
+          "local_nominal_slot_h": 0,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        },
+        {
+          "event_id": "slot_0",
+          "nominal_slot_h": 0,
+          "time_h": 0,
+          "local_time_h": 12,
+          "local_nominal_slot_h": 12,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "state_event_id": "state_8520cc998a928d581d964732c5a36f4a83716f72b1517447dabc6fccf6a7dad6"
+    },
+    {
+      "manuscript_id": "omega_100",
+      "machine_chronological_bits": [
+        0,
+        0,
+        1
+      ],
+      "machine_bitstring": "001",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": true
+        }
+      ],
+      "dose_events": [
+        {
+          "event_id": "slot_12",
+          "nominal_slot_h": 12,
+          "time_h": 12,
+          "local_time_h": 24,
+          "local_nominal_slot_h": 24,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "state_event_id": "state_db73420f2b11ca3d6b761df6ba704bdd76f6c9d349e89fd36877a13cea044bac"
+    },
+    {
+      "manuscript_id": "omega_101",
+      "machine_chronological_bits": [
+        1,
+        0,
+        1
+      ],
+      "machine_bitstring": "101",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": true
+        }
+      ],
+      "dose_events": [
+        {
+          "event_id": "slot_-12",
+          "nominal_slot_h": -12,
+          "time_h": -12,
+          "local_time_h": 0,
+          "local_nominal_slot_h": 0,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        },
+        {
+          "event_id": "slot_12",
+          "nominal_slot_h": 12,
+          "time_h": 12,
+          "local_time_h": 24,
+          "local_nominal_slot_h": 24,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "state_event_id": "state_81a61d3d0adf805ad7f1c829a38096acdd3c3739166c1aa20ebcba1ea35b89f0"
+    },
+    {
+      "manuscript_id": "omega_110",
+      "machine_chronological_bits": [
+        0,
+        1,
+        1
+      ],
+      "machine_bitstring": "011",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": false
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": true
+        }
+      ],
+      "dose_events": [
+        {
+          "event_id": "slot_0",
+          "nominal_slot_h": 0,
+          "time_h": 0,
+          "local_time_h": 12,
+          "local_nominal_slot_h": 12,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        },
+        {
+          "event_id": "slot_12",
+          "nominal_slot_h": 12,
+          "time_h": 12,
+          "local_time_h": 24,
+          "local_nominal_slot_h": 24,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "state_event_id": "state_16bad00e25e805b79e2205210d6c1eed32166a71d8ddf1ad69259bbd38cfbb43"
+    },
+    {
+      "manuscript_id": "omega_111",
+      "machine_chronological_bits": [
+        1,
+        1,
+        1
+      ],
+      "machine_bitstring": "111",
+      "nominal_slots_h": [
+        -12,
+        0,
+        12
+      ],
+      "taken_by_slot": [
+        {
+          "nominal_time_h": -12,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 0,
+          "taken": true
+        },
+        {
+          "nominal_time_h": 12,
+          "taken": true
+        }
+      ],
+      "dose_events": [
+        {
+          "event_id": "slot_-12",
+          "nominal_slot_h": -12,
+          "time_h": -12,
+          "local_time_h": 0,
+          "local_nominal_slot_h": 0,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        },
+        {
+          "event_id": "slot_0",
+          "nominal_slot_h": 0,
+          "time_h": 0,
+          "local_time_h": 12,
+          "local_nominal_slot_h": 12,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        },
+        {
+          "event_id": "slot_12",
+          "nominal_slot_h": 12,
+          "time_h": 12,
+          "local_time_h": 24,
+          "local_nominal_slot_h": 24,
+          "amount_mg": 300.0,
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "state_event_id": "state_295046c8be2d5d4dac1522ba8563487ae0be555b18a140f33cea28364c420f49"
+    }
+  ],
+  "priors": [
+    {
+      "state_event_id": "state_853dd5bb2810e9a1c9f53c5f22fd53fedc8f72b8f4b389fe9ccc1a310bc861a6",
+      "manuscript_id": "omega_000",
+      "probability": 0.125
+    },
+    {
+      "state_event_id": "state_0e1b0f527210a4f9edbcf5716c1bf4e395f52051b6333661d0d69bbd97a9719c",
+      "manuscript_id": "omega_001",
+      "probability": 0.125
+    },
+    {
+      "state_event_id": "state_9402bd1cb6711bbbf6cc731c0b08934ae3752edb768e491f4a6fbf112077ba62",
+      "manuscript_id": "omega_010",
+      "probability": 0.125
+    },
+    {
+      "state_event_id": "state_8520cc998a928d581d964732c5a36f4a83716f72b1517447dabc6fccf6a7dad6",
+      "manuscript_id": "omega_011",
+      "probability": 0.125
+    },
+    {
+      "state_event_id": "state_db73420f2b11ca3d6b761df6ba704bdd76f6c9d349e89fd36877a13cea044bac",
+      "manuscript_id": "omega_100",
+      "probability": 0.125
+    },
+    {
+      "state_event_id": "state_81a61d3d0adf805ad7f1c829a38096acdd3c3739166c1aa20ebcba1ea35b89f0",
+      "manuscript_id": "omega_101",
+      "probability": 0.125
+    },
+    {
+      "state_event_id": "state_16bad00e25e805b79e2205210d6c1eed32166a71d8ddf1ad69259bbd38cfbb43",
+      "manuscript_id": "omega_110",
+      "probability": 0.125
+    },
+    {
+      "state_event_id": "state_295046c8be2d5d4dac1522ba8563487ae0be555b18a140f33cea28364c420f49",
+      "manuscript_id": "omega_111",
+      "probability": 0.125
+    }
+  ],
+  "schema": "oxc_numeric_source_ruv_v1",
+  "observations": [
+    {
+      "time_h": 24.0,
+      "concentration_mg_L": 12.0
+    }
+  ]
+}

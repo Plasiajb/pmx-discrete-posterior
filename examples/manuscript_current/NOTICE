@@ -1,0 +1,13 @@
+Current manuscript reviewer examples (2026-10-18)
+
+The Python package and these model adapters are distributed under the repository's MIT license.
+The calculation functions were extracted from the frozen experiment sources listed by SHA-256
+in model_adapters/extraction_manifest.json. Scientific equations and numerical checks were
+preserved; machine-specific import and output-directory bookkeeping was removed.
+
+All supplied observations and dosing histories are synthetic evaluation inputs. No NONMEM
+binary, license, credential, or patient record is included. The main demo runner computes
+Python-Laplace. The separately identified research_ghq extension provides the formal reference
+GHQ route. Neither runs NONMEM, provides clinical advice, or establishes clinical accuracy.
+
+The historical October 1 two-case examples remain separately available in ../manuscript_demos.

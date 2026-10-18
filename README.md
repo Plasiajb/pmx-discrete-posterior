@@ -1,12 +1,12 @@
 # pmx-discrete-posterior
 
-Small research package for model-conditional posterior probabilities over a finite set of predefined discrete states in pharmacometric models. The current implementation supports a one-ETA OXC validation path and an experimental multi-ETA stress-test path.
+Research package for model-conditional posterior probabilities over a finite set of predefined discrete states in pharmacometric models. It supports single- and multi-random-effect Laplace calculations. The current manuscript examples include OXC and TAC models with complete reference and sensitivity inputs.
 
 The probabilities are conditional on the model, candidate states, priors, IIV/RUV assumptions, covariates, dosing history, and observation. They are not direct evidence of true adherence and should not be used as standalone clinical decisions.
 
 ## Method Boundary
 
-For each discrete state `k`, the package computes a model-conditional likelihood contribution by minimizing
+For the one-random-effect, additive-error example, each discrete state `k` has a model-conditional likelihood contribution computed by minimizing
 
 ```text
 psi_k(eta) = 0.5 * ((y - f_k(eta)) / sigma)^2 + 0.5 * eta^2 / omega_variance
@@ -27,6 +27,11 @@ Pr(k | y) = prior_k * L_k / sum_j(prior_j * L_j)
 
 Zero prior mass is treated as a structural zero by default. Non-positive Hessian, optimizer-boundary, and optimizer-failure cases are marked as indeterminate in diagnostics rather than silently treated as fully valid posteriors.
 
+The multi-random-effect interface evaluates the joint observation density with
+the supplied covariance and residual model, and uses the full Hessian in its
+Laplace approximation. The current manuscript adapters preserve the formal
+optimizer settings and independent numerical checks.
+
 The package does not bundle NONMEM. NONMEM `$MIX`/`$MIXTURE` PMIX outputs are an optional licensed reference path outside the core Python calculation.
 
 ## Release Status
@@ -36,6 +41,10 @@ release for manuscript review, collaborator audit, and reproducibility
 assessment. The package is distributed under the MIT License. It is not a public
 PyPI release, not a NONMEM replacement, and not a clinical decision-support
 tool. DOI archiving and PyPI publication remain separate author decisions.
+
+The current manuscript examples require this updated source checkout. The
+original `0.1.4` release wheel does not contain the new explicit numerical
+configuration or current scenario catalog; it is not an interchangeable snapshot.
 
 ## Installation
 
@@ -53,17 +62,19 @@ python -m pip install pmx_discrete_posterior-0.1.4-py3-none-any.whl
 
 ## Manuscript Review Demos
 
-The [oxcarbazepine and tacrolimus demos](examples/manuscript_demos/README.md)
-provide two reproducible cases from the current manuscript analysis. Each case
-includes its inputs, frozen calculation code, saved reference results, and
-checks for a newly computed posterior vector. The oxcarbazepine case explicitly
-uses a Hill coefficient of 219; the tacrolimus case uses the guarded covariance
-interface for the two-compartment model.
+The [current manuscript examples](examples/manuscript_current/README.md)
+contain the complete October 2026 design: 83 oxcarbazepine and 135 tacrolimus
+cases, including both reference cases and all sensitivity settings. Each case
+includes resolved model, variability, observation, candidate-history and prior
+inputs. The Python-Laplace entry computes the full posterior vector and retains
+numerical diagnostics. TAC uses correlated IIV and occasion-specific IOV; the
+near-zero residual case remains in the catalog with its numerical failure.
 
-These demos have their own dependency instructions and source manifest. They
-run without a NONMEM installation. Any NONMEM probabilities shown by a demo
-are saved comparator results, not a new NONMEM execution. The examples below
-remain general package examples and are separate from the manuscript demos.
+The [historical two-case demos](examples/manuscript_demos/README.md) retain the
+October 1 analysis and its original validation records. They are not substitutes
+for the current scenario set. Each demo directory has its own dependency and
+source instructions. No NONMEM installation is needed for the Python examples;
+saved NONMEM comparator values in historical examples are not live executions.
 
 ## Minimal Usage
 
@@ -145,15 +156,16 @@ Outputs:
 
 The script uses the public package API and writes only under the selected output directory.
 
-## Multi-ETA Supplement Stress Test
+## Historical Multi-ETA Stress Test
 
-An experimental extension supports multi-ETA, multi-observation Laplace calculations with combined additive/proportional residual error:
+The multi-ETA, multi-observation interface is also used by the historical
+combined additive/proportional residual-error example:
 
 ```python
 from pmx_discrete_posterior import MultiEtaLaplaceConfig, compute_multieta_posterior
 ```
 
-The current stress test uses a synthetic oral one-compartment PK model with ETA(CL), ETA(V), four observations, and combined RUV. It compares the package's multivariate Laplace posterior against a tensor-product Gauss-Hermite numerical integration reference:
+That stress test uses a synthetic oral one-compartment PK model with ETA(CL), ETA(V), four observations, and combined RUV. It compares the package's multivariate Laplace posterior against a tensor-product Gauss-Hermite numerical integration reference:
 
 ```bash
 python examples/multieta_stress_test.py

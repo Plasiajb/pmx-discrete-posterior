@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from numbers import Integral
 from typing import Any, Mapping, Protocol, Sequence
 
 import numpy as np
@@ -9,6 +10,10 @@ from numpy.polynomial.hermite import hermgauss
 
 from .api import DiscreteState
 from .engine import logsumexp
+
+
+_OMEGA_SYMMETRY_RTOL = 1e-10
+_OMEGA_SYMMETRY_ATOL = 1e-12
 
 
 try:  # pragma: no cover - scipy availability is runtime-specific
@@ -40,6 +45,9 @@ class MultiEtaLaplaceConfig:
     derivative_step_scale: float = 1e-4
     positive_floor: float = 1e-12
     prior_policy: str = "structural_zero"
+    optimizer_start: Sequence[float] | None = None
+    optimizer_options: Mapping[str, Any] | None = None
+    residual_mode: str = "legacy_combined"
 
 
 @dataclass(frozen=True)
@@ -114,6 +122,7 @@ def compute_multieta_posterior(
         raise ValueError("omega_covariance must have at least one ETA dimension.")
     _validate_prior_policy(config)
     _validate_states(states)
+    _validate_residual_mode(config)
 
     diagnostics = [
         multieta_state_diagnostics(y, state, model, config, omega, omega_inv, omega_logdet)
@@ -160,7 +169,13 @@ def multieta_state_diagnostics(
     y = _coerce_observations(observations)
     if omega is None or omega_inv is None or omega_logdet is None:
         omega, omega_inv, omega_logdet = _omega_matrices(config)
+    else:
+        # Precomputed arguments must not bypass the public covariance guard.
+        _validated_omega(config.omega_covariance)
+        omega = _validated_omega(omega)
     dim = omega.shape[0]
+    _validate_residual_mode(config)
+    start, options = _optimizer_inputs(config, dim)
     bounds = [(float(config.eta_lower), float(config.eta_upper)) for _ in range(dim)]
 
     def objective(eta: Sequence[float]) -> float:
@@ -168,10 +183,10 @@ def multieta_state_diagnostics(
 
     result = _scipy_minimize(
         objective,
-        np.zeros(dim, dtype=float),
+        start,
         method=config.optimizer_method,
         bounds=bounds,
-        options={"maxiter": int(config.optimizer_maxiter)},
+        options=options,
     )
     eta_hat = np.asarray(result.x, dtype=float)
     psi_hat = float(result.fun)
@@ -241,6 +256,7 @@ def gauss_hermite_posterior(
     y = _coerce_observations(observations)
     _validate_prior_policy(config)
     _validate_states(states)
+    _validate_residual_mode(config)
     omega, _, _ = _omega_matrices(config)
     dim = omega.shape[0]
     if dim > 3:
@@ -330,14 +346,104 @@ def _log_observation_likelihood(
             f"Model returned {pred.size} predictions for {observations.size} observations."
         )
     sd = _combined_residual_sd(pred, config)
+    if config.residual_mode != "legacy_combined":
+        try:
+            with np.errstate(over="raise", invalid="raise", divide="raise"):
+                value = float(np.sum(
+                    -0.5 * math.log(2.0 * math.pi) - np.log(sd)
+                    - 0.5 * ((observations - pred) / sd) ** 2
+                ))
+        except FloatingPointError as exc:
+            raise ValueError("Strict residual mode requires a finite log observation density.") from exc
+        if not math.isfinite(value):
+            raise ValueError("Strict residual mode requires a finite log observation density.")
+        return value
     return float(np.sum(-0.5 * math.log(2.0 * math.pi) - np.log(sd) - 0.5 * ((observations - pred) / sd) ** 2))
 
 
 def _combined_residual_sd(pred: np.ndarray, config: MultiEtaLaplaceConfig) -> np.ndarray:
+    if config.residual_mode != "legacy_combined":
+        _validate_residual_mode(config)
+        if not np.all(np.isfinite(pred)):
+            raise ValueError("Strict residual mode requires finite model predictions.")
+        if config.residual_mode == "additive_only":
+            sd = np.full_like(pred, float(config.additive_sd), dtype=float)
+        else:
+            # abs(pred) is the SD implied by (proportional_sd * pred)**2,
+            # not clipping of the prediction used as the observation mean.
+            with np.errstate(over="ignore", under="ignore", invalid="ignore"):
+                sd = float(config.proportional_sd) * np.abs(pred)
+        if not np.all(np.isfinite(sd) & (sd > 0.0)):
+            raise ValueError("Strict residual mode requires finite, strictly positive residual SDs.")
+        return sd
     floor = max(float(config.positive_floor), 1e-300)
     add = max(float(config.additive_sd), floor)
     prop = max(float(config.proportional_sd), 0.0)
     return np.maximum(np.sqrt(add * add + (prop * np.maximum(pred, 0.0)) ** 2), floor)
+
+
+def _validate_residual_mode(config: MultiEtaLaplaceConfig) -> None:
+    if config.residual_mode == "legacy_combined":
+        return
+    if config.residual_mode not in ("additive_only", "proportional_only"):
+        raise ValueError("residual_mode must be 'legacy_combined', 'additive_only', or 'proportional_only'.")
+    add, prop = float(config.additive_sd), float(config.proportional_sd)
+    active, inactive = (add, prop) if config.residual_mode == "additive_only" else (prop, add)
+    if not math.isfinite(active) or active <= 0.0:
+        raise ValueError(f"{config.residual_mode} requires a finite, strictly positive active SD.")
+    if inactive != 0.0:
+        raise ValueError(f"{config.residual_mode} requires the inactive SD to be exactly zero.")
+
+
+def _optimizer_inputs(config: MultiEtaLaplaceConfig, dim: int) -> tuple[np.ndarray, dict[str, Any]]:
+    lower, upper = float(config.eta_lower), float(config.eta_upper)
+    if math.isnan(lower) or math.isnan(upper) or lower >= upper:
+        raise ValueError("ETA optimizer bounds must be ordered and non-NaN with eta_lower < eta_upper.")
+    if dim < 1:
+        raise ValueError("omega_covariance must have at least one ETA dimension.")
+    if isinstance(config.optimizer_start, (str, bytes)):
+        raise ValueError("optimizer_start must be a finite numeric vector, not a string.")
+    start = np.zeros(dim, dtype=float) if config.optimizer_start is None else np.array(config.optimizer_start, dtype=float, copy=True)
+    if start.shape != (dim,) or not np.all(np.isfinite(start)):
+        raise ValueError(f"optimizer_start must be a finite vector with {dim} ETA entries.")
+    if np.any(start < lower) or np.any(start > upper):
+        raise ValueError("optimizer_start must lie within the declared ETA bounds.")
+    if not isinstance(config.optimizer_maxiter, Integral) or isinstance(config.optimizer_maxiter, bool) or config.optimizer_maxiter <= 0:
+        raise ValueError("optimizer_maxiter must be a positive integer.")
+    if config.optimizer_options is not None and not isinstance(config.optimizer_options, Mapping):
+        raise ValueError("optimizer_options must be a mapping or None.")
+    options = dict(config.optimizer_options or {})
+    if any(not isinstance(key, str) for key in options):
+        raise ValueError("optimizer_options keys must be strings.")
+    if "maxiter" in options:
+        raise ValueError("Set optimizer_maxiter explicitly; optimizer_options must not contain maxiter.")
+    if "initial_simplex" in options:
+        if config.optimizer_method.lower() != "nelder-mead":
+            raise ValueError("initial_simplex is only supported with optimizer_method='Nelder-Mead'.")
+        simplex = np.array(options["initial_simplex"], dtype=float, copy=True)
+        if simplex.shape != (dim + 1, dim) or not np.all(np.isfinite(simplex)):
+            raise ValueError(f"initial_simplex must be finite with shape ({dim + 1}, {dim}).")
+        if np.any(simplex < lower) or np.any(simplex > upper):
+            raise ValueError("initial_simplex must lie within the declared ETA bounds.")
+        if not np.array_equal(simplex[0], start):
+            raise ValueError("initial_simplex[0] must equal optimizer_start (zero when omitted).")
+        if np.linalg.matrix_rank(simplex[1:] - simplex[0]) != dim:
+            raise ValueError("initial_simplex must be nondegenerate in all ETA dimensions.")
+        options["initial_simplex"] = simplex
+    for name in ("xatol", "fatol"):
+        if name in options:
+            if config.optimizer_method.lower() != "nelder-mead":
+                raise ValueError(f"{name} is only supported with optimizer_method='Nelder-Mead'.")
+            value = float(options[name])
+            if not math.isfinite(value) or value < 0.0:
+                raise ValueError(f"{name} must be finite and non-negative.")
+            options[name] = value
+    if "maxfev" in options:
+        value = options["maxfev"]
+        if not isinstance(value, Integral) or isinstance(value, bool) or value <= 0:
+            raise ValueError("maxfev must be a positive integer.")
+    options["maxiter"] = int(config.optimizer_maxiter)
+    return start, options
 
 
 def _coerce_observations(observations: Sequence[float]) -> np.ndarray:
@@ -351,12 +457,36 @@ def _coerce_observations(observations: Sequence[float]) -> np.ndarray:
     return y
 
 
-def _omega_matrices(config: MultiEtaLaplaceConfig) -> tuple[np.ndarray, np.ndarray, float]:
-    omega = np.asarray(config.omega_covariance, dtype=float)
+def _validated_omega(covariance: Sequence[Sequence[float]]) -> np.ndarray:
+    omega = np.asarray(covariance, dtype=float)
     if omega.ndim != 2 or omega.shape[0] != omega.shape[1]:
         raise ValueError("omega_covariance must be a square matrix.")
+    if omega.shape[0] < 1:
+        raise ValueError("omega_covariance must have at least one ETA dimension.")
     if not np.all(np.isfinite(omega)):
         raise ValueError("omega_covariance must be finite.")
+    if np.any(np.diag(omega) <= 0.0):
+        raise ValueError("omega_covariance must be positive definite.")
+    # Check asymmetry in correlation units so tiny variances cannot mask it.
+    scale = np.sqrt(np.diag(omega))
+    try:
+        with np.errstate(over="raise", invalid="raise", divide="raise"):
+            standardized = omega / scale[:, None] / scale[None, :]
+    except FloatingPointError as exc:
+        raise ValueError("omega_covariance has invalid standardized entries.") from exc
+    if not np.allclose(standardized, standardized.T,
+                       rtol=_OMEGA_SYMMETRY_RTOL, atol=_OMEGA_SYMMETRY_ATOL):
+        raise ValueError("omega_covariance must be symmetric in correlation units (rtol=1e-10, atol=1e-12).")
+    try:
+        np.linalg.cholesky(omega)
+    except np.linalg.LinAlgError as exc:
+        raise ValueError("omega_covariance must be positive definite.") from exc
+    return omega
+
+
+def _omega_matrices(config: MultiEtaLaplaceConfig) -> tuple[np.ndarray, np.ndarray, float]:
+    omega = _validated_omega(config.omega_covariance)
+    # Keep the legacy arithmetic after validation for bitwise-compatible output.
     sign, logdet = np.linalg.slogdet(omega)
     if sign <= 0 or not math.isfinite(float(logdet)):
         raise ValueError("omega_covariance must be positive definite.")

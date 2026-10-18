@@ -1,0 +1,133 @@
+{
+  "schema": "portable_formal_ghq_source_v1",
+  "version": "2026.10.18.1",
+  "path_base": "workspace for source; examples/manuscript_current for target",
+  "dependencies": {
+    "python": "3.12.0",
+    "numpy": "2.5.2",
+    "scipy": "1.16.2",
+    "mpmath": "1.3.0"
+  },
+  "records": [
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/tac_ghq/adaptive_capacity_v22/worker.py",
+      "source_sha256": "1aa6e6955c28cbde923d430f4c3ba5d02e70263c1d0e14ed2e83be54870dd9f7",
+      "target": "research_ghq/_tac/worker.py",
+      "target_sha256": "e446770bfc854165e86aa6a99e814080e41b3d2b01b230af9d60911c8f6d9765",
+      "change": "sibling imports only",
+      "relative_imports": [
+        "fast_model",
+        "geometry",
+        "kernel",
+        "tensor",
+        "atomic_io"
+      ],
+      "ast_equal_after_import_relocation": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/tac_ghq/adaptive_capacity_v22/resolved.py",
+      "source_sha256": "c49f2045b2f6cb6b2bb686beef73b79580c93be4fe9f48496c8ba188cdb19447",
+      "target": "research_ghq/_tac/resolved.py",
+      "target_sha256": "c49f2045b2f6cb6b2bb686beef73b79580c93be4fe9f48496c8ba188cdb19447",
+      "change": "unchanged text",
+      "relative_imports": [],
+      "ast_equal_after_import_relocation": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/tac_ghq/adaptive_capacity_v22/fast_model.py",
+      "source_sha256": "9a123144ed7d5ec46b902167735fb3bff7c68c8576fcc2e9434599ebdfd3b453",
+      "target": "research_ghq/_tac/fast_model.py",
+      "target_sha256": "9a123144ed7d5ec46b902167735fb3bff7c68c8576fcc2e9434599ebdfd3b453",
+      "change": "unchanged text",
+      "relative_imports": [],
+      "ast_equal_after_import_relocation": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/tac_ghq/adaptive_capacity_v22/geometry.py",
+      "source_sha256": "380830b01bd70098afd7db98b9ac018cba30ab31ba3f55084c69eec05f0744ee",
+      "target": "research_ghq/_tac/geometry.py",
+      "target_sha256": "380830b01bd70098afd7db98b9ac018cba30ab31ba3f55084c69eec05f0744ee",
+      "change": "unchanged text",
+      "relative_imports": [],
+      "ast_equal_after_import_relocation": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/tac_ghq/adaptive_capacity_v22/kernel.py",
+      "source_sha256": "5dcc0a581daa975950056d4c7efe866950355bf70b7d04516e17aede76543dae",
+      "target": "research_ghq/_tac/kernel.py",
+      "target_sha256": "e67a69baf99c898b668201712e128e5308ce26bb8d0c48702710dc13f923e38d",
+      "change": "sibling imports only",
+      "relative_imports": [
+        "tensor"
+      ],
+      "ast_equal_after_import_relocation": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/tac_ghq/adaptive_capacity_v22/tensor.py",
+      "source_sha256": "047cdfb706d4e08487e7a47f0988757198af89505831b7f2f4ce2445d62b6a42",
+      "target": "research_ghq/_tac/tensor.py",
+      "target_sha256": "047cdfb706d4e08487e7a47f0988757198af89505831b7f2f4ce2445d62b6a42",
+      "change": "unchanged text",
+      "relative_imports": [],
+      "ast_equal_after_import_relocation": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/tac_ghq/adaptive_capacity_v22/atomic_io.py",
+      "source_sha256": "a814525b3ce557f6d34de134aa2ca6142219afb9c83ffcdfa1b358b1141609a7",
+      "target": "research_ghq/_tac/atomic_io.py",
+      "target_sha256": "a814525b3ce557f6d34de134aa2ca6142219afb9c83ffcdfa1b358b1141609a7",
+      "change": "unchanged text",
+      "relative_imports": [],
+      "ast_equal_after_import_relocation": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/oxc/numerical.py",
+      "source_sha256": "675bb28dcfbc606f2efcd30b4ada8787589bcb22d5246f5cc07e32858f1e823c",
+      "target": "research_ghq/_oxc.py",
+      "target_sha256": "917505e103632cfddc1b90a6a559410734760f3cb06411893588808fcd780c8c",
+      "exact_extracted_definitions": [
+        "GHQ_ORDERS",
+        "SEARCH",
+        "normalize",
+        "independent_center",
+        "ghq"
+      ],
+      "ast_equal": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/oxc/adapter.py",
+      "source_sha256": "6ac00114be1b5fe4f830ce06fe76728b8cbad5e6befabfb4520fd7cb123897b8",
+      "target": "model_adapters/oxc_model.py",
+      "target_sha256": "559f55a2f98d3e3d72e0a15ebd3f6ae7f495d572b85cda165708826a31d5b5ec",
+      "shared_read_only": true,
+      "exact_definitions": [
+        "SD",
+        "CV",
+        "VARIANCE",
+        "FIXED",
+        "FIELDS",
+        "no_truth",
+        "validate",
+        "rate",
+        "concentration",
+        "Model"
+      ],
+      "ast_equal": true
+    },
+    {
+      "source": "manuscript_revision_execution_20260928/48_final_validation_redesign_20261005/implementation/rerun_source_ruv_20261006/oxc/common.py",
+      "source_sha256": "0ef828ec4ba5e786d6ed86b076fc0523438833dc5d8bb536441f58d27819ae1b",
+      "target": "model_adapters/_common.py",
+      "target_sha256": "4450bb392c670fdfca9a4670067aadfa0872a40a4fa723a2601ec85eb141ef86",
+      "shared_read_only": true,
+      "exact_definitions": [
+        "require",
+        "canonical",
+        "digest"
+      ],
+      "ast_equal": true
+    }
+  ],
+  "numerical_edits": false,
+  "public_gauss_hermite_posterior_modified": false
+}

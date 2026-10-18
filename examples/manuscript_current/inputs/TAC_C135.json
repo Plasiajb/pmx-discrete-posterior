@@ -1,0 +1,350 @@
+{
+  "schema": "tac_resolved_v1",
+  "numeric_id": "tac_d00fcbb36933cef41234df3ecfdb9e188715d6b3fad42566b40b89e377c94f4c",
+  "parameters": {
+    "CL": 25.5,
+    "V1": 113.0,
+    "Q": 67.9,
+    "V2": 1060.0,
+    "ka": 0.35,
+    "lag": 0.44,
+    "WT": 70.0
+  },
+  "fixed": {
+    "X": 0,
+    "HEM": 0.33,
+    "POD": 22.7,
+    "Pred": 155.5,
+    "theta_CYP3A5": 1.6,
+    "theta_HEM": -1.01,
+    "theta_POD": -0.0021,
+    "theta_Pred": -0.0028,
+    "POD_cap": 180,
+    "WT_exponent": 0.75,
+    "normalization_weight": 70
+  },
+  "slots": [
+    -12,
+    0,
+    12
+  ],
+  "shared_last": -24.0,
+  "shared_dose": 6.0,
+  "tau": 12.0,
+  "states": [
+    {
+      "state_event_id": "state_853dd5bb2810e9a1c9f53c5f22fd53fedc8f72b8f4b389fe9ccc1a310bc861a6",
+      "manuscript_id": "omega_000",
+      "machine_bitstring": "000",
+      "prior": 0.125,
+      "events": []
+    },
+    {
+      "state_event_id": "state_8d7169c4827b8e1bb62c428ac32456e2e332be7ac8bbcd3c5d2c5068a9b45daa",
+      "manuscript_id": "omega_001",
+      "machine_bitstring": "100",
+      "prior": 0.125,
+      "events": [
+        {
+          "nominal_slot_h": -12.0,
+          "time_h": -12.0,
+          "amount_mg": 6.0
+        }
+      ]
+    },
+    {
+      "state_event_id": "state_d987bbb88d17a78008c27e0227012632ce61b187dfb9f2014c21721faefcb1c7",
+      "manuscript_id": "omega_010",
+      "machine_bitstring": "010",
+      "prior": 0.125,
+      "events": [
+        {
+          "nominal_slot_h": 0.0,
+          "time_h": 0.0,
+          "amount_mg": 6.0
+        }
+      ]
+    },
+    {
+      "state_event_id": "state_17f6f961dddefe95daaae157f0e0b6cd05874da7ac39653f7fcd58bd5672bd9d",
+      "manuscript_id": "omega_011",
+      "machine_bitstring": "110",
+      "prior": 0.125,
+      "events": [
+        {
+          "nominal_slot_h": -12.0,
+          "time_h": -12.0,
+          "amount_mg": 6.0
+        },
+        {
+          "nominal_slot_h": 0.0,
+          "time_h": 0.0,
+          "amount_mg": 6.0
+        }
+      ]
+    },
+    {
+      "state_event_id": "state_fd652080f5142be2a1072aba900024d0b8d751c5150e45b731285e9aade8c4b7",
+      "manuscript_id": "omega_100",
+      "machine_bitstring": "001",
+      "prior": 0.125,
+      "events": [
+        {
+          "nominal_slot_h": 12.0,
+          "time_h": 12.0,
+          "amount_mg": 6.0
+        }
+      ]
+    },
+    {
+      "state_event_id": "state_15e16edb150005f1dc042e182ee67bb0a623f54166f0340486521e5ab64b6572",
+      "manuscript_id": "omega_101",
+      "machine_bitstring": "101",
+      "prior": 0.125,
+      "events": [
+        {
+          "nominal_slot_h": -12.0,
+          "time_h": -12.0,
+          "amount_mg": 6.0
+        },
+        {
+          "nominal_slot_h": 12.0,
+          "time_h": 12.0,
+          "amount_mg": 6.0
+        }
+      ]
+    },
+    {
+      "state_event_id": "state_fd8b20ded0f6fcb0c73ef8a5b764fdd6c2cea4d0e22d965ed2042775d0a22373",
+      "manuscript_id": "omega_110",
+      "machine_bitstring": "011",
+      "prior": 0.125,
+      "events": [
+        {
+          "nominal_slot_h": 0.0,
+          "time_h": 0.0,
+          "amount_mg": 6.0
+        },
+        {
+          "nominal_slot_h": 12.0,
+          "time_h": 12.0,
+          "amount_mg": 6.0
+        }
+      ]
+    },
+    {
+      "state_event_id": "state_e8664769b7a54dd893ac8e07e9aaab7263cf2d5ffaf38995da6786dbf6e2f51e",
+      "manuscript_id": "omega_111",
+      "machine_bitstring": "111",
+      "prior": 0.125,
+      "events": [
+        {
+          "nominal_slot_h": -12.0,
+          "time_h": -12.0,
+          "amount_mg": 6.0
+        },
+        {
+          "nominal_slot_h": 0.0,
+          "time_h": 0.0,
+          "amount_mg": 6.0
+        },
+        {
+          "nominal_slot_h": 12.0,
+          "time_h": 12.0,
+          "amount_mg": 6.0
+        }
+      ]
+    }
+  ],
+  "omega": [
+    [
+      0.08344460695463439,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.19805053857439603,
+      -0.01671233240450257,
+      0.13615474483258513,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      -0.01671233240450257,
+      0.5873621303556349,
+      -0.004502486522586959,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.13615474483258513,
+      -0.004502486522586959,
+      0.20422654773754803,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.08562800390349452,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.955597979744738,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.08562800390349452,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.955597979744738,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.08562800390349452,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.955597979744738,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.08562800390349452,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.955597979744738
+    ]
+  ],
+  "eta_order": [
+    "Clearance IIV",
+    "Central-volume IIV",
+    "Peripheral-volume IIV",
+    "Absorption-rate IIV",
+    "Clearance IOV@occ_-24",
+    "Central-volume IOV@occ_-24",
+    "Clearance IOV@occ_-12",
+    "Central-volume IOV@occ_-12",
+    "Clearance IOV@occ_0",
+    "Central-volume IOV@occ_0",
+    "Clearance IOV@occ_12",
+    "Central-volume IOV@occ_12"
+  ],
+  "residual_sd": 0.183,
+  "times": [
+    24.0
+  ],
+  "observations": [
+    12.0
+  ]
+}
