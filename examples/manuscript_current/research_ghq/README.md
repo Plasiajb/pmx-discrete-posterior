@@ -130,7 +130,8 @@ discarded after each call, so its order cap cannot change a later adaptive call.
 
 These additions are source- and contract-validated. Six selected cases were also
 recomputed from a fresh public GitHub checkout; all 26 posterior components
-matched formal GHQ raw R1 exactly. See [VALIDATION.md](../VALIDATION.md#public-ghq-sensitivity-sample)
+matched the accepted formal GHQ first-repeat vectors exactly. See
+[VALIDATION.md](../VALIDATION.md#public-ghq-sensitivity-sample)
 for the tested commit, cases and full-vector evidence. This is not a new full
 sensitivity, five-repeat or expensive fixed-grid replay. Earlier reference
 checks and the 217 historically accepted configurations are separate evidence.

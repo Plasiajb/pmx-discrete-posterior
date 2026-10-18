@@ -51,8 +51,11 @@ checkpoints were used. All 349 tracked files were unchanged after execution.
 | TAC_C055 | Central-volume IOV | 4 | 108.406 | 0 |
 
 All six attempts passed native diagnostic checks. All 26 unmodified posterior
-components exactly matched the archived GHQ first repeat. Direct comparison of
-the raw vector with the normalized five-repeat mean also passed the componentwise
+components exactly matched the archived accepted GHQ first repeat.
+For OXC_C024/C025, this is the accepted GHQ02 supplement S1, not the earlier
+nonconverged base R1; S1-S5 are indexed as repeats 1-5 in the final comparison.
+Direct comparison of the raw vector with the normalized five-repeat mean also
+passed the componentwise
 criterion above; a separately normalized fresh-versus-mean comparison is retained
 as an additional check. Formal comparators were read after each calculation exited.
 Full vectors, state labels, differences, hashes, budgets and environment are in

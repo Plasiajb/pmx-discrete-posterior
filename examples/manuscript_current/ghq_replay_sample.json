@@ -10,6 +10,7 @@
   "failed": 0,
   "source_checkout_unchanged": true,
   "comparator_access": "Post-computation only; this file is not read by inference",
+  "reference_repeat_convention": "formal_raw_r1 denotes the first accepted formal repeat. OXC_C024/C025 use GHQ02 supplement S1, with S1-S5 indexed as 1-5 in final_precision; not the earlier nonconverged base R1. Other sampled cases use R1-R5.",
   "tolerance": {
     "absolute": 1e-15,
     "relative": 1e-13,
