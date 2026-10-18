@@ -1,3 +1,3 @@
 # These published snapshots carry byte-level provenance hashes.
-examples/manuscript_current/** -text
-src/pmx_discrete_posterior/multieta.py -text
+examples/manuscript_current/** -text whitespace=cr-at-eol,-blank-at-eof
+src/pmx_discrete_posterior/multieta.py -text whitespace=cr-at-eol,-blank-at-eof
