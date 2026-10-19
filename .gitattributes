@@ -1,3 +1,7 @@
 # These published snapshots carry byte-level provenance hashes.
 examples/manuscript_current/** -text whitespace=cr-at-eol,-blank-at-eof
-src/pmx_discrete_posterior/multieta.py -text whitespace=cr-at-eol,-blank-at-eof
+# Accepted v0.2 scientific sources and reference inputs are byte-preserved.
+src/pmx_discrete_posterior/** -text whitespace=cr-at-eol
+examples/posterior_reference.py -text whitespace=cr-at-eol
+examples/reference_models.py -text whitespace=cr-at-eol
+tests/fixtures/** -text whitespace=cr-at-eol

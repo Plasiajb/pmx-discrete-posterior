@@ -1,10 +1,9 @@
 cff-version: 1.2.0
 title: "pmx-discrete-posterior"
-message: "If you use this research prototype, please cite the associated manuscript or software release once available."
+message: "Please cite this software and record the version and commit or release archive used."
 type: software
-version: "0.1.4"
-date-released: "2026-06-15"
-abstract: "Laplace posterior probabilities for predefined discrete states in pharmacometric models."
+version: "0.2.0"
+abstract: "Model-conditional posterior probabilities for predefined discrete pharmacometric states using Laplace approximation and retained prior-centered Gauss-Hermite quadrature."
 authors:
   - name: "AI-ready PMX benchmark engine contributors"
 license: "MIT"

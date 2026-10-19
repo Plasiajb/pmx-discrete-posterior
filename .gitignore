@@ -10,3 +10,13 @@ examples/*_output/
 tests/_tmp_*/
 .venv/
 venv/
+.venv*/
+test_history/
+delivery_acceptance*/
+_delivery_tmp/
+*.log
+*.junit.xml
+.env
+.env.*
+!.env.example
+.github/_ci/

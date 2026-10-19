@@ -1,5 +1,46 @@
 # Release Notes
 
+## v0.2.0 - Unified Posterior API
+
+The distribution name remains `pmx-discrete-posterior`, the Python import is
+`pmx_discrete_posterior`, and the license remains MIT. The repository is private;
+this version is distributed through GitHub and is not published on PyPI.
+
+### Changes
+
+- `compute_posterior` accepts seven keyword input groups and handles zero, one
+  or multiple active random effects through one pipeline.
+- Model inputs separate parameter relationships, prediction, IIV/IOV and
+  residual error. Candidate histories use explicit dose events, not encoded IDs.
+- Results retain all candidates, log marginal likelihoods and diagnostics.
+  Positive-prior failures prevent posterior normalization; zero priors remain
+  explicit skipped states with zero posterior probability.
+- OXC and TAC reference examples compute complete Laplace posteriors from
+  bundled inputs. The source archive includes the examples and portable tests;
+  the wheel contains the runtime package.
+
+### Compatibility And Scope
+
+This is not API-compatible with 0.1.4. Old one-ETA/multi-ETA entry points,
+reporting/no-call helpers and adapters are not exported. See the
+[migration guide](docs/migration.md). Manuscript examples remain tied to the
+`manuscript-20261018` source tag and a separate environment.
+
+Python >=3.11, NumPy >=1.26 and SciPy >=1.16.2,<2 are required. SciPy is no
+longer optional. Source builds require setuptools >=77.0.3.
+
+Laplace is the maintained core. Prior-centered GHQ is retained with explicit
+orders, tolerances and node budgets; external backends such as R `aghq` are
+not integrated. TAC high-order GHQ accuracy has not passed acceptance.
+Reference checks do not constitute a full sensitivity replay with v0.2.0.
+Removing old interfaces isolates those paths; it does not certify repairs to
+the old reporting or model implementations.
+
+## Historical Releases
+
+The records below describe their original releases, not the repository's
+current visibility or the v0.2 API.
+
 ## v0.1.4 - Posterior evidence reporting layer release
 
 Date: 2026-06-15

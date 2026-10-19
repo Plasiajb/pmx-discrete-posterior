@@ -6,44 +6,104 @@ on:
     tags: ["v*"]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  PYTHONIOENCODING: utf-8
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
 
 jobs:
-  test-build:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build wheel and sdist
+        shell: pwsh
+        run: |
+          python -m pip install "build>=1.2,<2" "twine>=6,<7"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m build --wheel --sdist --outdir .github/_ci/dist
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m twine check .github/_ci/dist/*
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: distributions
+          path: .github/_ci/dist/*
+          if-no-files-found: error
+          retention-days: 14
+
+  portable:
+    needs: build
+    runs-on: windows-latest
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-
+        environment:
+          - python: "3.11"
+            dependencies: minimum
+          - python: "3.12"
+            dependencies: current
+        distribution: [wheel, sdist]
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install package and release tools
+          python-version: ${{ matrix.environment.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: distributions
+          path: .github/_ci/dist
+      - name: Clean-installed portable suite and real OXC example
+        shell: pwsh
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e ".[scipy,plots,test]"
-          python -m pip install build twine
+          ./.github/scripts/test-installed.ps1 -Distribution ${{ matrix.distribution }} -Dependencies ${{ matrix.environment.dependencies }} -Selection quick -Reference OXC
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: portable-${{ matrix.environment.python }}-${{ matrix.distribution }}
+          path: .github/_ci/*-quick/results/*
+          if-no-files-found: warn
+          retention-days: 14
 
-      - name: Compile package and examples on Python 3.12
-        if: matrix.python-version == '3.12'
-        run: python -m compileall -q src tests examples
-
-      - name: Compile package and compatible examples on older Python
-        if: matrix.python-version != '3.12'
-        # The frozen manuscript demos require Python 3.12; their source hashes are preserved.
-        run: python -m compileall -q -x '[/\\]manuscript_demos[/\\]' src tests examples
-
-      - name: Run unit tests
-        run: python -m unittest discover -s tests -v
-
-      - name: Build source distribution and wheel
-        run: python -m build --sdist --wheel
-
-      - name: Check package metadata
-        run: python -m twine check dist/*
+  tac-reference:
+    needs: build
+    runs-on: windows-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        environment:
+          - python: "3.11"
+            dependencies: minimum
+          - python: "3.12"
+            dependencies: current
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.environment.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: distributions
+          path: .github/_ci/dist
+      - name: Clean-installed TAC Laplace, curvature and bounded GHQ regressions
+        shell: pwsh
+        run: |
+          ./.github/scripts/test-installed.ps1 -Distribution wheel -Dependencies ${{ matrix.environment.dependencies }} -Selection slow -Reference TAC
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tac-${{ matrix.environment.python }}
+          path: .github/_ci/wheel-slow/results/*
+          if-no-files-found: warn
+          retention-days: 14

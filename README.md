@@ -1,201 +1,145 @@
 # pmx-discrete-posterior
 
-Research package for model-conditional posterior probabilities over a finite set of predefined discrete states in pharmacometric models. It supports single- and multi-random-effect Laplace calculations. The current manuscript examples include OXC and TAC models with complete reference and sensitivity inputs.
+**Version 0.2.0 | Python >=3.11 | MIT**
 
-The probabilities are conditional on the model, candidate states, priors, IIV/RUV assumptions, covariates, dosing history, and observation. They are not direct evidence of true adherence and should not be used as standalone clinical decisions.
+Compute model-conditional posterior probabilities over a finite set of
+predefined pharmacometric states, such as alternative dosing histories.
+Supply a model, individual data, observations, candidate histories and their
+prior probabilities. The package integrates over random effects and returns
+each candidate's log marginal likelihood, posterior probability and diagnostics.
 
-## Method Boundary
+Laplace is the maintained numerical route. A retained prior-centered
+Gauss-Hermite quadrature (GHQ) route is also available. Neither NONMEM nor R is
+required. These are research calculations conditional on the supplied model
+and assumptions, not direct evidence of adherence or standalone clinical decisions.
 
-For the one-random-effect, additive-error example, each discrete state `k` has a model-conditional likelihood contribution computed by minimizing
+## Install
 
-```text
-psi_k(eta) = 0.5 * ((y - f_k(eta)) / sigma)^2 + 0.5 * eta^2 / omega_variance
-```
+The [GitHub repository](https://github.com/Plasiajb/pmx-discrete-posterior) is
+private; repository and release downloads require access. This package is not
+published on PyPI. Runtime dependencies are NumPy >=1.26 and SciPy >=1.16.2,<2.
 
-and applying the one-dimensional Laplace approximation
-
-```text
-log L_k ~= -0.5 * log(2*pi) - log(sigma) - 0.5 * log(omega_variance)
-           - psi_k(eta_hat_k) - 0.5 * log(H_k)
-```
-
-The posterior is then
-
-```text
-Pr(k | y) = prior_k * L_k / sum_j(prior_j * L_j)
-```
-
-Zero prior mass is treated as a structural zero by default. Non-positive Hessian, optimizer-boundary, and optimizer-failure cases are marked as indeterminate in diagnostics rather than silently treated as fully valid posteriors.
-
-The multi-random-effect interface evaluates the joint observation density with
-the supplied covariance and residual model, and uses the full Hessian in its
-Laplace approximation. The current manuscript adapters preserve the formal
-optimizer settings and independent numerical checks.
-
-The package does not bundle NONMEM. NONMEM `$MIX`/`$MIXTURE` PMIX outputs are an optional licensed reference path outside the core Python calculation.
-
-## Release Status
-
-Version `0.1.4` is available as a public open-source GitHub repository and
-release for manuscript review, collaborator audit, and reproducibility
-assessment. The package is distributed under the MIT License. It is not a public
-PyPI release, not a NONMEM replacement, and not a clinical decision-support
-tool. DOI archiving and PyPI publication remain separate author decisions.
-
-The current manuscript examples require this updated source checkout. The
-original `0.1.4` release wheel does not contain the new explicit numerical
-configuration or current scenario catalog; it is not an interchangeable snapshot.
-The separate research GHQ module is version `2026.10.18.2`, not package `0.1.4`.
-It needs the source checkout and pinned dependencies, but no package installation.
-
-## Installation
-
-From a checked-out repository:
+From a source checkout:
 
 ```bash
-python -m pip install -e ".[scipy,plots,test]"
+git clone https://github.com/Plasiajb/pmx-discrete-posterior.git
+cd pmx-discrete-posterior
+python -m venv .venv
 ```
 
-From a local release wheel:
+Activate with `.venv\Scripts\Activate.ps1` in PowerShell or
+`source .venv/bin/activate` in a POSIX shell, then:
 
 ```bash
-python -m pip install pmx_discrete_posterior-0.1.4-py3-none-any.whl
+python -m pip install .
+python examples/posterior_reference.py OXC
 ```
 
-## Manuscript Review Demos
+For release archives, download the wheel, source archive and checksum file
+from the [GitHub releases](https://github.com/Plasiajb/pmx-discrete-posterior/releases).
+In a fresh virtual environment, install either local artifact:
 
-The [current manuscript examples](examples/manuscript_current/README.md)
-contain the complete October 2026 design: 83 oxcarbazepine and 135 tacrolimus
-cases, including both reference cases and all sensitivity settings. Each case
-includes resolved model, variability, observation, candidate-history and prior
-inputs. The Python-Laplace entry computes the full posterior vector and retains
-numerical diagnostics. TAC uses correlated IIV and occasion-specific IOV; the
-near-zero residual case remains in the catalog with its numerical failure.
+```bash
+python -m pip install ./pmx_discrete_posterior-0.2.0-py3-none-any.whl
+# Alternative: build and install from the source archive.
+python -m pip install ./pmx_discrete_posterior-0.2.0.tar.gz
+```
 
-The separate [current GHQ reference and sensitivity examples](examples/manuscript_current/research_ghq/README.md)
-use `run_ghq_demo.py` to inspect, export or compute one pinned case. All 218
-designs are configured; 217 were historically accepted, with `TAC_C078` retained
-as a historical failure. These counts are not fresh public-replay results.
-Inspect resource allowances first: some TAC fixed grids allow about six hours
-and billions of points, without a hard runtime guarantee. See the
-[validation record](examples/manuscript_current/VALIDATION.md) for measured replay scope.
+The wheel contains the runtime package. To run examples after a wheel install,
+extract the matching source archive and work from its root. Keep `examples/`
+and `tests/fixtures/` together. Initial installation needs access to dependencies;
+the examples do not need network access at runtime.
 
-The [historical two-case demos](examples/manuscript_demos/README.md) retain the
-October 1 analysis and its original validation records. They are not substitutes
-for the current scenario set. Each demo directory has its own dependency and
-source instructions. No NONMEM installation is needed for the Python examples;
-saved NONMEM comparator values in historical examples are not live executions.
+## Minimal Call
 
-## Minimal Usage
+Run this Python code from the source root in the environment above. The
+reference loader supplies a complete OXC model and input data; it does not
+supply a precomputed posterior.
 
 ```python
-from pmx_discrete_posterior import (
-    OneEtaLaplaceConfig,
-    OxcOneEtaDoseHistoryModel,
-    build_oxc_dose_history_states,
-    build_laplace_curve_payload,
-    compute_laplace_posterior,
+from pmx_discrete_posterior import compute_posterior
+from examples.reference_models import load_reference
+
+case = load_reference("OXC")
+model = case["model"]
+model["random_effects_dependence"] = "independent_blocks"
+model["residual_model"]["dependence"] = "conditionally_independent"
+states = case["candidate_states"]
+
+result = compute_posterior(
+    model=model,
+    individual_data=case["individual_data"],
+    observations=case["observations"],
+    candidate_states=states,
+    priors={state["state_id"]: 1.0 / len(states) for state in states},
+    integration_method="laplace",
+    numerical_options=None,
 )
-
-scenarios = ("omega00", "omega01", "omega10", "omega11")
-prior = {scenario: 0.25 for scenario in scenarios}
-
-model = OxcOneEtaDoseHistoryModel(
-    dose_mg=300.0,
-    interval_h=12.0,
-    obs_time_h=36.0,
-    weight_kg=25.0,
-    steady_state_anchor_age_h=36.0,
-    candidate_dose_ages_h=(12.0, 24.0),
-    candidate_dose_mg=(300.0, 300.0),
-)
-states = build_oxc_dose_history_states(scenarios, prior)
-config = OneEtaLaplaceConfig(
-    omega_variance=0.012245714245884425,
-    residual_sd=1e-6,
-)
-
-observation = model.prediction("omega11", eta=0.0)
-result = compute_laplace_posterior(observation, states, model, config)
-print(result.posterior)
-
-curve = build_laplace_curve_payload([2.5, 6.3, 11.7, 15.5], states, model, config)
-print(curve["long_rows"][0])
+if result["status"] != "success":
+    raise RuntimeError(result["failure_reason"])
+for row in result["state_results"]:
+    print(row["state_id"], row["posterior_probability"])
 ```
 
-## Posterior Evidence Reporting Layer
+All seven input groups are keyword arguments. Custom models use the same
+[API](docs/api.md) and [model contract](docs/models.md); the reference loader is
+an example helper, not an installed package API.
 
-The package also exposes a lightweight reporting layer for manuscript and audit
-workflows. It does not change the Laplace calculation; it summarizes an existing
-posterior result into report-ready fields:
+## Read Results
 
-```python
-from pmx_discrete_posterior import (
-    NoCallRule,
-    build_case_card,
-    posterior_to_long_rows,
-    posterior_to_wide_row,
-    summarize_posterior_evidence,
-)
+Always check the overall `status` before using probabilities. On success,
+`state_results` preserves candidate order and contains a complete normalized
+posterior. Invalid inputs raise `InputError`. Numerical or model-execution
+failure returns `status="failed"` with a reason and all candidate rows;
+positive-prior posterior values remain `None`, even for successful integrals.
+The package never drops failed candidates and renormalizes the remainder.
 
-rule = NoCallRule(rule_id="NC_DEFAULT", margin_threshold=0.10, entropy_threshold=0.80)
-report = summarize_posterior_evidence(result, rule=rule, case_metadata={"case_id": "example"})
-print(report.map_state_id, report.margin, report.normalized_entropy, report.no_call)
-print(build_case_card(report)["interpretation"])
-rows = posterior_to_long_rows(report)
-wide = posterior_to_wide_row(report)
-```
+An exactly zero prior skips integration, keeps the candidate with
+`status="skipped_zero_prior"`, and returns posterior `0.0`. Inputs for that
+candidate must still be valid. See [result fields and failure handling](docs/api.md#results).
 
-The reporting layer is intended to support model-conditioned posterior evidence
-summaries: posterior vector, MAP state, posterior margin, normalized entropy,
-no-call status, numerical warnings, and provenance fields. The default no-call
-rule is a prespecified reporting diagnostic for weak posterior separation, not a
-validated clinical abstention rule.
-
-## OXC4 PMIX-DV Plot
+## Examples And Scope
 
 ```bash
-python examples/oxc4_pmix_dv_plot.py --output-dir examples/oxc4_pmix_dv_output
+python examples/posterior_reference.py OXC
+python examples/posterior_reference.py TAC
 ```
 
-Outputs:
+These compute the four-state OXC and TAC Laplace reference cases. TAC has ten
+active random effects and takes longer. The CLI prints JSON and exits `0`
+on calculation success or `1` on numerical failure. See
+[reference examples](docs/reference_examples.md) for units, checks and output details.
 
-- `oxc4_pmix_dv_curve.csv`
-- `oxc4_pmix_dv_curve.png`
-- `summary.json`
+OXC and TAC Laplace references have been checked; **the full manuscript
+sensitivity matrix has not been replayed with v0.2.0**. The retained
+[GHQ route](docs/ghq.md) has an OXC reference check, but high-order TAC accuracy
+has not passed acceptance. It is not R `aghq`; no external GHQ backend is integrated.
 
-The script uses the public package API and writes only under the selected output directory.
+The directories `examples/manuscript_current` and `examples/manuscript_demos`
+preserve earlier manuscript work. Run them only from the
+`manuscript-20261018` tag in a separate checkout and environment, following the
+[migration guide](docs/migration.md#reproduce-the-manuscript).
+They are not v0.2 examples, and the original 0.1.4 wheel is not a substitute
+for that source snapshot.
 
-## Historical Multi-ETA Stress Test
+## Test, Build And Contribute
 
-The multi-ETA, multi-observation interface is also used by the historical
-combined additive/proportional residual-error example:
-
-```python
-from pmx_discrete_posterior import MultiEtaLaplaceConfig, compute_multieta_posterior
-```
-
-That stress test uses a synthetic oral one-compartment PK model with ETA(CL), ETA(V), four observations, and combined RUV. It compares the package's multivariate Laplace posterior against a tensor-product Gauss-Hermite numerical integration reference:
+From a source checkout:
 
 ```bash
-python examples/multieta_stress_test.py
+python -m pip install -e ".[test]"
+python -m pytest -m "not slow"
+python -m pytest -m slow
 ```
 
-Default outputs are written to:
+The standard `-m "not slow"` selection excludes slow tests. The second command above runs the
+portable component suite; the third runs the separately marked slow cases,
+including full TAC reference calculations. See [CONTRIBUTING.md](CONTRIBUTING.md)
+for source builds and installed-package checks.
 
-```text
-../JPKPD_IMA_Laplace_Manuscript_20260521/supplement/experiments/multieta_stress_test_20260521/
-```
+[Release notes](RELEASE_NOTES.md) | [Migration](docs/migration.md) |
+[Validation](docs/validation/README.md) |
+[Security](SECURITY.md) | [Citation](CITATION.cff)
 
-This is supplementary generality evidence only. It is not a replacement for the OXC same-assumption NONMEM IMA/PMIX reference validation.
-
-## Tests
-
-From this directory:
-
-```bash
-python -m pytest
-python -m unittest discover -s tests
-```
-
-The tests are written with `unittest` and run cleanly under `pytest` when pytest is installed. They cover posterior normalization, zero-prior exclusion, OXC four-state MAP behavior, GUI4-compatible PMIX-DV row fields, multi-ETA stress-test agreement with Gauss-Hermite reference, and plotting examples.
+Copyright (c) 2026 AI-ready PMX benchmark engine contributors.
+Distributed under the [MIT License](LICENSE).

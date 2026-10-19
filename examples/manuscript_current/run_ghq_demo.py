@@ -24,6 +24,11 @@ def _json(value):
 
 
 def _modules():
+    if not (REPO / 'src/pmx_discrete_posterior/multieta.py').is_file():
+        raise RuntimeError(
+            'Use a separate checkout of tag manuscript-20261018 for manuscript GHQ. '
+            'This frozen adapter is not a v0.2 package entry point.'
+        )
     for prefix in ('research_ghq', 'model_adapters'):
         for name, module in tuple(sys.modules.items()):
             if name == prefix or name.startswith(prefix + '.'):

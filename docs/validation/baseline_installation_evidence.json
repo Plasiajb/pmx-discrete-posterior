@@ -1,0 +1,1262 @@
+{
+  "schema": "pmx.baseline-installation-evidence.v1",
+  "extracted_utc": "2026-10-19T17:10:44.101448+00:00",
+  "extraction_type": "Read-only archived evidence parsing, hashing and arithmetic comparison; no numerical experiments or package tests executed",
+  "distribution": {
+    "name": "pmx-discrete-posterior",
+    "import_name": "pmx_discrete_posterior",
+    "version": "0.2.0",
+    "declared_python": ">=3.11",
+    "declared_dependencies": [
+      "numpy>=1.26",
+      "scipy<2,>=1.16.2",
+      "pytest>=8; extra == \"test\"",
+      "mpmath>=1.3; extra == \"test\""
+    ]
+  },
+  "provenance_root": {
+    "label": "accepted_baseline",
+    "workspace_relative_path": "pmx_discrete_posterior_v2_20261019",
+    "path_rule": "All source paths are relative to this root unless a run-relative map is explicitly named"
+  },
+  "source_reports": [
+    {
+      "path": "docs/delivery_acceptance_20261020/GITHUB_HANDOFF.md",
+      "sha256": "79d1c304b7942fab5dd23457a5501d17f05aa6edc601b7562a21d849a0459cbe"
+    },
+    {
+      "path": "docs/delivery_acceptance_20261020/REPORT.md",
+      "sha256": "00d3313b766aa8f5270b99e3771e428b59c26140c915454b89ca480e9f053e59"
+    },
+    {
+      "path": "docs/audit_acceptance_20261019/reference.md",
+      "sha256": "39af2ade68b8af2cdc108bc396c628be3709ae60e4a7d075c6bb8cd99e1dec91"
+    }
+  ],
+  "original_release_artifacts": [
+    {
+      "filename": "pmx_discrete_posterior-0.2.0-py3-none-any.whl",
+      "sha256": "698c997f1c6898a15247500157001817ed488640e515a50f731a8b218eabca46",
+      "size_bytes": 74671,
+      "verified_locations": [
+        "releases/0.2.0/pmx_discrete_posterior-0.2.0-py3-none-any.whl",
+        "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/dist/pmx_discrete_posterior-0.2.0-py3-none-any.whl",
+        "delivery_acceptance_20261020/runs/20261020T005000_80b3ce89/dist/pmx_discrete_posterior-0.2.0-py3-none-any.whl"
+      ]
+    },
+    {
+      "filename": "pmx_discrete_posterior-0.2.0.tar.gz",
+      "sha256": "ab124312af898bd7143786f1b9b94ab6e7c5f911840601da3e1dbee6ca96460e",
+      "size_bytes": 276781,
+      "verified_locations": [
+        "releases/0.2.0/pmx_discrete_posterior-0.2.0.tar.gz",
+        "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/dist/pmx_discrete_posterior-0.2.0.tar.gz",
+        "delivery_acceptance_20261020/runs/20261020T005000_80b3ce89/dist/pmx_discrete_posterior-0.2.0.tar.gz"
+      ]
+    }
+  ],
+  "archive_verification": {
+    "wheel_files": 37,
+    "sdist_regular_files": 140,
+    "production_python_modules": 32,
+    "wheel_record_hashes_verified": 36
+  },
+  "original_build_environment": {
+    "python": "3.12.0",
+    "build": "1.6.1",
+    "setuptools": "77.0.3",
+    "wheel": "0.48.0",
+    "build_system": {
+      "requires": [
+        "setuptools>=77.0.3"
+      ],
+      "build-backend": "setuptools.build_meta"
+    },
+    "isolation": "build --no-isolation in the dedicated bootstrap venv",
+    "evidence": [
+      {
+        "path": "delivery_acceptance_20261020/bootstrap/install-build-tools-network.log",
+        "sha256": "650b7f9890ccc57d2ba90336b6986405bf121cc82fb4ce1df9aa441f868871c5"
+      },
+      {
+        "path": "delivery_acceptance_20261020/bootstrap/install-build-minimum.log",
+        "sha256": "3e58b5c0a993ab8d862a58e3718c6b4803075774544059a742ba2f8fa875cf86"
+      },
+      {
+        "path": "delivery_acceptance_20261020/bootstrap/venv/pyvenv.cfg",
+        "sha256": "152d58e87fcc49393a2c16a3c9effc139ea6ff2423d21d378d55945a46e424f4"
+      }
+    ],
+    "qualification": "Versions linked through archived bootstrap install logs and the venv config; current metadata-only runtime probes confirmed these versions. The build receipt itself does not list tool versions."
+  },
+  "baseline_source_identity": {
+    "build_run": "20261020T004907_c91d228b",
+    "snapshot_manifest": {
+      "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/snapshot_hashes.json",
+      "sha256": "69483142af376033afab680e7a5dcb4f569819456d7f80cbc829eefe1d363e0a"
+    },
+    "selected_sources": [
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/pyproject.toml",
+        "sha256": "4129285ed3da03691336fb5bdabd738f23a19d4be1c2e8cb113e3cb5bf9cefe7"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tools/check_distribution.py",
+        "sha256": "88cb4cc8121dd3ff14a9d6b89a56c9cfa751e576e1c4c7a9722567f2e019bab2"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/examples/posterior_reference.py",
+        "sha256": "aba7d7f60493f88f6b0eb3ae9b859dec4f55e6dd7e100aa3354ad9508f709935"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/examples/reference_models.py",
+        "sha256": "d4c07d73fc4521da244d6ed715fcda7e6cc03f3172488d931f39a09857c3e9cc"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/fixtures/OXC_C003.json",
+        "sha256": "67d268cbc4e7268474753403ea195ec52a5ce95986e40772e2e1a8ab03db3d5a"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/fixtures/TAC_C003.json",
+        "sha256": "3aa3ae1408c8c8707e3644f1924217350847b3a3555d9dcec90b89a574ab14e6"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_numerics_optimization.py",
+        "sha256": "93bb66bb8157b354945e1a66b6b213f92b9b6f205001b18e9c683c81301fb0f1"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_numerics_gradient.py",
+        "sha256": "07804454dcd5010242fa39eaa6bb7bccb8198bc4aeaa932423591a807df20db2"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_numerics_hessian.py",
+        "sha256": "10c12e311a84640cf229ef0ee28283b46ce8e41b568c4ff17b48581adb45291f"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_numerics_hessian_adversarial.py",
+        "sha256": "d53b0a5825eba4dcd426c2b6c8931b4c978c8388ca8ad5145b66918166bbd81c"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_laplace_integration.py",
+        "sha256": "ba8cdaffd53d2d454d0c42aa51d1f1da3d3f5b8e02f5671f14546099f01595c7"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_laplace_curvature.py",
+        "sha256": "72a2da12e9b17ace2c9a4c511c1e2d7103e41fbeaa95d62da1da01e4e66e24e2"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_laplace_mode_screen.py",
+        "sha256": "3622b46848e2a2a571b038aafa0fdcc9238b0b55fe286b4a27a50a00cb20e52c"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_posterior_computation.py",
+        "sha256": "55d1141a2a3fbf71a07db7ced3ed44932f9fa6b0a06b64f7e83e4b9e630d829f"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_posterior_normalization.py",
+        "sha256": "4f0e42149ab60429f6c564d583d5211850b9e1907682e262771c9351f212ef63"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_random_effects.py",
+        "sha256": "6ddefd111dbb23df8f8c599def04f8fd22345e719b3d0502fa00b29a7ae00d9f"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_residuals.py",
+        "sha256": "18b1335cef3003609febcd42b541f69e1052de6387e32fc1fb5ab0e56c5086b0"
+      },
+      {
+        "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/test_likelihood.py",
+        "sha256": "f4bf61e23c3166efb5e3c173c24c574f02b10d73ab48dc3a9090798e8fff3be1"
+      }
+    ],
+    "core_bytes_match_original_wheel_and_sdist": true,
+    "current_repository_rebuilt_artifacts_equivalent_to_original": "not assessed; not claimed"
+  },
+  "reference_contract": {
+    "source": {
+      "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tools/check_distribution.py",
+      "sha256": "88cb4cc8121dd3ff14a9d6b89a56c9cfa751e576e1c4c7a9722567f2e019bab2"
+    },
+    "description": "Archived acceptance constants, not exact nonlinear integral ground truth; errors are recomputed from saved stdout only",
+    "state_order_note": "Chronological slots are [0 h, 12 h]; manuscript omega_01 maps to bitstring 10, omega_10 to 01.",
+    "models": {
+      "OXC": {
+        "fixture": {
+          "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/fixtures/OXC_C003.json",
+          "sha256": "67d268cbc4e7268474753403ea195ec52a5ce95986e40772e2e1a8ab03db3d5a"
+        },
+        "state_order": [
+          {
+            "state_id": "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681",
+            "manuscript_id": "omega_00",
+            "chronological_bitstring": "00"
+          },
+          {
+            "state_id": "state_6cf511a7706e8318ba9c59ca6e9e74e347b31829a559efe8fa33b861b64644e9",
+            "manuscript_id": "omega_01",
+            "chronological_bitstring": "10"
+          },
+          {
+            "state_id": "state_207324eb5bdd241659fde078e9c0b6feeeb160423e270da304daaa5b8390de69",
+            "manuscript_id": "omega_10",
+            "chronological_bitstring": "01"
+          },
+          {
+            "state_id": "state_50241cf258a49601695e85381a33eb515611e03f51a0bad796d3089b8665d42f",
+            "manuscript_id": "omega_11",
+            "chronological_bitstring": "11"
+          }
+        ],
+        "log_marginal_likelihood": [
+          -6.5855336131149524,
+          -3.6440125863671535,
+          -2.1658162679584247,
+          -2.563769888807698
+        ],
+        "posterior_probability": [
+          0.006296560090573311,
+          0.11928606261935508,
+          0.5230728861787735,
+          0.35134449111129823
+        ],
+        "tolerances": {
+          "log_marginal_likelihood_atol": 1e-06,
+          "posterior_probability_atol": 5e-06,
+          "posterior_sum_atol": 2e-15,
+          "relative_tolerance_used": false
+        }
+      },
+      "TAC": {
+        "fixture": {
+          "path": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b/source/tests/fixtures/TAC_C003.json",
+          "sha256": "3aa3ae1408c8c8707e3644f1924217350847b3a3555d9dcec90b89a574ab14e6"
+        },
+        "state_order": [
+          {
+            "state_id": "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681",
+            "manuscript_id": "omega_00",
+            "chronological_bitstring": "00"
+          },
+          {
+            "state_id": "state_257522c31a5edf1ff5037764858097c7686f87db82abac1ed065432159708fee",
+            "manuscript_id": "omega_01",
+            "chronological_bitstring": "10"
+          },
+          {
+            "state_id": "state_fc8bab0939921bb3816e4299c1228b86366b0eb2992227642bc76fb934151ed4",
+            "manuscript_id": "omega_10",
+            "chronological_bitstring": "01"
+          },
+          {
+            "state_id": "state_f2f85477955a8a8c552c99078c66f34a36df9bcf2dedc540c807e4dd02899286",
+            "manuscript_id": "omega_11",
+            "chronological_bitstring": "11"
+          }
+        ],
+        "log_marginal_likelihood": [
+          -3.0602575684754125,
+          -2.8464740513320637,
+          -2.785253631927297,
+          -2.81866521683658
+        ],
+        "posterior_probability": [
+          0.20711804665707417,
+          0.2564854717642472,
+          0.27267835198432405,
+          0.2637181295943546
+        ],
+        "tolerances": {
+          "log_marginal_likelihood_atol": 0.001,
+          "posterior_probability_atol": 5e-06,
+          "posterior_sum_atol": 2e-15,
+          "relative_tolerance_used": false
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "run_id": "20261020T004907_c91d228b",
+      "directory_relative_to_baseline": "delivery_acceptance_20261020/runs/20261020T004907_c91d228b",
+      "label": "final_py311_minimum",
+      "status": "passed",
+      "finished_utc": "2026-10-19T16:54:35.005616+00:00",
+      "platform": "Windows AMD64",
+      "installation_environments": {
+        "wheel": {
+          "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+          "versions": {
+            "pmx-discrete-posterior": "0.2.0",
+            "numpy": "1.26.0",
+            "scipy": "1.16.2"
+          },
+          "user_site_enabled": false,
+          "system_site_packages_enabled": false,
+          "import_origin_relative_to_venv": "Lib/site-packages/pmx_discrete_posterior/__init__.py",
+          "install_exit_code": 0,
+          "pip_check": "No broken requirements found.",
+          "full_regression_executed": true
+        },
+        "sdist": {
+          "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+          "versions": {
+            "pmx-discrete-posterior": "0.2.0",
+            "numpy": "1.26.0",
+            "scipy": "1.16.2"
+          },
+          "user_site_enabled": false,
+          "system_site_packages_enabled": false,
+          "import_origin_relative_to_venv": "Lib/site-packages/pmx_discrete_posterior/__init__.py",
+          "install_exit_code": 0,
+          "pip_check": "No broken requirements found.",
+          "full_regression_executed": false,
+          "temporary_built_wheel_log_receipt": {
+            "size_bytes": 74672,
+            "sha256": "54079260071817c3dd6f5be55bf46daf59a441804c85df50db1dc9cd4cb9e034",
+            "verification": "Recorded in archived pip stdout; temporary file not independently rehashed",
+            "is_original_release_wheel_hash": false
+          }
+        }
+      },
+      "installed_regression": {
+        "installation_kind": "wheel",
+        "passed": 239,
+        "tests": 239,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "stdout_summary": "239 passed in 3.03s",
+        "junit_duration_seconds": 3.021,
+        "test_dependencies": {
+          "pytest": "9.1.1",
+          "mpmath": "1.4.1"
+        },
+        "testcase_id_list_sha256": "ff4edd1f10f831af5615324b005f1ad3f8db08966049cedecab3a0ad074b8d49",
+        "tests_by_class": {
+          "tests.test_laplace_curvature": 32,
+          "tests.test_laplace_integration": 30,
+          "tests.test_laplace_mode_screen": 2,
+          "tests.test_likelihood": 9,
+          "tests.test_numerics_gradient": 28,
+          "tests.test_numerics_hessian": 13,
+          "tests.test_numerics_hessian_adversarial": 20,
+          "tests.test_numerics_optimization": 24,
+          "tests.test_posterior_computation": 25,
+          "tests.test_posterior_normalization": 38,
+          "tests.test_random_effects": 11,
+          "tests.test_residuals": 7
+        }
+      },
+      "references": {
+        "OXC": {
+          "applies_to_installations": [
+            "wheel",
+            "sdist"
+          ],
+          "wheel_sdist_parsed_outputs_exactly_equal": true,
+          "full_archived_output": {
+            "model": "OXC",
+            "status": "success",
+            "integration_method": "laplace",
+            "state_results": [
+              {
+                "status": "success",
+                "log_marginal_likelihood": -6.585533613029762,
+                "failure_reason": null,
+                "state_id": "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.0062965601212348656,
+                "events": []
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -3.644012586304423,
+                "failure_reason": null,
+                "state_id": "state_6cf511a7706e8318ba9c59ca6e9e74e347b31829a559efe8fa33b861b64644e9",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.1192860629232695,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.1658162678644435,
+                "failure_reason": null,
+                "state_id": "state_207324eb5bdd241659fde078e9c0b6feeeb160423e270da304daaa5b8390de69",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.523072886632705,
+                "events": [
+                  {
+                    "time": 12.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.5637698887397793,
+                "failure_reason": null,
+                "state_id": "state_50241cf258a49601695e85381a33eb515611e03f51a0bad796d3089b8665d42f",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.3513444903227907,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  },
+                  {
+                    "time": 12.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              }
+            ],
+            "failure_reason": null
+          },
+          "errors_against_archived_reference": {
+            "log_marginal_likelihood": {
+              "absolute_errors_by_state": [
+                8.519052130395721e-11,
+                6.27307095157903e-11,
+                9.39812672129392e-11,
+                6.791855966525873e-11
+              ],
+              "max_absolute_error": 9.39812672129392e-11
+            },
+            "posterior_probability": {
+              "absolute_errors_by_state": [
+                3.066155489228617e-11,
+                3.0391442140675906e-10,
+                4.5393155900796955e-10,
+                7.885075370417383e-10
+              ],
+              "max_absolute_error": 7.885075370417383e-10
+            }
+          },
+          "posterior_sum_absolute_error": 0.0,
+          "within_all_tolerances": true
+        },
+        "TAC": {
+          "applies_to_installations": [
+            "wheel",
+            "sdist"
+          ],
+          "wheel_sdist_parsed_outputs_exactly_equal": true,
+          "full_archived_output": {
+            "model": "TAC",
+            "status": "success",
+            "integration_method": "laplace",
+            "state_results": [
+              {
+                "status": "success",
+                "log_marginal_likelihood": -3.060257752061382,
+                "failure_reason": null,
+                "state_id": "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.20711803335307674,
+                "events": []
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.8464747138618884,
+                "failure_reason": null,
+                "state_id": "state_257522c31a5edf1ff5037764858097c7686f87db82abac1ed065432159708fee",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.256485434748528,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.785253685811175,
+                "failure_reason": null,
+                "state_id": "state_fc8bab0939921bb3816e4299c1228b86366b0eb2992227642bc76fb934151ed4",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.2726783530037358,
+                "events": [
+                  {
+                    "time": 12.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.8186655634832727,
+                "failure_reason": null,
+                "state_id": "state_f2f85477955a8a8c552c99078c66f34a36df9bcf2dedc540c807e4dd02899286",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.2637181788946596,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  },
+                  {
+                    "time": 12.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              }
+            ],
+            "failure_reason": null
+          },
+          "errors_against_archived_reference": {
+            "log_marginal_likelihood": {
+              "absolute_errors_by_state": [
+                1.8358596953760298e-07,
+                6.625298247797673e-07,
+                5.38838778041395e-08,
+                3.466466926838052e-07
+              ],
+              "max_absolute_error": 6.625298247797673e-07
+            },
+            "posterior_probability": {
+              "absolute_errors_by_state": [
+                1.33039974314908e-08,
+                3.701571921199687e-08,
+                1.0194117217032783e-09,
+                4.9300305005051115e-08
+              ],
+              "max_absolute_error": 4.9300305005051115e-08
+            }
+          },
+          "posterior_sum_absolute_error": 0.0,
+          "within_all_tolerances": true
+        }
+      },
+      "command_receipts": {
+        "build": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:49:07.312416+00:00",
+          "finished": "2026-10-19T16:49:11.201030+00:00",
+          "stderr_bytes": 2244
+        },
+        "installed_regression": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:51:48.478853+00:00",
+          "finished": "2026-10-19T16:51:52.140997+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_install": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:51:59.389723+00:00",
+          "finished": "2026-10-19T16:52:23.985663+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_origin": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:24.673071+00:00",
+          "finished": "2026-10-19T16:52:24.786121+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_OXC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:24.786121+00:00",
+          "finished": "2026-10-19T16:52:30.349940+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_pip_check": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:23.985663+00:00",
+          "finished": "2026-10-19T16:52:24.669052+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_TAC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:30.350695+00:00",
+          "finished": "2026-10-19T16:54:35.005616+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_venv": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:51:52.141510+00:00",
+          "finished": "2026-10-19T16:51:59.389303+00:00",
+          "stderr_bytes": 0
+        },
+        "test_dependencies": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:51:41.244962+00:00",
+          "finished": "2026-10-19T16:51:48.478853+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_install": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:49:18.916318+00:00",
+          "finished": "2026-10-19T16:49:34.172082+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_origin": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:49:34.735941+00:00",
+          "finished": "2026-10-19T16:49:34.852570+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_OXC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:49:34.852570+00:00",
+          "finished": "2026-10-19T16:49:40.100664+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_pip_check": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:49:34.172082+00:00",
+          "finished": "2026-10-19T16:49:34.735941+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_TAC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:49:40.101180+00:00",
+          "finished": "2026-10-19T16:51:41.243962+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_venv": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:49:11.525245+00:00",
+          "finished": "2026-10-19T16:49:18.916318+00:00",
+          "stderr_bytes": 0
+        }
+      },
+      "evidence_sha256_relative_to_run": {
+        "build.command.json": "5994c2f09d3c57a49848c6d7ef21624fcb2f77554a072399d10a5d1364c71dd4",
+        "build.stdout.log": "341dca256fb00bbbb5c3fa37313a39dadc2086b7508c2c3c63740533187f7cc1",
+        "build.stderr.log": "91a8d44ff0610b3553d975c0acf785b722e015d5a5b3ac80e1f7dac1cbd8acd0",
+        "installed_regression.command.json": "6bc4b9733bd2edeb2457c1312f7ea6840fd042324267a70607907846d663a436",
+        "installed_regression.stdout.log": "c1921f784730b57985bbef3d454303e305cda0b9293b91cf9127e064b82bd270",
+        "installed_regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_install.command.json": "582f01dd712e4d721701ea88247cfefcddb31585935447084d15109015ddd0f8",
+        "sdist_install.stdout.log": "865d4b8a6ce1610be484de1d400f6c12fecfcc9f25dc654c11887ea78eb31804",
+        "sdist_install.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_origin.command.json": "8c916ed2624a592f559fa5acba5b978eb5f2a90ccf93fb562c6301a74d7dd53d",
+        "sdist_origin.stdout.log": "a094cf278d301666fd4bbd989fd23115d857d919322764050e74ee5d633f812e",
+        "sdist_origin.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_OXC.command.json": "b9ffbd1b7262be2eac50c1b5e0c69e34b15d3301fe33bbb829f653ec582807f1",
+        "sdist_OXC.stdout.log": "13796b59b99181ed47799589d608b58b3d75163619fa69549391e4420b1cf73e",
+        "sdist_OXC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_pip_check.command.json": "fec64af87e90548b1ada47accf28f72b1750a3377dead690497f8f2ffc1a0a48",
+        "sdist_pip_check.stdout.log": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+        "sdist_pip_check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_TAC.command.json": "e9f79e5eda1d592fbf8dc732443497a18e50fa744c9267b977b5963a0d85dc1e",
+        "sdist_TAC.stdout.log": "39b8c3f214ba891b3971ee2188584b67bcaf7897971b9c04bf28ff5bf4e69264",
+        "sdist_TAC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_venv.command.json": "8680a71ab42868df27e60128edc17c97b788f1504916f449c5f18c8f32b05d7e",
+        "sdist_venv.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_venv.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_dependencies.command.json": "cf25f2826abe7f1eaf55f0bb28beb7eb3f84df5145a8d6c0362d9fa7a6ddc66a",
+        "test_dependencies.stdout.log": "db671dd512150e9011a799326021c5df306ccae8ea5d07ed21997d60225a04e0",
+        "test_dependencies.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_install.command.json": "8563f7c7da7f12d00926ec6dc90706643822deb09d18391ac2e04e7177ab0b08",
+        "wheel_install.stdout.log": "ba60ae14a69d9d26547a57141006be0d22c1187bbe0bdb247b1b18b79f6c762d",
+        "wheel_install.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_origin.command.json": "b077b9b681858a3fef54b95fd75647c8fd1c6f0557dde37f06e4f69baeb4de82",
+        "wheel_origin.stdout.log": "263d4451851770e71ba8e4ec390da031abc1fef73a0ba305c69a498da17a0f38",
+        "wheel_origin.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_OXC.command.json": "03d57785406daf9ddd55b31519416f4b6c80d53c6bd57ed5d89816fd4cc066ce",
+        "wheel_OXC.stdout.log": "13796b59b99181ed47799589d608b58b3d75163619fa69549391e4420b1cf73e",
+        "wheel_OXC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_pip_check.command.json": "9ffce3d09103ba0405c1afe74951843a2451ce335eba67b542b15413220c9a4f",
+        "wheel_pip_check.stdout.log": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+        "wheel_pip_check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_TAC.command.json": "d89a9788f9baa71ac272d0e21ad7b0bf68304348ca5d10058167288d08e71b54",
+        "wheel_TAC.stdout.log": "39b8c3f214ba891b3971ee2188584b67bcaf7897971b9c04bf28ff5bf4e69264",
+        "wheel_TAC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_venv.command.json": "c2bf3decb63256c74fce2e9da3c00cdbd04a484f29c3b3a03318c6665e676ff6",
+        "wheel_venv.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_venv.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "3df25d1573266c88804f463457a2c3cfbb7f6a896974fdb83fc23a5966493046",
+        "artifact_hashes.json": "5f2ed736cbec6723162371b57c898d907baca15149aa681aa5b05d69f02775a1",
+        "installed_regression.xml": "79a62403e77d7462159bd587082eb40a136b12e7edd67889ff2152f2d9c8eb55",
+        "snapshot_hashes.json": "69483142af376033afab680e7a5dcb4f569819456d7f80cbc829eefe1d363e0a"
+      }
+    },
+    {
+      "run_id": "20261020T005000_80b3ce89",
+      "directory_relative_to_baseline": "delivery_acceptance_20261020/runs/20261020T005000_80b3ce89",
+      "label": "final_py312_latest",
+      "status": "passed",
+      "finished_utc": "2026-10-19T16:54:56.733108+00:00",
+      "platform": "Windows AMD64",
+      "installation_environments": {
+        "wheel": {
+          "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+          "versions": {
+            "pmx-discrete-posterior": "0.2.0",
+            "numpy": "2.5.4",
+            "scipy": "1.18.1"
+          },
+          "user_site_enabled": false,
+          "system_site_packages_enabled": false,
+          "import_origin_relative_to_venv": "Lib/site-packages/pmx_discrete_posterior/__init__.py",
+          "install_exit_code": 0,
+          "pip_check": "No broken requirements found.",
+          "full_regression_executed": true
+        },
+        "sdist": {
+          "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+          "versions": {
+            "pmx-discrete-posterior": "0.2.0",
+            "numpy": "2.5.4",
+            "scipy": "1.18.1"
+          },
+          "user_site_enabled": false,
+          "system_site_packages_enabled": false,
+          "import_origin_relative_to_venv": "Lib/site-packages/pmx_discrete_posterior/__init__.py",
+          "install_exit_code": 0,
+          "pip_check": "No broken requirements found.",
+          "full_regression_executed": false,
+          "temporary_built_wheel_log_receipt": {
+            "size_bytes": 74672,
+            "sha256": "b00cba823bc6bd22b3d9eec44bfc706b72b984cabddcfebf1b286b762b24cc5a",
+            "verification": "Recorded in archived pip stdout; temporary file not independently rehashed",
+            "is_original_release_wheel_hash": false
+          }
+        }
+      },
+      "installed_regression": {
+        "installation_kind": "wheel",
+        "passed": 239,
+        "tests": 239,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "stdout_summary": "239 passed in 7.05s",
+        "junit_duration_seconds": 7.043,
+        "test_dependencies": {
+          "pytest": "9.1.1",
+          "mpmath": "1.4.1"
+        },
+        "testcase_id_list_sha256": "ff4edd1f10f831af5615324b005f1ad3f8db08966049cedecab3a0ad074b8d49",
+        "tests_by_class": {
+          "tests.test_laplace_curvature": 32,
+          "tests.test_laplace_integration": 30,
+          "tests.test_laplace_mode_screen": 2,
+          "tests.test_likelihood": 9,
+          "tests.test_numerics_gradient": 28,
+          "tests.test_numerics_hessian": 13,
+          "tests.test_numerics_hessian_adversarial": 20,
+          "tests.test_numerics_optimization": 24,
+          "tests.test_posterior_computation": 25,
+          "tests.test_posterior_normalization": 38,
+          "tests.test_random_effects": 11,
+          "tests.test_residuals": 7
+        }
+      },
+      "references": {
+        "OXC": {
+          "applies_to_installations": [
+            "wheel",
+            "sdist"
+          ],
+          "wheel_sdist_parsed_outputs_exactly_equal": true,
+          "full_archived_output": {
+            "model": "OXC",
+            "status": "success",
+            "integration_method": "laplace",
+            "state_results": [
+              {
+                "status": "success",
+                "log_marginal_likelihood": -6.585533613029762,
+                "failure_reason": null,
+                "state_id": "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.006296560121234877,
+                "events": []
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -3.644012586304418,
+                "failure_reason": null,
+                "state_id": "state_6cf511a7706e8318ba9c59ca6e9e74e347b31829a559efe8fa33b861b64644e9",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.11928606292327029,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.1658162678644484,
+                "failure_reason": null,
+                "state_id": "state_207324eb5bdd241659fde078e9c0b6feeeb160423e270da304daaa5b8390de69",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.5230728866327035,
+                "events": [
+                  {
+                    "time": 12.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.5637698887397793,
+                "failure_reason": null,
+                "state_id": "state_50241cf258a49601695e85381a33eb515611e03f51a0bad796d3089b8665d42f",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.35134449032279136,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  },
+                  {
+                    "time": 12.0,
+                    "amount": 300.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              }
+            ],
+            "failure_reason": null
+          },
+          "errors_against_archived_reference": {
+            "log_marginal_likelihood": {
+              "absolute_errors_by_state": [
+                8.519052130395721e-11,
+                6.273559449709865e-11,
+                9.397638223163085e-11,
+                6.791855966525873e-11
+              ],
+              "max_absolute_error": 9.397638223163085e-11
+            },
+            "posterior_probability": {
+              "absolute_errors_by_state": [
+                3.066156616798876e-11,
+                3.039152124406641e-10,
+                4.539300046957351e-10,
+                7.885068709079235e-10
+              ],
+              "max_absolute_error": 7.885068709079235e-10
+            }
+          },
+          "posterior_sum_absolute_error": 0.0,
+          "within_all_tolerances": true
+        },
+        "TAC": {
+          "applies_to_installations": [
+            "wheel",
+            "sdist"
+          ],
+          "wheel_sdist_parsed_outputs_exactly_equal": true,
+          "full_archived_output": {
+            "model": "TAC",
+            "status": "success",
+            "integration_method": "laplace",
+            "state_results": [
+              {
+                "status": "success",
+                "log_marginal_likelihood": -3.0602577520616205,
+                "failure_reason": null,
+                "state_id": "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.20711803335303852,
+                "events": []
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.846474713862002,
+                "failure_reason": null,
+                "state_id": "state_257522c31a5edf1ff5037764858097c7686f87db82abac1ed065432159708fee",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.25648543474851265,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.785253685811514,
+                "failure_reason": null,
+                "state_id": "state_fc8bab0939921bb3816e4299c1228b86366b0eb2992227642bc76fb934151ed4",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.2726783530036581,
+                "events": [
+                  {
+                    "time": 12.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              },
+              {
+                "status": "success",
+                "log_marginal_likelihood": -2.8186655634828295,
+                "failure_reason": null,
+                "state_id": "state_f2f85477955a8a8c552c99078c66f34a36df9bcf2dedc540c807e4dd02899286",
+                "prior_probability": 0.25,
+                "posterior_probability": 0.2637181788947907,
+                "events": [
+                  {
+                    "time": 0.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  },
+                  {
+                    "time": 12.0,
+                    "amount": 6.0,
+                    "amount_unit": "mg",
+                    "route": "oral",
+                    "compartment": "depot"
+                  }
+                ]
+              }
+            ],
+            "failure_reason": null
+          },
+          "errors_against_archived_reference": {
+            "log_marginal_likelihood": {
+              "absolute_errors_by_state": [
+                1.8358620801350867e-07,
+                6.62529938466605e-07,
+                5.388421664420662e-08,
+                3.466462494827738e-07
+              ],
+              "max_absolute_error": 6.62529938466605e-07
+            },
+            "posterior_probability": {
+              "absolute_errors_by_state": [
+                1.3304035650918422e-08,
+                3.701573453307461e-08,
+                1.0193340616027058e-09,
+                4.930043612239032e-08
+              ],
+              "max_absolute_error": 4.930043612239032e-08
+            }
+          },
+          "posterior_sum_absolute_error": 0.0,
+          "within_all_tolerances": true
+        }
+      },
+      "command_receipts": {
+        "installed_regression": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:23.655818+00:00",
+          "finished": "2026-10-19T16:52:31.127416+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_install": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:37.304201+00:00",
+          "finished": "2026-10-19T16:52:58.637515+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_origin": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:59.319465+00:00",
+          "finished": "2026-10-19T16:52:59.471970+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_OXC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:59.480739+00:00",
+          "finished": "2026-10-19T16:53:05.996408+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_pip_check": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:58.637515+00:00",
+          "finished": "2026-10-19T16:52:59.319465+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_TAC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:53:05.996815+00:00",
+          "finished": "2026-10-19T16:54:56.733108+00:00",
+          "stderr_bytes": 0
+        },
+        "sdist_venv": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:31.127416+00:00",
+          "finished": "2026-10-19T16:52:37.299175+00:00",
+          "stderr_bytes": 0
+        },
+        "test_dependencies": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:52:16.161257+00:00",
+          "finished": "2026-10-19T16:52:23.655818+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_install": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:50:05.823700+00:00",
+          "finished": "2026-10-19T16:50:19.669036+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_origin": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:50:20.325195+00:00",
+          "finished": "2026-10-19T16:50:20.477991+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_OXC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:50:20.477991+00:00",
+          "finished": "2026-10-19T16:50:27.121961+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_pip_check": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:50:19.669036+00:00",
+          "finished": "2026-10-19T16:50:20.325195+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_TAC": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:50:27.121961+00:00",
+          "finished": "2026-10-19T16:52:16.160248+00:00",
+          "stderr_bytes": 0
+        },
+        "wheel_venv": {
+          "exit_code": 0,
+          "started": "2026-10-19T16:50:00.973199+00:00",
+          "finished": "2026-10-19T16:50:05.823700+00:00",
+          "stderr_bytes": 0
+        }
+      },
+      "evidence_sha256_relative_to_run": {
+        "installed_regression.command.json": "d51af63f40bbe4f97dd289b248e1ab9581f65b5296bd7227b26c690e6d4a44f5",
+        "installed_regression.stdout.log": "d363fc7cffaf0e02c8637e8c6bf212fd5086adda045cde2803b698d7b694e044",
+        "installed_regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_install.command.json": "32a13f1e7f4743f71bdafd3a10d463ded14a40026ed4c2229025ced9c6183941",
+        "sdist_install.stdout.log": "4aa57dd903bc17bce9aacfd2c7b0b6bf11462c302e6769fc0b0e01ac8433cb0b",
+        "sdist_install.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_origin.command.json": "a8b0071a5e6b34ba5de585375e50c317416f3552594d28b0115f1c4308e96480",
+        "sdist_origin.stdout.log": "c3e1439262319db470cdb8899cede3439c46af14be1846dfca787f2cd80d8590",
+        "sdist_origin.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_OXC.command.json": "10004bca5a257d9b7d4b09636eda5d1776e557e581cbc31931e20da20cdb275d",
+        "sdist_OXC.stdout.log": "6e1181982c7a0a4f1996cf6c8a21f09bb7163986961af5dc17267d93057a4499",
+        "sdist_OXC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_pip_check.command.json": "964a8de38e9579f4897660264c6729416c5be9bf76994a62dc5f7d855f1c9504",
+        "sdist_pip_check.stdout.log": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+        "sdist_pip_check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_TAC.command.json": "cc23584e14ceb70931d751e40024bd40461e5ba53116bd8ac94894b2b8fdbb45",
+        "sdist_TAC.stdout.log": "b18d2412afcdb17b54cb1dbb120c1c9be8dbce3a4d7f2ba7a6e15bab11558219",
+        "sdist_TAC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_venv.command.json": "edbbb94a4372f78c20e5875abddbee87e1a77129cb964b420d5a41c0f1bfbf3b",
+        "sdist_venv.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sdist_venv.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_dependencies.command.json": "cb6a9f7e853b4534a6628fd606dee6183331826d91f13e17a2ef507a014a1bdb",
+        "test_dependencies.stdout.log": "db671dd512150e9011a799326021c5df306ccae8ea5d07ed21997d60225a04e0",
+        "test_dependencies.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_install.command.json": "72c7f4431c4327d513ff0407950bb5173b882804c2cfe73ebca13626a3346fe4",
+        "wheel_install.stdout.log": "a3ca64c68add5cebaf640462ff978be6c1aeab0191a1f1c3ad59cf7c949fd862",
+        "wheel_install.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_origin.command.json": "37d3214574f915bd85506c26ec6984b17916299aa9f34ea1d08045d2853925f9",
+        "wheel_origin.stdout.log": "fae55844c8c2c6374ad2766e6580a5d7e0c4d29ab419ddf37be1908861f04d35",
+        "wheel_origin.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_OXC.command.json": "9de3ed2657059e3db7d833dddba2a5f0d64ff8d06e7350b3f5d78efedb5798f8",
+        "wheel_OXC.stdout.log": "6e1181982c7a0a4f1996cf6c8a21f09bb7163986961af5dc17267d93057a4499",
+        "wheel_OXC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_pip_check.command.json": "b0100210dab9c69d4e2624b0992eeda75c6bf40c76b1e450f5e7d7ffc23ab1c2",
+        "wheel_pip_check.stdout.log": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+        "wheel_pip_check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_TAC.command.json": "3b62a68b9fc2a76463177e26cd91d1736f199ee8749bac3f7125b2174f81a5af",
+        "wheel_TAC.stdout.log": "b18d2412afcdb17b54cb1dbb120c1c9be8dbce3a4d7f2ba7a6e15bab11558219",
+        "wheel_TAC.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_venv.command.json": "51adaee97babd5e7b5bf2ae5b4f452ccf6e961d90047b237df2ea2b7fcb36567",
+        "wheel_venv.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wheel_venv.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "43800366e5f08cf5dcb581ec85116877acde5bf0b883afc0c6ebeb1943a5611b",
+        "artifact_hashes.json": "5f2ed736cbec6723162371b57c898d907baca15149aa681aa5b05d69f02775a1",
+        "installed_regression.xml": "60dd7d6420912ab6aa7b372ba44ea7c24ba539f0ad0c9fcc9e8a7ee081a294be",
+        "snapshot_hashes.json": "69483142af376033afab680e7a5dcb4f569819456d7f80cbc829eefe1d363e0a"
+      }
+    }
+  ],
+  "counts_summary": {
+    "environment_combinations": 2,
+    "clean_installations": 4,
+    "complete_reference_invocations": 8,
+    "states_per_reference": 4,
+    "installed_regression_invocations": 2,
+    "distinct_regression_cases": 239,
+    "total_passed_test_executions": 478,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "interpretation": "239 identical tests repeated in two wheel environments; not 478 distinct tests and not 239 tests for each sdist installation"
+  },
+  "portable_command_templates": {
+    "executed_by_this_extraction": false,
+    "substitution": "Each {...} token is a caller-selected path, passed as one argv element, not a literal shell command.",
+    "cwd": "{CONSUMER_DIR}",
+    "environment": {
+      "PYTHONPATH": null,
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONIOENCODING": "utf-8",
+      "PIP_NO_INDEX": "1",
+      "PIP_FIND_LINKS": "{WHEELHOUSE_FILE_URI}",
+      "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+      "PIP_CACHE_DIR": "{RUN_DIR}/pip-cache",
+      "TEMP": "{SHORT_WORKSPACE_TMP}",
+      "TMP": "{SHORT_WORKSPACE_TMP}"
+    },
+    "build": [
+      "{BUILD_PYTHON}",
+      "-B",
+      "-m",
+      "build",
+      "--no-isolation",
+      "--outdir",
+      "{DIST_DIR}",
+      "{SOURCE_SNAPSHOT}"
+    ],
+    "create_venv": [
+      "{BASE_PYTHON}",
+      "-I",
+      "-m",
+      "venv",
+      "{VENV_DIR}"
+    ],
+    "install": [
+      "{VENV_PYTHON}",
+      "-I",
+      "-m",
+      "pip",
+      "install",
+      "--no-cache-dir",
+      "{ARTIFACT}"
+    ],
+    "install_pins_by_run": {
+      "20261020T004907_c91d228b": [
+        "numpy==1.26.0",
+        "scipy==1.16.2"
+      ],
+      "20261020T005000_80b3ce89": []
+    },
+    "pin_note": "Append pins for the first run. The second run resolved unpinned against the then-current offline wheelhouse; exact replay should pin the recorded versions.",
+    "pip_check": [
+      "{VENV_PYTHON}",
+      "-I",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "reference": [
+      "{VENV_PYTHON}",
+      "-s",
+      "{EXTRACTED_SDIST}/examples/posterior_reference.py",
+      "{MODEL}"
+    ],
+    "reference_models": [
+      "OXC",
+      "TAC"
+    ],
+    "test_dependencies": [
+      "{WHEEL_PYTHON}",
+      "-I",
+      "-m",
+      "pip",
+      "install",
+      "pytest>=8",
+      "mpmath>=1.3"
+    ],
+    "regression_environment_extra": {
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    },
+    "regression": [
+      "{WHEEL_PYTHON}",
+      "-I",
+      "-m",
+      "pytest",
+      "-q",
+      "-o",
+      "pythonpath=",
+      "-o",
+      "cache_dir={RUN_DIR}/pytest-cache",
+      "--basetemp={SHORT_WORKSPACE_TMP}/pytest",
+      "--junitxml={RUN_DIR}/installed_regression.xml",
+      "{EXTRACTED_SDIST}/tests/test_numerics_optimization.py",
+      "{EXTRACTED_SDIST}/tests/test_numerics_gradient.py",
+      "{EXTRACTED_SDIST}/tests/test_numerics_hessian.py",
+      "{EXTRACTED_SDIST}/tests/test_numerics_hessian_adversarial.py",
+      "{EXTRACTED_SDIST}/tests/test_laplace_integration.py",
+      "{EXTRACTED_SDIST}/tests/test_laplace_curvature.py",
+      "{EXTRACTED_SDIST}/tests/test_laplace_mode_screen.py",
+      "{EXTRACTED_SDIST}/tests/test_posterior_computation.py",
+      "{EXTRACTED_SDIST}/tests/test_posterior_normalization.py",
+      "{EXTRACTED_SDIST}/tests/test_random_effects.py",
+      "{EXTRACTED_SDIST}/tests/test_residuals.py",
+      "{EXTRACTED_SDIST}/tests/test_likelihood.py"
+    ],
+    "notes": [
+      "Create fresh environments outside the immutable baseline; do not install into its archived venvs.",
+      "Extract the tested sdist into CONSUMER_DIR before running examples/tests. It uses a src layout.",
+      "VENV_PYTHON means Scripts/python.exe on Windows or bin/python on POSIX. POSIX compatibility is not established by these Windows runs.",
+      "Only the first final run built the original artifacts; the second reused that exact pair.",
+      "Rebuilding any repository state creates new artifacts requiring new hashes and clean-install evidence."
+    ]
+  },
+  "scope_limitations": [
+    "Only the original 0.2.0 artifacts identified above are covered; no current-repository rebuild equivalence is asserted.",
+    "Only Windows AMD64 CPython 3.11.9 / NumPy 1.26.0 / SciPy 1.16.2 and CPython 3.12.0 / NumPy 2.5.4 / SciPy 1.18.1 were verified.",
+    "No macOS, Linux, other Python patch/minor versions, PyPy, or free-threaded compatibility evidence is supplied.",
+    "The label final_py312_latest is historical; it is not a claim about currently newest dependency versions.",
+    "The 239-test installed suite ran only against the wheel, not the sdist-installed package; both installations ran the complete OXC/TAC references.",
+    "These Laplace reference differences are regression agreement, not a bound on approximation error or proof of clinical accuracy.",
+    "No live NONMEM, external R aghq, complete sensitivity matrix, or five-repeat formal experiment was executed by this extraction or established by these two installation runs.",
+    "Retained prior-centered GHQ is not an integrated R aghq backend; high-order TAC GHQ accuracy remains unaccepted in the baseline report.",
+    "Separate 28-test local and 12-test static audits mentioned by the baseline report are outside this two-run extraction and not added to its counts.",
+    "Earlier failed build/install attempts are retained in the baseline; final-run success does not erase them.",
+    "No remote publication, CI execution, or current-repository validation is claimed.",
+    "The original build stderr contains manifest-pruning and disabled-bytecompilation warnings; its exit code was zero. Installation/reference/regression stderr files were empty.",
+    "Original source archives may contain historical development material; this report includes only selected evidence, not internal prompt contents."
+  ]
+}

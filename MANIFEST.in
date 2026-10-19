@@ -1,6 +1,10 @@
-include LICENSE
-include RELEASE_NOTES.md
-include CITATION.cff
-include GITHUB_RELEASE_CHECKLIST.md
-exclude PACKAGE_STATUS_20260521.md
-recursive-include examples *.py
+include README.md LICENSE RELEASE_NOTES.md CITATION.cff
+include CONTRIBUTING.md SECURITY.md GITHUB_RELEASE_CHECKLIST.md
+include examples/posterior_reference.py examples/reference_models.py
+recursive-include tests *.py *.json
+include tests/pytest.ini
+recursive-include docs *.md *.json
+include tools/verify_reference.py
+prune examples/manuscript_current
+prune examples/manuscript_demos
+global-exclude __pycache__ *.py[cod]

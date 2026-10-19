@@ -1,5 +1,10 @@
 # Current Manuscript Laplace And GHQ Examples
 
+**Legacy manuscript implementation, not the 0.2.0 API.** Use a separate checkout
+of tag `manuscript-20261018` and its environment before running the commands
+below. See [version-specific setup](../README.md). These retained results do
+not describe a full sensitivity replay using 0.2.0.
+
 This entry computes the frozen October 2026 evaluation models from complete
 synthetic inputs through [model_adapters](model_adapters). It contains 218 design
 records: 83 OXC and 135 TAC. The references are `OXC_C003` and `TAC_C003`.

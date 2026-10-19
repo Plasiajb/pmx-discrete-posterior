@@ -1,5 +1,10 @@
 # Two Manuscript Reviewer Demos
 
+**Legacy implementation.** For an isolated reproduction use tag
+`manuscript-20261018` in a separate checkout and environment; see
+[version-specific setup](../README.md). The vendored package here is not
+the 0.2.0 implementation.
+
 Historical October 1, 2026 two-case examples. For the current 218-design OXC/TAC
 reference and sensitivity examples, with separate Laplace and GHQ entries, see
 [current examples](../manuscript_current/README.md).

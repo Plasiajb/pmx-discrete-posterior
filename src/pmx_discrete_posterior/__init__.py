@@ -1,104 +1,19 @@
-from __future__ import annotations
+"""功能 / Function: 离散状态后验计算开发包 / Discrete-state posterior development package.
+输入 / Inputs: 显式模型、个体数据、观测及候选 / Explicit model, individual data, observations and candidates.
+输出 / Outputs: 输入/结果校验、模型评价、Laplace/GHQ积分与完整后验 / Input/result validation, model evaluation, Laplace/GHQ integration and complete posteriors.
+公开入口compute_posterior支持Laplace和先验中心GHQ / Public compute_posterior supports Laplace and prior-centered GHQ.
+"""
 
-from .api import (
-    BoundedMinimum,
-    DiscretePosteriorResult,
-    DiscreteState,
-    LaplaceStateDiagnostics,
-    OneEtaLaplaceConfig,
-    OneEtaPredictionModel,
-    StatePosterior,
-)
-from .engine import (
-    build_laplace_curve_payload,
-    compute_laplace_posterior,
-    finite_second_derivative,
-    laplace_probabilities,
-    laplace_state_diagnostics,
-    logsumexp,
-    minimize_bounded,
-    states_from_prior,
-)
-from .multieta import (
-    MultiEtaLaplaceConfig,
-    MultiEtaPosteriorResult,
-    MultiEtaPredictionModel,
-    MultiEtaStateDiagnostics,
-    MultiEtaStatePosterior,
-    compute_multieta_posterior,
-    finite_difference_hessian,
-    gauss_hermite_posterior,
-    multieta_state_diagnostics,
-)
-from .oxc import OxcLaplacePk, OxcOneEtaDoseHistoryModel, build_oxc_dose_history_states
-from .reporting import (
-    DEFAULT_NO_CALL_RULE,
-    NoCallRule,
-    PosteriorEvidenceReport,
-    StateEvidenceRow,
-    apply_no_call_rule,
-    build_case_card,
-    build_provenance_manifest,
-    normalized_entropy,
-    posterior_margin,
-    posterior_to_long_rows,
-    posterior_to_wide_row,
-    reweight_prior_sensitivity,
-    summarize_posterior_evidence,
-    threshold_sensitivity_panel,
-)
+__all__ = ["compute_posterior"]
 
-LaplaceConfig = OneEtaLaplaceConfig
-OxcSingleEtaModel = OxcOneEtaDoseHistoryModel
-compute_posterior = compute_laplace_posterior
-compute_curve = build_laplace_curve_payload
-__version__ = "0.1.4"
 
-__all__ = [
-    "__version__",
-    "BoundedMinimum",
-    "DiscretePosteriorResult",
-    "DiscreteState",
-    "LaplaceConfig",
-    "LaplaceStateDiagnostics",
-    "MultiEtaLaplaceConfig",
-    "MultiEtaPosteriorResult",
-    "MultiEtaPredictionModel",
-    "MultiEtaStateDiagnostics",
-    "MultiEtaStatePosterior",
-    "OneEtaLaplaceConfig",
-    "OneEtaPredictionModel",
-    "OxcLaplacePk",
-    "OxcOneEtaDoseHistoryModel",
-    "OxcSingleEtaModel",
-    "DEFAULT_NO_CALL_RULE",
-    "NoCallRule",
-    "PosteriorEvidenceReport",
-    "StateEvidenceRow",
-    "StatePosterior",
-    "apply_no_call_rule",
-    "build_case_card",
-    "build_provenance_manifest",
-    "compute_curve",
-    "compute_posterior",
-    "build_laplace_curve_payload",
-    "build_oxc_dose_history_states",
-    "compute_laplace_posterior",
-    "compute_multieta_posterior",
-    "finite_second_derivative",
-    "finite_difference_hessian",
-    "gauss_hermite_posterior",
-    "laplace_probabilities",
-    "laplace_state_diagnostics",
-    "logsumexp",
-    "minimize_bounded",
-    "multieta_state_diagnostics",
-    "normalized_entropy",
-    "posterior_margin",
-    "posterior_to_long_rows",
-    "posterior_to_wide_row",
-    "reweight_prior_sensitivity",
-    "summarize_posterior_evidence",
-    "states_from_prior",
-    "threshold_sensitivity_panel",
-]
+def __getattr__(name):
+    """功能 / Function: 按需导出同一后验函数，保持接口导入独立 / Lazily export the same posterior function, preserving isolated interface imports.
+    输入 / Inputs: 待读取的包属性名 / Requested package attribute name.
+    输出 / Outputs: compute_posterior原函数；未知属性抛AttributeError，不包装计算 / Original compute_posterior function; unknown names raise AttributeError, without wrapping execution.
+    """
+    if name != "compute_posterior":
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    from .posterior import compute_posterior
+    globals()[name] = compute_posterior
+    return compute_posterior

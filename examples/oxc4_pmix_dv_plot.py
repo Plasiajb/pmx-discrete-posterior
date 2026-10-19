@@ -1,5 +1,13 @@
 from __future__ import annotations
 
+from pathlib import Path as _LegacyPath
+
+if not (_LegacyPath(__file__).resolve().parents[1] / "src/pmx_discrete_posterior/multieta.py").is_file():
+    raise RuntimeError(
+        "This example uses the legacy API. Use tag manuscript-20261018 in a "
+        "separate checkout, or examples/posterior_reference.py for version 0.2."
+    )
+
 import argparse
 import csv
 import json

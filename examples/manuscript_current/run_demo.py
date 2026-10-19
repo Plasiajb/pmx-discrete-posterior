@@ -47,6 +47,12 @@ def _check_loaded(prefix, root):
 
 def adapters():
     """Never fall back to another checkout or an installed scientific package."""
+    if not (SRC / "pmx_discrete_posterior" / "multieta.py").is_file():
+        raise RuntimeError(
+            "This manuscript example requires the legacy package. "
+            "Use a separate checkout of tag manuscript-20261018; "
+            "v0.2 examples are in examples/posterior_reference.py."
+        )
     if not (SRC / "pmx_discrete_posterior" / "__init__.py").is_file():
         raise RuntimeError("Missing repository src; retain the complete checkout, not just this folder")
     _check_loaded("pmx_discrete_posterior", SRC)
