@@ -1,6 +1,6 @@
 # pmx-discrete-posterior
 
-**0.2.0 | UNRELEASED repair branch | Python >=3.11 | MIT**
+**0.2.0 | c026 repaired distribution | 2026-10-21 | Python >=3.11 | MIT**
 
 Compute model-conditional posterior probabilities over a finite set of
 predefined pharmacometric states, such as alternative dosing histories.
@@ -13,55 +13,26 @@ Gauss-Hermite quadrature (GHQ) route is also available. Neither NONMEM nor R is
 required. These are research calculations conditional on the supplied model
 and assumptions, not direct evidence of adherence or standalone clinical decisions.
 
-## Unreleased Numerical Repair
-
-Branch `repair/prior-coordinates-20261021` retains package version `0.2.0`.
-The c026 integration extends commit `be4619b` (the pre-c026 repair baseline);
-identify a repair build by its exact commit and artifact hashes, not version alone.
-This is UNRELEASED work, not a new tag, release or merge to main. Immutable
-published v0.2.0 assets are unchanged and do not contain this repair.
-
-The branch retains covariance-standardized Laplace coordinates, the full Hessian
-and Jacobian. The c026 repair **changes the acceptance path**: a narrowly eligible
-precision-limited endpoint can yield an accepted integral after independent
-curvature-relative and local consistency checks. The nonconverged optimizer
-remains `failed` in `method_details.precision_recovery`, with its original reason
-and a warning. No fallback optimizer, endpoint move or partial normalization is
-introduced; scientific inputs and priors are unchanged.
-
-Explicit `optimization.stationarity_tolerance`, including an explicitly supplied
-default `1e-5`, remains binding. Omitting it permits curvature-relative recovery
-only after strict eligibility and consistency checks. The BFGS default
-`min(1e-6, stationarity_tolerance / 10)` (normally `gtol=1e-6`) and both `1e-3`
-Hessian/stationarity-impact thresholds are unchanged by c026. See the
-[acceptance contract](docs/api.md#precision-limited-recovery).
-
-Source evidence records five targeted passes of ten originally failing OXC cases,
-including c026, not a full sensitivity-matrix rerun. TAC c078 still fails.
-The **1463 passed, 2 skipped, 0 remaining failures** result combines a full-suite
-run with an affected-module rerun; it is not one all-green invocation.
-Fresh c026 wheel and source-distribution installations passed **1212** and
-**1201** tests respectively, including all 36 new regressions; both verified the
-OXC/TAC reference examples. These overlapping counts are not additive.
-See the [c026 validation note](docs/validation/c026_repair_20261021.md) and
-[compact source receipt](docs/validation/c026_source_evidence.json).
-Earlier development-version and installation results remain
-[historical evidence](docs/validation/repair_20261021.md).
-
 ## Install
 
 The [GitHub repository](https://github.com/Plasiajb/pmx-discrete-posterior) is
 private; repository and release downloads require access. This package is not
 published on PyPI. Runtime dependencies are NumPy >=1.26 and SciPy >=1.16.2,<2.
 
-For the unreleased repair, use a separate source checkout of its branch and
-record the exact commit (the branch can advance):
+Use the c026 repaired assets dated **2026-10-21** from the
+[v0.2.0 release](https://github.com/Plasiajb/pmx-discrete-posterior/releases/tag/v0.2.0).
+Download the wheel and its matching `SHA256SUMS.txt`, `VALIDATION.json` and
+`VALIDATION.md`. These release receipts identify the rebuilt artifacts;
+do not use historical c026 artifact hashes for these downloads.
+
+**This is a same-version replacement.** Version `0.2.0` and filenames alone
+cannot identify the repair. Verify the artifact SHA-256 against the matching
+release checksum file and retain it with the build commit. Original release
+assets and the tag bundle have been backed up and hash-checked, not relabelled.
+Use a fresh virtual environment; if reusing one, both `--force-reinstall` and
+`--no-cache-dir` are required to avoid retaining the old build.
 
 ```bash
-git clone https://github.com/Plasiajb/pmx-discrete-posterior.git
-cd pmx-discrete-posterior
-git switch repair/prior-coordinates-20261021
-git rev-parse HEAD
 python -m venv .venv
 ```
 
@@ -69,27 +40,24 @@ Activate with `.venv\Scripts\Activate.ps1` in PowerShell or
 `source .venv/bin/activate` in a POSIX shell, then:
 
 ```bash
-python -m pip install .
+python -m pip install --force-reinstall --no-cache-dir ./pmx_discrete_posterior-0.2.0-py3-none-any.whl
+```
+
+Alternatively, install from a fresh checkout of the repaired `v0.2.0` tag.
+Use `--branch main` instead for current source, and always record the resolved commit:
+
+```bash
+git clone --branch v0.2.0 https://github.com/Plasiajb/pmx-discrete-posterior.git
+cd pmx-discrete-posterior
+git rev-parse HEAD
+python -m pip install --force-reinstall --no-cache-dir .
 python examples/posterior_reference.py OXC
 ```
 
-Repair builds retain `0.2.0` filenames; keep them separate from published assets
-and record checksums. See the [fresh installation receipt](docs/validation/c026_installation_evidence.json)
-for the tested commit, environment and artifact identities.
-
-For the unchanged v0.2.0 release archives, download the wheel, source archive and checksum file
-from the [GitHub releases](https://github.com/Plasiajb/pmx-discrete-posterior/releases).
-In a fresh virtual environment, install either local artifact:
-
-```bash
-python -m pip install ./pmx_discrete_posterior-0.2.0-py3-none-any.whl
-# Alternative: build and install from the source archive.
-python -m pip install ./pmx_discrete_posterior-0.2.0.tar.gz
-```
-
 The wheel contains the runtime package. To run examples after a wheel install,
-extract the matching source archive and work from its root. Keep `examples/`
-and `tests/fixtures/` together. Initial installation needs access to dependencies;
+extract the matching source archive and work from its root. The matching
+`pmx_discrete_posterior-0.2.0.tar.gz` is also installable with the same pip flags.
+Keep `examples/` and `tests/fixtures/` together. Initial installation needs access to dependencies;
 the examples do not need network access at runtime.
 
 ## Minimal Call
@@ -144,6 +112,23 @@ An exactly zero prior skips integration, keeps the candidate with
 `status="skipped_zero_prior"`, and returns posterior `0.0`. Inputs for that
 candidate must still be valid. See [result fields and failure handling](docs/api.md#results).
 
+## Numerical Repair
+
+The repaired distribution uses covariance-standardized Laplace coordinates,
+the full Hessian and Jacobian. c026 **changes the acceptance path**: a narrowly
+eligible precision-limited endpoint can yield an accepted integral after
+independent curvature-relative and local consistency checks. No fallback
+optimizer, endpoint move or partial normalization is introduced; scientific
+inputs and priors are unchanged.
+
+Explicit `optimization.stationarity_tolerance`, including explicit `1e-5`,
+remains binding. Omission permits recovery only after strict eligibility and
+consistency checks. The BFGS default is `min(1e-6, stationarity_tolerance / 10)`,
+normally `gtol=1e-6`; both Hessian/stationarity-impact thresholds remain `1e-3`.
+These local checks do not prove a global mode or exact nonlinear integration.
+See the [acceptance contract](docs/api.md#precision-limited-recovery) and
+[validation evidence](docs/validation/README.md).
+
 ## Examples And Scope
 
 ```bash
@@ -156,8 +141,11 @@ active random effects and takes longer. The CLI prints JSON and exits `0`
 on calculation success or `1` on numerical failure. See
 [reference examples](docs/reference_examples.md) for units, checks and output details.
 
-For published v0.2.0, OXC and TAC Laplace references have been checked; **the full manuscript
-sensitivity matrix has not been replayed with v0.2.0**. The retained
+Prior c026 acceptance includes OXC/TAC reference checks and five targeted passes
+of ten originally failing OXC cases, **not a full sensitivity-matrix rerun**.
+TAC c078 still fails, with no partial posterior normalization. Release
+validation receipts identify the rebuilt artifacts and their actual checks.
+The retained
 [GHQ route](docs/ghq.md) has an OXC reference check, but high-order TAC accuracy
 has not passed acceptance. It is not R `aghq`; no external GHQ backend is integrated.
 

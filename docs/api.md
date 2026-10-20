@@ -63,7 +63,7 @@ For Laplace, `None` selects the implementation defaults. Supported groups:
 The initial point is a vector with one entry per active random effect; the
 default is the zero-mean prior point. BFGS is unconstrained. Default
 stationarity tolerance is `1e-5`; derivative absolute and relative tolerances
-are `1e-6`. In this unreleased repair, the BFGS default is
+are `1e-6`. In the c026 repaired 0.2.0 distribution, the BFGS default is
 `gtol=min(1e-6, stationarity_tolerance / 10)`; with the default stationarity
 tolerance it is `1e-6`. An explicit `optimization.backend_options.gtol`
 override remains supported, including the former `1e-7` setting.
@@ -71,16 +71,17 @@ A successful optimizer alone is not a successful Laplace integral:
 the calculation also checks stationarity and curvature. These local checks do
 not prove a global mode or exact integration.
 
-On the unreleased repair branch (package version `0.2.0`), Laplace optimization
+In the c026 repaired distribution (package version `0.2.0`), Laplace optimization
 and differentiation use covariance-standardized coordinates, `eta = mean + L z`. Optimization tolerances
 and derivative steps (including `initial_step`) apply in these standardized
 coordinates. The supplied `initial_point` and returned `conditional_mode`
 remain in original random-effect coordinates. Diagnostics label the coordinate
 system and retain both modes when optimization or integral recovery succeeds.
 A failed search's labelled endpoint is not accepted solely because it is retained.
-Explicit numerical settings from published v0.2.0 therefore need rechecking in
-the new coordinates. The c026 acceptance path below differs from published
-v0.2.0; the Hessian and stationarity-impact thresholds remain `1e-3`.
+Explicit numerical settings from the original v0.2.0 distribution therefore
+need rechecking in the new coordinates. The c026 acceptance path below differs
+from that original distribution; the Hessian and stationarity-impact thresholds
+remain `1e-3`.
 
 GHQ accepts only a `ghq` group, with `variant`, `orders`,
 `log_integral_atol`, `posterior_atol`, `max_nodes`.
@@ -119,7 +120,7 @@ the original requested options rather than replacing them with expanded defaults
 Recovery rechecks the same endpoint; it does not move it, select a new starting
 point, launch another optimizer or switch integration methods. Scientific inputs,
 priors and posterior normalization are unchanged. See the
-[c026 evidence and limits](validation/c026_repair_20261021.md).
+[prior c026 acceptance evidence and limits](validation/c026_repair_20261021.md).
 
 ## Results
 

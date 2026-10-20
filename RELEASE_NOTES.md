@@ -1,11 +1,19 @@
 # Release Notes
 
-## UNRELEASED - c026 Repair (Package Version 0.2.0)
+## v0.2.0 - c026 Repaired Distribution (2026-10-21)
 
-Branch `repair/prior-coordinates-20261021` extends the pre-c026 repair baseline
-`be4619b`. Package version `0.2.0` is retained; record the exact integration
-commit and artifact hashes to identify a build. Published v0.2.0 assets remain
-immutable and distinct. No new release, tag or merge to main is announced.
+This distribution replaces the original v0.2.0 release assets while retaining
+package version `0.2.0`. The original five assets and tag bundle have been backed
+up and hash-checked; they remain historical artifacts, not relabelled c026 builds.
+Install from the repaired release or its matching tag/main source, not a
+repair-only branch. Record the exact build commit and artifact SHA-256, not
+version or filename alone. Use a fresh virtual environment, or reinstall with
+both `--force-reinstall` and `--no-cache-dir`.
+
+The replacement release carries fresh `VALIDATION.json`, `VALIDATION.md` and
+`SHA256SUMS.txt` for the actual rebuilt wheel and source archive. These record
+the tested source commit, artifact hashes and test results; prior acceptance
+below is not a validation receipt for these new archives.
 
 - Changes the Laplace acceptance path for narrowly eligible precision-limited
   search endpoints. Independent gradient schedules, strict Hessian checks,
@@ -23,7 +31,9 @@ immutable and distinct. No new release, tag or merge to main is announced.
   full covariance handling and normalization are unchanged. No automatic alternate
   optimizer, multistart, endpoint move or partial normalization is added.
 
-Source validation records five targeted passes of ten originally failing OXC
+### Prior Acceptance And Limits
+
+Prior c026 source validation records five targeted passes of ten originally failing OXC
 cases, each with 10/10 cases and 40/40 candidate integrals successful. For c026,
 maximum differences from an independent high-precision **local Laplace** reference
 are `4.631482208861115e-8` in posterior probability and `2.357708501765643e-7` in
@@ -31,22 +41,20 @@ log marginal likelihood, not errors against exact nonlinear integration.
 TAC c003/c036/c037 retain their baseline results; TAC c078 still fails with no
 posterior normalization. These checks are not a full-matrix rerun.
 
-Merged source regression evidence is **1463 passed, 2 skipped, 0 remaining
-failures**, combining a full-suite run and affected-module rerun, not one
-all-green invocation. Fresh c026 wheel/source-distribution installations passed
-1212/1201 tests, with all 36 new regressions and both OXC/TAC reference examples
-verified in each environment. The suites overlap; these counts are not additive.
-All 33 installed production files match the independent c026 source. These are
-new checks of commit `5363d7dc5a46d74c10ac2319756dba4858c3765a`, not prior
-installation results. See the
-[c026 validation note](docs/validation/c026_repair_20261021.md) and
-[compact source receipt](docs/validation/c026_source_evidence.json).
+The [prior c026 acceptance note](docs/validation/c026_repair_20261021.md),
+[source receipt](docs/validation/c026_source_evidence.json) and
+[installation receipt](docs/validation/c026_installation_evidence.json) retain
+their original run identities, counts and hashes. The merged source result was
+a full-suite run plus an affected-module rerun, not one all-green invocation;
+overlapping installed suites must not be added together. Those records are
+historical evidence, not the new release's artifact identities or final counts.
+See the [validation index](docs/validation/README.md) for release-receipt scope.
 
 ## Historical 0.2.1.dev20261021 - Pre-c026 Numerical Repair
 
 The following record describes the earlier development snapshot and its installed
 artifacts. Its version label, c026 deferral and test counts are historical, not
-the current branch identity or c026 installation acceptance.
+the repaired distribution identity or its release acceptance.
 
 Branch `repair/prior-coordinates-20261021` is an independent repair based on
 v0.2.0. `0.2.1.dev20261021` is a development identifier only, not a new release,
@@ -93,7 +101,7 @@ See the [repair validation note](docs/validation/repair_20261021.md)
 for artifact hashes, test identities and the scope of each check. Existing v0.2.0
 documentation and legacy manuscript examples are retained.
 
-## v0.2.0 - Unified Posterior API
+## Original v0.2.0 - Unified Posterior API
 
 The distribution name remains `pmx-discrete-posterior`, the Python import is
 `pmx_discrete_posterior`, and the license remains MIT. The repository is private;
