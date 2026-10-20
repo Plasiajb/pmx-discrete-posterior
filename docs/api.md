@@ -112,6 +112,10 @@ this distinction through option validation. The BFGS default remains
 stationarity-impact screens remain `1e-3`. These are local numerical screens,
 not rigorous bounds on Laplace approximation error.
 
+Re-submitting a fully normalized options mapping also makes its filled-in
+`stationarity_tolerance` explicit. To reproduce omission-based recovery, retain
+the original requested options rather than replacing them with expanded defaults.
+
 Recovery rechecks the same endpoint; it does not move it, select a new starting
 point, launch another optimizer or switch integration methods. Scientific inputs,
 priors and posterior normalization are unchanged. See the

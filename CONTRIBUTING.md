@@ -92,9 +92,9 @@ and dependency versions, commands and actual outcomes. The
 [release validation page](docs/validation/README.md) points to published evidence;
 local success is not a claim that CI or every supported environment passed.
 
-**Fresh c026 wheel and source-distribution installation results are PENDING.**
-The new receipt is reserved as `docs/validation/c026_installation_evidence.json`
-until fresh checks are recorded. The existing
+Fresh c026 wheel and source-distribution checks passed. The
+[c026 installation receipt](docs/validation/c026_installation_evidence.json)
+records the tested commit, artifact/source hashes and actual results. The existing
 [repair installation receipt](docs/validation/repair_installation_evidence.json)
 belongs to the previous development version and is historical evidence only.
 

@@ -33,8 +33,12 @@ posterior normalization. These checks are not a full-matrix rerun.
 
 Merged source regression evidence is **1463 passed, 2 skipped, 0 remaining
 failures**, combining a full-suite run and affected-module rerun, not one
-all-green invocation. **Fresh c026 installation results are PENDING**; prior
-development installation passes do not validate the current build. See the
+all-green invocation. Fresh c026 wheel/source-distribution installations passed
+1212/1201 tests, with all 36 new regressions and both OXC/TAC reference examples
+verified in each environment. The suites overlap; these counts are not additive.
+All 33 installed production files match the independent c026 source. These are
+new checks of commit `5363d7dc5a46d74c10ac2319756dba4858c3765a`, not prior
+installation results. See the
 [c026 validation note](docs/validation/c026_repair_20261021.md) and
 [compact source receipt](docs/validation/c026_source_evidence.json).
 

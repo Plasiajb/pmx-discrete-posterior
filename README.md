@@ -40,7 +40,9 @@ Source evidence records five targeted passes of ten originally failing OXC cases
 including c026, not a full sensitivity-matrix rerun. TAC c078 still fails.
 The **1463 passed, 2 skipped, 0 remaining failures** result combines a full-suite
 run with an affected-module rerun; it is not one all-green invocation.
-**Fresh c026 wheel and source-distribution installation results: PENDING.**
+Fresh c026 wheel and source-distribution installations passed **1212** and
+**1201** tests respectively, including all 36 new regressions; both verified the
+OXC/TAC reference examples. These overlapping counts are not additive.
 See the [c026 validation note](docs/validation/c026_repair_20261021.md) and
 [compact source receipt](docs/validation/c026_source_evidence.json).
 Earlier development-version and installation results remain
@@ -72,7 +74,8 @@ python examples/posterior_reference.py OXC
 ```
 
 Repair builds retain `0.2.0` filenames; keep them separate from published assets
-and record checksums. Fresh installation acceptance is pending.
+and record checksums. See the [fresh installation receipt](docs/validation/c026_installation_evidence.json)
+for the tested commit, environment and artifact identities.
 
 For the unchanged v0.2.0 release archives, download the wheel, source archive and checksum file
 from the [GitHub releases](https://github.com/Plasiajb/pmx-discrete-posterior/releases).
