@@ -1,5 +1,52 @@
 # Release Notes
 
+## 0.2.1.dev20261021 - Unreleased Numerical Repair
+
+Branch `repair/prior-coordinates-20261021` is an independent repair based on
+v0.2.0. `0.2.1.dev20261021` is a development identifier only, not a new release,
+tag or merge to the main branch. Published v0.2.0 artifacts remain unchanged;
+full release acceptance is not claimed.
+
+- Laplace optimization and full Hessian evaluation use covariance-standardized
+  coordinates, retaining the original density callback and change-of-variables
+  Jacobian. Initial points and returned modes remain in original effect coordinates.
+- Optimization diagnostics retain SciPy termination details, the returned point
+  and gradient, last/best primary objective evaluations and derivative failures.
+- A fourth production change, in `interfaces/inputs/numerical_options.py`, sets
+  the BFGS default to `min(1e-6, stationarity_tolerance / 10)`: `gtol=1e-6`
+  with default `stationarity_tolerance=1e-5`. Explicit `gtol=1e-7` remains
+  supported. The three earlier numerical repair files are unchanged by this update.
+- Scientific models, inputs, priors, posterior normalization, the seven-group
+  API and independent gradient, Hessian and stationarity acceptance gates are
+  unchanged. The search stopping default changes as described above. No new
+  Hessian or GHQ backend, R dependency or automatic retry is added.
+
+Before the default change, a local TAC c036/c037 comparison recorded BFGS
+precision loss at the former `gtol=1e-7` setting. Explicit `gtol=1e-6` returned
+complete posteriors directly through `compute_posterior`: 4/4 candidates succeeded
+in each case and passed the original independent checks. Each case was called
+once per setting, four full calls total. This configuration evidence supports
+the new default choice; it is not fresh whole-matrix or five-repeat validation
+of the changed default.
+
+Maximum posterior differences of `2.639003821e-9` (c036) and `5.871017728e-9`
+(c037) are relative to previously independently validated external vectors,
+not the historical `gtol=1e-7` calls, which returned no complete posterior.
+Rankings and the historical 132/135 TAC first-pass count are unchanged.
+OXC c026 and TAC c078 remain deferred.
+
+The source default-update full regression recorded 1427 passes and two
+Windows symlink-permission skips. Fresh isolated wheel and source-distribution
+installations passed 1176 and 1165 tests respectively; both verified the OXC/TAC
+reference examples. All 33 installed production files matched the repair source.
+These overlapping test groups must not be added together. The installed checks
+used Windows, Python 3.12.0, NumPy 2.5.2 and SciPy 1.16.2.
+A fresh full-matrix external R `aghq` pass, followed after review by five Laplace
+repeats, is planned, not completed. Full release acceptance remains outstanding.
+See the [repair validation note](docs/validation/repair_20261021.md)
+for artifact hashes, test identities and the scope of each check. Existing v0.2.0
+documentation and legacy manuscript examples are retained.
+
 ## v0.2.0 - Unified Posterior API
 
 The distribution name remains `pmx-discrete-posterior`, the Python import is

@@ -51,10 +51,12 @@ Check the wheel in a fresh environment from a directory outside the source
 checkout so that the source tree cannot mask the installed package:
 
 ```bash
-python -m pip install /path/to/dist/pmx_discrete_posterior-0.2.0-py3-none-any.whl
+python -m pip install /path/to/dist/pmx_discrete_posterior-0.2.1.dev20261021-py3-none-any.whl
 python -c "from importlib.metadata import version; import pmx_discrete_posterior as p; print(version('pmx-discrete-posterior'), p.__file__)"
 ```
 
+This repair branch requires its development version for installed-package checks;
+use the v0.2.0 tag's tests when checking the published v0.2.0 artifacts.
 Replace the artifact path with your build location. Extract the matching source
 archive into a separate directory, change to that directory, install test
 dependencies and check the installed wheel without pytest's source-path setting:

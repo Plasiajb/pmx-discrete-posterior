@@ -24,6 +24,25 @@ def test_defaults_match_tested_numerics_and_no_initial_point_inferred():
     assert result["hessian"][0, 0] == pytest.approx(2)
 
 
+def test_default_gtol_changes_only_search_stopping_tolerance():
+    """功能 / Function: 默认停止精度与独立检查分离 / Separate the default stopping tolerance from independent checks.
+    输入 / Inputs: 默认与显式旧设置 / Default and explicit former settings.
+    输出 / Outputs: 仅gtol变化；原检查保留 / Only gtol changes; original checks retained.
+    """
+    from pmx_discrete_posterior.numerics.laplace import STATIONARITY_LOG_INTEGRAL_ATOL
+
+    default = validate_numerical_options(None)
+    old = validate_numerical_options({"optimization": {"backend_options": {"gtol": 1e-7}}})
+    assert default["optimization"]["backend_options"]["gtol"] == 1e-6
+    assert old["optimization"]["backend_options"]["gtol"] == 1e-7
+    default["optimization"]["backend_options"]["gtol"] = 1e-7
+    assert default == old
+    assert default["optimization"]["stationarity_tolerance"] == 1e-5
+    assert STATIONARITY_LOG_INTEGRAL_ATOL == 1e-3
+    tighter = validate_numerical_options({"optimization": {"stationarity_tolerance": 1e-8}})
+    assert tighter["optimization"]["backend_options"]["gtol"] == pytest.approx(1e-9)
+
+
 def test_user_settings_are_copied_and_initial_point_is_separate_from_optimizer_options():
     original = {"optimization": {"initial_point": [1., 2.], "backend_options": {"maxiter": 75}},
                 "derivatives": {"backend_options": {"initial_step": 1.}, "atol": 1e-7}}

@@ -183,31 +183,22 @@ def test_nc01_false_solver_success_near_old_boundary_is_rejected(monkeypatch, si
     assert all(row["posterior_probability"] is None for row in (a, b))
 
 
-@pytest.mark.parametrize("exact_start", [False, True], ids=["reject-displaced", "accept-exact-mode"])
+@pytest.mark.parametrize("exact_start", [False, True], ids=["standardized-default", "accept-exact-mode"])
 def test_nc01_flat_gaussian_wrong_stationarity_and_exact_mode(exact_start):
-    """功能 / Function: 真实BFGS早停须拒绝，准确众数须算准 / Reject actual BFGS early stopping and accept the accurate mode.
-    输入 / Inputs: 方差1e14、SD1e7、目标5e6及大尺度求导步长 / Variance 1e14, SD 1e7, target 5e6 and scale-resolved derivative step.
-    输出 / Outputs: 默认点失效或解析log积分达标；不放宽任何容差 / Default-point failure or accurate analytic log integral; no tolerance relaxation.
+    """功能 / Function: 标准化后真实BFGS须找到解析众数 / Standardized real BFGS must reach the analytic mode.
+    输入 / Inputs: 方差1e14、SD1e7、目标5e6及默认标准化步长 / Variance 1e14, SD 1e7, target 5e6 and default standardized steps.
+    输出 / Outputs: 两种起点均满足解析log积分标准 / Both starts meet the analytic log-integral criterion.
     """
     args = _model_inputs({"A": lambda eta: math.hypot(1.0, 5e6 - eta)}, variance=1e14, sd=1e7)
-    args["numerical_options"] = {"derivatives": {"backend_options": {"initial_step": 1e5}}}
+    args["numerical_options"] = {}
     if exact_start:
         args["numerical_options"]["optimization"] = {"initial_point": [2.5e6]}
     result = compute_posterior(**args)
     _emit(f"NC01 flat exact_start={exact_start}", result)
     row = result["state_results"][0]
-    if exact_start:
-        _assert_posterior_success(result, float(norm.logpdf(5e6, scale=math.sqrt(2e14))) - 0.5e-14,
-                                  {"A": [2.5e6]})
-    else:
-        assert result["status"] == row["status"] == "failed", result
-        assert row["method_details"]["optimization"]["backend_success"] is True
-        assert row["method_details"]["conditional_mode"] == [0.0]
-        assert row["method_details"]["stage"] == "stationarity"
-        assert row["method_details"]["estimated_log_integral_error_from_stationarity"] == pytest.approx(0.0625, rel=1e-3)
-        assert row["method_details"]["estimated_log_integral_error_from_hessian"] < 1e-3
-        assert row["log_marginal_likelihood"] is row["posterior_probability"] is None
-        assert "local mode contribution" in row["failure_reason"]
+    _assert_posterior_success(result, float(norm.logpdf(5e6, scale=math.sqrt(2e14))) - 0.5e-14,
+                              {"A": [2.5e6]})
+    assert row["method_details"]["optimization"]["backend_success"] is True
 
 
 @pytest.mark.parametrize("dimension", [1, 2], ids=["one-ETA", "two-ETA"])

@@ -63,9 +63,24 @@ For Laplace, `None` selects the implementation defaults. Supported groups:
 The initial point is a vector with one entry per active random effect; the
 default is the zero-mean prior point. BFGS is unconstrained. Default
 stationarity tolerance is `1e-5`; derivative absolute and relative tolerances
-are `1e-6`. A successful optimizer alone is not a successful Laplace integral:
+are `1e-6`. In this development repair, the BFGS default is
+`gtol=min(1e-6, stationarity_tolerance / 10)`; with the default stationarity
+tolerance it is `1e-6`. An explicit `optimization.backend_options.gtol`
+override remains supported, including the former `1e-7` setting.
+A successful optimizer alone is not a successful Laplace integral:
 the calculation also checks stationarity and curvature. These local checks do
 not prove a global mode or exact integration.
+
+In `0.2.1.dev20261021`, Laplace optimization and differentiation use
+covariance-standardized coordinates, `eta = mean + L z`. Optimization tolerances
+and derivative steps (including `initial_step`) apply in these standardized
+coordinates. The supplied `initial_point` and returned `conditional_mode`
+remain in original random-effect coordinates. Diagnostics label the coordinate
+system and retain both modes when optimization succeeds. A failed search may
+retain a labelled backend endpoint; it is not an accepted mode.
+Explicit numerical settings from v0.2.0 therefore
+need rechecking in the new coordinates. The independent gradient, Hessian and
+stationarity-impact acceptance thresholds are unchanged.
 
 GHQ accepts only a `ghq` group, with `variant`, `orders`,
 `log_integral_atol`, `posterior_atol`, `max_nodes`.

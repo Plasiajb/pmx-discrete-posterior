@@ -59,7 +59,7 @@ def resolve_optimization_options(optimization_options):
     backend = options.get("backend_options", {})
     fields(backend, (), ("maxiter", "gtol", "xrtol", "c1", "c2", "finite_diff_rel_step"), name="backend_options")
     parsed = {"maxiter": _positive_integer(backend.get("maxiter", 1000), "maxiter"),
-              "gtol": scalar(backend.get("gtol", min(1e-7, tolerance / 10)), positive=True, name="gtol"),
+              "gtol": scalar(backend.get("gtol", min(1e-6, tolerance / 10)), positive=True, name="gtol"),
               "xrtol": scalar(backend.get("xrtol", 0), minimum=0, name="xrtol"),
               "c1": scalar(backend.get("c1", 1e-4), positive=True, name="c1"),
               "c2": scalar(backend.get("c2", 0.9), positive=True, name="c2"),

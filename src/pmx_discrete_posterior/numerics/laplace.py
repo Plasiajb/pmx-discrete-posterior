@@ -13,6 +13,7 @@ from ..interfaces.inputs.numerical_options import resolve_hessian_options, valid
 from ..interfaces.protocols import ConditionalLogLikelihood, RandomEffectDistributionProtocol
 from ..interfaces.results import IntegrationResult, validate_integration_result
 from ..interfaces.validation import InputError, numeric_array, scalar
+from .coordinates import PriorCoordinates
 from .derivatives import _EvaluationError, _ScalarObjective, hessian
 from .optimization import minimize
 
@@ -117,7 +118,8 @@ def integrate(
     """功能 / Function: 复用优化与Hessian，计算单候选的局部Laplace积分 / Compute one candidate's local Laplace integral using existing optimization and Hessian implementations.
     输入 / Inputs: 确定性似然、同坐标分布、显式laplace方法及已有数值选项 / Deterministic likelihood, same-coordinate distribution, explicit laplace method and existing options.
     输出 / Outputs: IntegrationResult；非法设置抛InputError，执行失败返回failed/None及原因 / IntegrationResult; invalid settings raise InputError, execution failures return failed/None with reasons.
-    起点缺省用分布均值；无多起点、自动重试或坐标变换，不证明全局众数 / Default start is the distribution mean; no multistart, retry or coordinate transformation, and no global-mode guarantee.
+    起点和返回众数用原始效应坐标；优化与求导步长用协方差标准化坐标 / Starts and returned modes use original effects; optimization and derivative steps use covariance-standardized coordinates.
+    无多起点或自动重试，不证明全局众数 / No multistart or automatic retry; no global-mode guarantee.
     """
     method = validate_integration_method(integration_method)
     if method != "laplace":
@@ -138,6 +140,12 @@ def integrate(
     point = optimization_options.pop("initial_point", mean).copy()
     if point.shape != mean.shape:
         raise InputError("initial_point must match the active random-effect dimension")
+    coordinates = None
+    if dimension:
+        try:
+            coordinates = PriorCoordinates(mean, random_effect_distribution.covariance)
+        except AttributeError as exc:
+            raise InputError("random_effect_distribution must expose its active covariance") from exc
     derivative_options = options["derivatives"]
     resolve_hessian_options(derivative_options)
     details = {"integration_method": method, "dimension": dimension, "initial_point": point.tolist(),
@@ -151,26 +159,46 @@ def integrate(
         if dimension == 0:
             value = _direct_log_likelihood(conditional_log_likelihood, random_effect_distribution)
         else:
-            objective = _joint_objective(conditional_log_likelihood, random_effect_distribution)
-            optimum = minimize(objective, point, optimization_options)
+            original_objective = _joint_objective(conditional_log_likelihood, random_effect_distribution)
+
+            def objective(standardized_point):
+                """功能 / Function: 在标准化坐标中评价同一积分目标 / Evaluate the same integration target in standardized coordinates.
+                输入 / Inputs: z(d) / Standardized effects.
+                输出 / Outputs: U(mean+Lz)-log|L|；保留原始密度回调 / Transformed negative log density retaining the original density callback.
+                """
+                return math.fsum((original_objective(coordinates.to_original(standardized_point)),
+                                  -coordinates.log_abs_det))
+
+            standardized_start = coordinates.to_standard(point)
+            details.update(coordinate_system="prior_standardized",
+                           original_coordinate_system="random_effects",
+                           standardized_initial_point=standardized_start.tolist(),
+                           log_abs_det_coordinate_transform=coordinates.log_abs_det)
+            optimum = minimize(objective, standardized_start, optimization_options)
             details["optimization"] = optimum["method_details"]
+            details["optimization"]["coordinate_system"] = "prior_standardized"
             if optimum["status"] != "success":
                 raise _EvaluationError(optimum["failure_reason"])
             mode = optimum["minimizer"]
-            details.update(conditional_mode=mode.tolist(), objective_value=optimum["objective_value"], stage="hessian")
+            details.update(conditional_mode=coordinates.to_original(mode).tolist(),
+                           standardized_mode=mode.tolist(),
+                           objective_value=math.fsum((optimum["objective_value"], coordinates.log_abs_det)),
+                           standardized_objective_value=optimum["objective_value"], stage="hessian")
             curvature = hessian(objective, mode, derivative_options)
             details["hessian"] = curvature["method_details"]
+            details["hessian"]["coordinate_system"] = "prior_standardized"
             if curvature["status"] != "success":
                 raise _EvaluationError(curvature["failure_reason"])
             details["stage"] = "curvature"
             logdet, error, mode_error = _curvature_terms(curvature["hessian"], curvature["estimated_error"],
                                                         optimum["method_details"]["gradient_inf_with_error"])
-            details.update(log_determinant=logdet, estimated_log_integral_error_from_hessian=error,
+            details.update(log_determinant=math.fsum((logdet, -2*coordinates.log_abs_det)),
+                           standardized_log_determinant=logdet, estimated_log_integral_error_from_hessian=error,
                            estimated_log_integral_error_from_stationarity=mode_error, stage="stationarity")
             if mode_error > STATIONARITY_LOG_INTEGRAL_ATOL:
                 raise _EvaluationError(f"estimated local mode contribution to log integral {mode_error:.6g} exceeds 1e-3")
             details["stage"] = "formula"
-            # 同一坐标的完整密度与曲率；不再补加Omega项 / Full density and curvature in the same coordinates; do not add Omega terms again.
+            # 同一z坐标的密度与曲率，Jacobian已在目标中计入 / Density and curvature both in z; the objective already includes the Jacobian.
             value = math.fsum((-optimum["objective_value"], .5 * dimension * math.log(2 * math.pi), -.5 * logdet))
             if not math.isfinite(value):
                 raise _EvaluationError("non-finite Laplace log integral; not a proven zero likelihood")

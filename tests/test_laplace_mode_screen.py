@@ -4,10 +4,12 @@ from scipy.stats import norm
 
 from pmx_discrete_posterior.models.random_effects import RandomEffectDistribution
 from pmx_discrete_posterior.numerics.laplace import integrate
+from pmx_discrete_posterior.numerics import laplace
 
 
 def flat_gaussian(initial_point=None):
-    options = {"derivatives": {"backend_options": {"initial_step": 1e5}}}
+    # 步长现在属于标准化坐标，使用默认值 / Steps now use standardized coordinates; use defaults.
+    options = {}
     if initial_point is not None:
         options["optimization"] = {"initial_point": [initial_point]}
     return integrate(
@@ -17,9 +19,21 @@ def flat_gaussian(initial_point=None):
     )
 
 
-def test_accurate_hessian_cannot_validate_a_displaced_mode_in_a_flat_gaussian():
+def test_standardization_resolves_the_former_flat_gaussian_early_stop():
     result = flat_gaussian()
     assert result["method_details"]["optimization"]["backend_success"]
+    assert result["status"] == "success", result
+    assert result["method_details"]["conditional_mode"] == pytest.approx([2.5e6], abs=1e-3, rel=0)
+    assert result["log_marginal_likelihood"] == pytest.approx(norm.logpdf(5e6, scale=np.sqrt(2e14)), abs=1e-7, rel=0)
+
+
+def test_accurate_hessian_cannot_validate_a_displaced_mode_in_a_flat_gaussian(monkeypatch):
+    def displaced(objective, point, options):
+        # z=0对应eta=0；标准化梯度绝对值为0.5 / z=0 maps to eta=0; standardized gradient magnitude is 0.5.
+        return {"status": "success", "minimizer": np.zeros(1), "objective_value": objective(np.zeros(1)),
+                "method_details": {"backend_success": True, "gradient_inf_with_error": .5}}
+    monkeypatch.setattr(laplace, "minimize", displaced)
+    result = flat_gaussian()
     assert result["method_details"]["conditional_mode"] == [0.]
     assert result["status"] == "failed", result
     assert result["log_marginal_likelihood"] is None

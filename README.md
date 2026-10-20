@@ -1,6 +1,6 @@
 # pmx-discrete-posterior
 
-**Version 0.2.0 | Python >=3.11 | MIT**
+**Development 0.2.1.dev20261021 | Python >=3.11 | MIT**
 
 Compute model-conditional posterior probabilities over a finite set of
 predefined pharmacometric states, such as alternative dosing histories.
@@ -13,17 +13,43 @@ Gauss-Hermite quadrature (GHQ) route is also available. Neither NONMEM nor R is
 required. These are research calculations conditional on the supplied model
 and assumptions, not direct evidence of adherence or standalone clinical decisions.
 
+## Unreleased Numerical Repair
+
+Branch `repair/prior-coordinates-20261021` uses the development identifier
+`0.2.1.dev20261021` for an independent repair based on v0.2.0. It adds
+covariance-standardized Laplace coordinates and optimization diagnostics,
+preserving the full Hessian and Jacobian, scientific models, priors and
+independent acceptance thresholds. This is not a new GHQ backend, release, tag or merge
+to the main branch; published v0.2.0 artifacts remain unchanged.
+
+The production BFGS default is now `min(1e-6, stationarity_tolerance / 10)`,
+giving `gtol=1e-6` with the default `stationarity_tolerance=1e-5`. Explicit
+`gtol=1e-7` remains supported. This changes the search stopping tolerance,
+not the independent gradient, Hessian or stationarity acceptance gates.
+
+An earlier TAC c036/c037 comparison recorded precision loss at `gtol=1e-7`
+and complete posteriors at explicit `gtol=1e-6`, with all four candidates per
+case passing the original independent checks. This supports the default choice,
+but is not a fresh full-matrix run or five-repeat validation of the new default.
+After this default change, fresh wheel and source-distribution installations
+passed 1176 and 1165 tests respectively, with both OXC/TAC reference examples
+verified. These overlapping test groups were checked on Windows with Python 3.12.
+See the [repair scope and validation status](docs/validation/repair_20261021.md)
+for artifact identities, source-regression evidence, deferred cases and remaining
+full-matrix and release checks.
+
 ## Install
 
 The [GitHub repository](https://github.com/Plasiajb/pmx-discrete-posterior) is
 private; repository and release downloads require access. This package is not
 published on PyPI. Runtime dependencies are NumPy >=1.26 and SciPy >=1.16.2,<2.
 
-From a source checkout:
+For the development repair, use a separate source checkout of its branch:
 
 ```bash
 git clone https://github.com/Plasiajb/pmx-discrete-posterior.git
 cd pmx-discrete-posterior
+git switch repair/prior-coordinates-20261021
 python -m venv .venv
 ```
 
@@ -35,7 +61,7 @@ python -m pip install .
 python examples/posterior_reference.py OXC
 ```
 
-For release archives, download the wheel, source archive and checksum file
+For the unchanged v0.2.0 release archives, download the wheel, source archive and checksum file
 from the [GitHub releases](https://github.com/Plasiajb/pmx-discrete-posterior/releases).
 In a fresh virtual environment, install either local artifact:
 
@@ -110,7 +136,7 @@ active random effects and takes longer. The CLI prints JSON and exits `0`
 on calculation success or `1` on numerical failure. See
 [reference examples](docs/reference_examples.md) for units, checks and output details.
 
-OXC and TAC Laplace references have been checked; **the full manuscript
+For published v0.2.0, OXC and TAC Laplace references have been checked; **the full manuscript
 sensitivity matrix has not been replayed with v0.2.0**. The retained
 [GHQ route](docs/ghq.md) has an OXC reference check, but high-order TAC accuracy
 has not passed acceptance. It is not R `aghq`; no external GHQ backend is integrated.

@@ -111,7 +111,7 @@ def main():
         imported = Path(pmx_discrete_posterior.__file__).resolve()
         check(imported.is_relative_to(Path(sysconfig.get_path("purelib")).resolve()),
               f"Source checkout masks installed package: {imported}")
-        check(version("pmx-discrete-posterior") == "0.2.0", "Wrong installed distribution version")
+        check(version("pmx-discrete-posterior") == "0.2.1.dev20261021", "Wrong installed distribution version")
     environment = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
     environment.update(PYTHONDONTWRITEBYTECODE="1", PYTHONIOENCODING="utf-8")
     run = subprocess.run(

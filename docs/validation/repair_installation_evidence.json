@@ -1,0 +1,520 @@
+{
+  "schema": "repair-installed-validation-v1",
+  "validation_date": "2026-10-21",
+  "package_version": "0.2.1.dev20261021",
+  "branch": "repair/prior-coordinates-20261021",
+  "base_commit": "55048bf782e07db831a729969a6f8ba45fbb31ae",
+  "scope": "Windows Python 3.12 clean-install integration checks; not full scientific matrix or release acceptance",
+  "artifacts": [
+    {
+      "name": "pmx_discrete_posterior-0.2.1.dev20261021-py3-none-any.whl",
+      "sha256": "b4a679bad6dfbda8f8e535195fedfa1013fdec589018a574ff844404ad7a8326",
+      "bytes": 77093
+    },
+    {
+      "name": "pmx_discrete_posterior-0.2.1.dev20261021.tar.gz",
+      "sha256": "d8be7d0f16fdaa77bf0d7034e45a70b91639c0157f4312b294545cc48c79c41e",
+      "bytes": 197378
+    }
+  ],
+  "production_sources": [
+    {
+      "file": "src/pmx_discrete_posterior/__init__.py",
+      "sha256": "6d647984448faddda3b60c4af403f31277b51f37f007e2cce2cd2ff65b0dff80"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/__init__.py",
+      "sha256": "391cbd154e8c8a5b4298c43f8b7ee19b4729af16fa0a66979ede9b40bc4cc79b"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/protocols.py",
+      "sha256": "6b1c6f606b044e8792d5552f24d4be5d20b6a385ee78aae65cf422c1074f15bf"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/results.py",
+      "sha256": "1bb4ca776e9d1e277376471b3fea18eba25c1a54b93bbe39a90cacb80eedc713"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/validation.py",
+      "sha256": "557dc3818289ee0fe99c0ccab536501e69887f20bbfd1cf3b491e5b44aae8b7b"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/__init__.py",
+      "sha256": "4938e96f3408eab87e3d8fc585235f080778494bd5b25b4b43fcf5bc9bf88a5f"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/candidate_states.py",
+      "sha256": "8e45f14e692d3f3178c07d5ca380a963233e442fbadbcc925204b9aa100d23ff"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/individual_data.py",
+      "sha256": "733d782bd8382fc6f0bd40ad78d4a7c5611a1e5417e194889a251a7e92ac875a"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/integration_method.py",
+      "sha256": "c7d201a33aae704e2221d0a2bd978c706c653b3c67e280e52ef8ce4f5c021268"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/model_inputs.py",
+      "sha256": "390e935565bc06474ff5adbdff8b508aa54f7d591e9f22816548018024979ebe"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/numerical_options.py",
+      "sha256": "354587c2a6bc8979d87a5897ff0f1bc66d4dfa3318f079e1fd7c95278f67ee36"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/observations.py",
+      "sha256": "807d6d5208baf3ba67ca1a2944d53e22f63c17231e573bf2635d4116cdd2e307"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/priors.py",
+      "sha256": "b74614c17b9793dd53ceacf63bf09b961d62fe41ac63c3eb2afc64cc92914482"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/interfaces/inputs/validate.py",
+      "sha256": "214e632c4d6eca1afbea64be42039c7ceac35d7faee4c08860361180f41b5a2a"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/__init__.py",
+      "sha256": "78187d5dab0811d3c7852c9ae600a393f40abc59b25347323f35c16c42d11fe5"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/likelihood.py",
+      "sha256": "9c3bc3f52ad2c845c04763db7f006c3badb67315ed9cdff945e209ae6aa1f97f"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/parameter_resolution.py",
+      "sha256": "9ae5c8919a7f9cc19e1314004bc1aad82bf1cfe245d8ff536b3b3c3a60c87de0"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/random_effects.py",
+      "sha256": "1e764d0a2685cb2c6fc6a7536efb0b714b5e3cc9a902bb640a849545801f7395"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/residuals.py",
+      "sha256": "a09d20f77fb2c37f147a2a51355b36f18706ec28eaed5ad2d9d8d4800509a66a"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/prediction/__init__.py",
+      "sha256": "b11efcd9b3a44d1e64683703f7f354b4cf00ae5231e36016363228b25334f005"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/prediction/evaluation.py",
+      "sha256": "f7af9c943ba5263b2d922a08b29cdc4cd4a809dd19cfee3a076b5792c3c26fbc"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/prediction/initialization.py",
+      "sha256": "d2e35ccf8905900bd9a9b14ffa649191435413de54b69b2aa6e55cc221bf4fd2"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/models/prediction/linear.py",
+      "sha256": "1fb3c7bc70812320f3e5ce982347b038d5cef34a91ab8cf9ec5bba14e5ba4189"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/numerics/__init__.py",
+      "sha256": "b0e0cebf7f5f2f04c198a4da0ed35263b2efdd884dcf90450ba39e3ff54dadc4"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/numerics/coordinates.py",
+      "sha256": "1c4615977ee3e573270f9649f66bff30650cef292ce5b1e1b8a0dd04ea6d5249"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/numerics/derivatives.py",
+      "sha256": "7ed55a8d1de4f0bbead955ae2c54b79bc2fc91d86c2c6c9dcd7729a98e18e077"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/numerics/ghq.py",
+      "sha256": "b3dbe79098093a2f834847b10c6f5e075e04a3b0396083e7126aabf71cbc7d32"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/numerics/integration.py",
+      "sha256": "f660ae6ca7583abe4efa482ccef335b348daf0625645db29224d1f3d10dbd2d9"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/numerics/laplace.py",
+      "sha256": "87e9b2c4a6f7af590bc418c519b0552aa3a20074542188956edc4f52980eb840"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/numerics/optimization.py",
+      "sha256": "12d19a5971ba29a411f9d8f1b95bd248580aca59c962653583e2b54c01826dcb"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/posterior/__init__.py",
+      "sha256": "2fce7708b4e481f483c9ea74c813c260c95dc80839ca0b74de3f41f6b0577041"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/posterior/computation.py",
+      "sha256": "f7b6f0fa45fae01f0b4dd39bf022b3b1e0667e2a5f42f8be3159ba1197fa3608"
+    },
+    {
+      "file": "src/pmx_discrete_posterior/posterior/normalization.py",
+      "sha256": "db02e5cf733d9a08fcd36d2c5d5b5ef6f8109be3a6b76d7415953db40aca7f57"
+    }
+  ],
+  "test_sources": [
+    {
+      "file": "tests/conftest.py",
+      "sha256": "b75774c7b8fb400c36f113d9a37ed82ad7577ffaf576d07d494d4eeae4adaf1a"
+    },
+    {
+      "file": "tests/test_audit_acceptance_api.py",
+      "sha256": "ff6d34a53d9e63127869d24448c26e7c33b0481762becf376de4dbce3488cdb6"
+    },
+    {
+      "file": "tests/test_audit_acceptance_callers.py",
+      "sha256": "a4e8c449ccc83c6112e0cf520000592b7f1704507fcf80d538951d1b8a74546c"
+    },
+    {
+      "file": "tests/test_audit_acceptance_ghq.py",
+      "sha256": "1664a09150ec683d8a8ff535e5edf00b282f35d66fdd951720bb56b6b5717a63"
+    },
+    {
+      "file": "tests/test_audit_acceptance_numerics.py",
+      "sha256": "565a99d8a580f5a886f3e099737434017b327001cf7c530e9b8112c8398f7836"
+    },
+    {
+      "file": "tests/test_call03_reference.py",
+      "sha256": "228645f3d79af0d26097e9ad3cdf7435cd8224e7474bf21d3bbaa45c05188979"
+    },
+    {
+      "file": "tests/test_call03_repair.py",
+      "sha256": "bd595e6543731c5e43aefd6a9f11ebd67e23477fa6e74e0ffe5eac54270bfcca"
+    },
+    {
+      "file": "tests/test_contracts.py",
+      "sha256": "d11d84628fe0c1fe93f1ff0984c3c21b7300db1b9236b3a45e3184a2792e7040"
+    },
+    {
+      "file": "tests/test_delivery.py",
+      "sha256": "b1f2708b50765b71b240ce6446f75734b0a4e29bffc60d11bd8a19a3ec365945"
+    },
+    {
+      "file": "tests/test_ghq_dispatch.py",
+      "sha256": "a75fcc4fb5d27f91a5eab7ab3d9ecb16acf647cd15026ace1b83171d628a89a3"
+    },
+    {
+      "file": "tests/test_ghq_example.py",
+      "sha256": "62e68f7a49bfea56aea60df8d38d8353839cb94d62439a8032c101d4b73bf002"
+    },
+    {
+      "file": "tests/test_ghq_integration.py",
+      "sha256": "b14206c23ccc00fb6b5d87aeebf1682f7545359f4b42081212f0cb358d89394f"
+    },
+    {
+      "file": "tests/test_ghq_nodes.py",
+      "sha256": "8970b13c70a5839f341530d30b1e1d3632c4b388e61f1e2fb083a59af225ffa3"
+    },
+    {
+      "file": "tests/test_ghq_options.py",
+      "sha256": "5e31c6f3048a9201e9357f728537cb381f235485ee8a462bd75f7d482d78c1fb"
+    },
+    {
+      "file": "tests/test_ghq_posterior.py",
+      "sha256": "b5dbc7e8ba5ed1ffbb7f698864299026550001c1ff15900cdcbdb1cda02063a6"
+    },
+    {
+      "file": "tests/test_ghq_reference_models.py",
+      "sha256": "a524d7177c0ef5fe60421bb03007e87e0365835973ff7146512fad9aa1248ff6"
+    },
+    {
+      "file": "tests/test_ghq_roundoff.py",
+      "sha256": "3b9c67a54a5424891a4f70f8d7dcde5ef6bc2dfeed930fb490e5e102a59b67cc"
+    },
+    {
+      "file": "tests/test_initialization.py",
+      "sha256": "e49d4e0f2d4987b3c791170b32832ea3d6e67de2e96792b956ffc3e7807e6c3a"
+    },
+    {
+      "file": "tests/test_input_assembly.py",
+      "sha256": "0cf173d303b56d29267dc0de3026d080a6f05e5cf0b419f498a61f673a5e3a53"
+    },
+    {
+      "file": "tests/test_input_candidates.py",
+      "sha256": "21b31b31fe7315111674da0a6d2d916481c4725285b6a602e5e3e526e8b791d0"
+    },
+    {
+      "file": "tests/test_input_individual_data.py",
+      "sha256": "6830b7ce9ee996f50681ca673d44f1fcaa07f5d7f585858446bcdcc17899aa97"
+    },
+    {
+      "file": "tests/test_input_method.py",
+      "sha256": "8c685f3f259b60d6e1eae4376fb469d3cbd4a2ff4e72c145a887da8d22b2f29b"
+    },
+    {
+      "file": "tests/test_input_model.py",
+      "sha256": "19d96a6d593a92289f6afafde178259c147d705d28aa3f1cccdb7114925361c0"
+    },
+    {
+      "file": "tests/test_input_numerical_options.py",
+      "sha256": "56f00b9f4a50c89dbbe996d6c5a54d844d5a1e597e3b2b18781a7178a8443de8"
+    },
+    {
+      "file": "tests/test_input_observations.py",
+      "sha256": "c83a6d8b497b9d002622143341dfa43eced9c1b1a92c64355d93be2d6a066fd0"
+    },
+    {
+      "file": "tests/test_input_priors.py",
+      "sha256": "7e7a273545c76f2cf3582c5dd4afa059a979061898f410cd1b80b7f6b6000edf"
+    },
+    {
+      "file": "tests/test_laplace_curvature.py",
+      "sha256": "72a2da12e9b17ace2c9a4c511c1e2d7103e41fbeaa95d62da1da01e4e66e24e2"
+    },
+    {
+      "file": "tests/test_laplace_integration.py",
+      "sha256": "ba8cdaffd53d2d454d0c42aa51d1f1da3d3f5b8e02f5671f14546099f01595c7"
+    },
+    {
+      "file": "tests/test_laplace_mode_screen.py",
+      "sha256": "022180d0dae391c26ce4a3956c0e08df2f5b26db4c636419930d95dfdc6535ed"
+    },
+    {
+      "file": "tests/test_laplace_objective.py",
+      "sha256": "67ace895c908c69eed9566498bc39176f57f57b940ff0628f680a0a182592c67"
+    },
+    {
+      "file": "tests/test_laplace_reference_models.py",
+      "sha256": "81f7be56cbbf9dbde17d19f5452c435ba060a1b21c59fc75acc9467461a4e9e6"
+    },
+    {
+      "file": "tests/test_likelihood.py",
+      "sha256": "f4bf61e23c3166efb5e3c173c24c574f02b10d73ab48dc3a9090798e8fff3be1"
+    },
+    {
+      "file": "tests/test_linear_prediction.py",
+      "sha256": "c5cba60c8ecb802785649c9f9daa93ec11e8574b270cb112f7e247e6c3676e41"
+    },
+    {
+      "file": "tests/test_models_adversarial.py",
+      "sha256": "562aacd4b71f90b71a6404052e58b9f59a577dbf358d5c2a0421acc8d1a6f2ff"
+    },
+    {
+      "file": "tests/test_numerical_edge_cases.py",
+      "sha256": "a38bc6b1a55da63af406a998c3717bf6e4b16fe9a2f1c219c9cb74475772ab41"
+    },
+    {
+      "file": "tests/test_numerics_backend_probe.py",
+      "sha256": "2a7728ceb808c9ab021da5a2b612be673a77a2a309bb85bd18d380e0d22297ce"
+    },
+    {
+      "file": "tests/test_numerics_edge_cases.py",
+      "sha256": "27f2c3b0a61d1f6b8cf4c26fa87d1b7724641c7971404c42394f826727b81600"
+    },
+    {
+      "file": "tests/test_numerics_gradient.py",
+      "sha256": "07804454dcd5010242fa39eaa6bb7bccb8198bc4aeaa932423591a807df20db2"
+    },
+    {
+      "file": "tests/test_numerics_hessian_adversarial.py",
+      "sha256": "c494c87021af3e3ae2889e67b5937722ca3cfee9a87145459082958c52fe045f"
+    },
+    {
+      "file": "tests/test_numerics_hessian.py",
+      "sha256": "10c12e311a84640cf229ef0ee28283b46ce8e41b568c4ff17b48581adb45291f"
+    },
+    {
+      "file": "tests/test_numerics_optimization.py",
+      "sha256": "93bb66bb8157b354945e1a66b6b213f92b9b6f205001b18e9c683c81301fb0f1"
+    },
+    {
+      "file": "tests/test_numerics_reference_models.py",
+      "sha256": "4addc3c36b202778e3f0ce762bf0f6ae20b3bab8f6a654ea6a05f393fd23bc38"
+    },
+    {
+      "file": "tests/test_parameter_resolution.py",
+      "sha256": "4d9fb811d63dd28bb60c33a5e14e46ae5be6588e32f24115570cbc00dcbb8d18"
+    },
+    {
+      "file": "tests/test_posterior_binding.py",
+      "sha256": "67b389baa9e9c90fcceeffb6f14332a5f345c6caa3170624abb835bc08e037c4"
+    },
+    {
+      "file": "tests/test_posterior_computation.py",
+      "sha256": "55d1141a2a3fbf71a07db7ced3ed44932f9fa6b0a06b64f7e83e4b9e630d829f"
+    },
+    {
+      "file": "tests/test_posterior_declarations.py",
+      "sha256": "a9c6f926c43c8085936bf0e64058838f9a29c0e86a752274193f345d82303f42"
+    },
+    {
+      "file": "tests/test_posterior_imports.py",
+      "sha256": "cc9bb535cfdca44f8f31166d5c319a1f360ae401de1987dcadbe2355209b0929"
+    },
+    {
+      "file": "tests/test_posterior_normalization.py",
+      "sha256": "4f0e42149ab60429f6c564d583d5211850b9e1907682e262771c9351f212ef63"
+    },
+    {
+      "file": "tests/test_posterior_reference_models.py",
+      "sha256": "7a55476d3a637519eeaea18a36bd9df542b942b291b49b7a44bcd8444defff7c"
+    },
+    {
+      "file": "tests/test_prediction.py",
+      "sha256": "7f7d75288e335f62109a52511b484e67d09dec9bb541cccf5155e7d6233d9f9b"
+    },
+    {
+      "file": "tests/test_probability_representation.py",
+      "sha256": "a996b64c677b8f24ceedb924de8a4c49326a7ef7ffb690688a2b44d59d39633b"
+    },
+    {
+      "file": "tests/test_protocols.py",
+      "sha256": "bf6efd05e223556ab22b27d3c3b1e095a5fbd3dcd4cb8d876353403375621bc5"
+    },
+    {
+      "file": "tests/test_random_effects.py",
+      "sha256": "6ddefd111dbb23df8f8c599def04f8fd22345e719b3d0502fa00b29a7ae00d9f"
+    },
+    {
+      "file": "tests/test_reference_models.py",
+      "sha256": "d1e51f853e82bff1c42302311e417aa8709bcd8634b628b8df3fd67336498af7"
+    },
+    {
+      "file": "tests/test_reference_verifier.py",
+      "sha256": "0da0e4cbca50d7687fddfa335a3b8d17affcf92df1ae034ddc9a32eef7aa76c0"
+    },
+    {
+      "file": "tests/test_release_contract.py",
+      "sha256": "f8df8c9c3e2273c32839d23d147e18b284e61084f854242f41adcde051e6fa73"
+    },
+    {
+      "file": "tests/test_repair_coordinates.py",
+      "sha256": "557892008d3a5588c086f36c3c25f76425686148003f78918f0a7188eb6e8b9d"
+    },
+    {
+      "file": "tests/test_repair_laplace_coordinates.py",
+      "sha256": "ff8281770059b31392d01b7580782ed21b4c7b2e1dc6ff3a700af3409ebbf054"
+    },
+    {
+      "file": "tests/test_repair_optimization_diagnostics.py",
+      "sha256": "7181482a4e9c7e999c18c24ca3d96da9b23cb19a01d3b0c9da1a586b1189601d"
+    },
+    {
+      "file": "tests/test_residuals.py",
+      "sha256": "18b1335cef3003609febcd42b541f69e1052de6387e32fc1fb5ab0e56c5086b0"
+    },
+    {
+      "file": "tests/test_results.py",
+      "sha256": "703715c8117568e4bf52c31e3d839d8e764c2411d15565abce453511ccf548d6"
+    },
+    {
+      "file": "tests/test_source_navigation.py",
+      "sha256": "1044ef93d54de14ed6a24da331027b062fd8f791feaac84c502fca3b09f7e765"
+    }
+  ],
+  "supporting_sources": [
+    {
+      "file": "examples/reference_models.py",
+      "sha256": "d4c07d73fc4521da244d6ed715fcda7e6cc03f3172488d931f39a09857c3e9cc"
+    },
+    {
+      "file": "examples/posterior_reference.py",
+      "sha256": "aba7d7f60493f88f6b0eb3ae9b859dec4f55e6dd7e100aa3354ad9508f709935"
+    },
+    {
+      "file": "tools/verify_reference.py",
+      "sha256": "302abffb139d316c9117c7b78366b35e55af429e9f7205a1c629da3f06f870c6"
+    },
+    {
+      "file": "tests/fixtures/OXC_C003.json",
+      "sha256": "67d268cbc4e7268474753403ea195ec52a5ce95986e40772e2e1a8ab03db3d5a"
+    },
+    {
+      "file": "tests/fixtures/TAC_C003.json",
+      "sha256": "3aa3ae1408c8c8707e3644f1924217350847b3a3555d9dcec90b89a574ab14e6"
+    },
+    {
+      "file": "pyproject.toml",
+      "sha256": "da33cbded3e58e7e9587698f29163ed453f1379375a3c2174c58e022266d45e4"
+    }
+  ],
+  "installed_checks": [
+    {
+      "distribution": "wheel",
+      "artifact_sha256": "b4a679bad6dfbda8f8e535195fedfa1013fdec589018a574ff844404ad7a8326",
+      "status": "passed",
+      "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+      "package_version": "0.2.1.dev20261021",
+      "numpy": "2.5.2",
+      "scipy": "1.16.2",
+      "fresh_venv": true,
+      "import_verified_in_site_packages": true,
+      "installed_production_files_verified": 33,
+      "selection": "quick or slow",
+      "passed": 1176.0,
+      "failed": 0.0,
+      "errors": 0.0,
+      "skipped": 0.0,
+      "reference_checks": [
+        {
+          "model": "OXC",
+          "case": "C003",
+          "status": "verified",
+          "candidates": 4,
+          "maximum_posterior_absolute_error": 1.1274583489040424E-09,
+          "maximum_log_integral_absolute_error": 7.927838385768382E-09,
+          "posterior_atol": 5E-06,
+          "log_integral_atol": 1E-06,
+          "rtol": 0
+        },
+        {
+          "model": "TAC",
+          "case": "C003",
+          "status": "verified",
+          "candidates": 4,
+          "maximum_posterior_absolute_error": 5.29211141020447E-08,
+          "maximum_log_integral_absolute_error": 6.658650955060352E-07,
+          "posterior_atol": 5E-06,
+          "log_integral_atol": 0.001,
+          "rtol": 0
+        }
+      ]
+    },
+    {
+      "distribution": "sdist",
+      "artifact_sha256": "d8be7d0f16fdaa77bf0d7034e45a70b91639c0157f4312b294545cc48c79c41e",
+      "status": "passed",
+      "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+      "package_version": "0.2.1.dev20261021",
+      "numpy": "2.5.2",
+      "scipy": "1.16.2",
+      "fresh_venv": true,
+      "import_verified_in_site_packages": true,
+      "installed_production_files_verified": 33,
+      "selection": "quick",
+      "passed": 1165.0,
+      "failed": 0.0,
+      "errors": 0.0,
+      "skipped": 0.0,
+      "reference_checks": [
+        {
+          "model": "OXC",
+          "case": "C003",
+          "status": "verified",
+          "candidates": 4,
+          "maximum_posterior_absolute_error": 1.1274583489040424E-09,
+          "maximum_log_integral_absolute_error": 7.927838385768382E-09,
+          "posterior_atol": 5E-06,
+          "log_integral_atol": 1E-06,
+          "rtol": 0
+        },
+        {
+          "model": "TAC",
+          "case": "C003",
+          "status": "verified",
+          "candidates": 4,
+          "maximum_posterior_absolute_error": 5.29211141020447E-08,
+          "maximum_log_integral_absolute_error": 6.658650955060352E-07,
+          "posterior_atol": 5E-06,
+          "log_integral_atol": 0.001,
+          "rtol": 0
+        }
+      ]
+    }
+  ],
+  "overlapping_test_groups": true,
+  "ci_run_in_this_update": false,
+  "complete_scientific_matrix_verified": false,
+  "formal_five_repeats_verified": false,
+  "new_release_created": false,
+  "published_v020_replaced": false
+}
