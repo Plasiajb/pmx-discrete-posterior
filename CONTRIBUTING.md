@@ -34,6 +34,19 @@ vectors and log marginal likelihoods, not only the highest-probability state.
 Do not relax reference tolerances to obtain a pass. A reference input change
 needs separate review and provenance, not a silent fixture replacement.
 
+For c026 recovery changes, test both omitted and explicitly supplied
+`optimization.stationarity_tolerance`, including explicit `1e-5`. Preserve the
+failed optimizer/derivative diagnostics and recovery warnings; integral acceptance
+must not imply optimizer convergence. Keep the unchanged-endpoint eligibility,
+curvature-scale and local consistency checks, with no alternate optimizer or
+partial posterior normalization. See the [API contract](docs/api.md#precision-limited-recovery).
+
+The [c026 source evidence](docs/validation/c026_repair_20261021.md) covers five
+targeted ten-case OXC passes, not a full matrix. Its 1463 passed / 2 skipped /
+0 remaining failures is merged full-suite and affected-module evidence, not one
+all-green run. Preserve source snapshots and earlier failed-run records; do not
+replace them or add overlapping test counts.
+
 ## Build
 
 From the source root:
@@ -51,12 +64,16 @@ Check the wheel in a fresh environment from a directory outside the source
 checkout so that the source tree cannot mask the installed package:
 
 ```bash
-python -m pip install /path/to/dist/pmx_discrete_posterior-0.2.1.dev20261021-py3-none-any.whl
+python -m pip install /path/to/dist/pmx_discrete_posterior-0.2.0-py3-none-any.whl
 python -c "from importlib.metadata import version; import pmx_discrete_posterior as p; print(version('pmx-discrete-posterior'), p.__file__)"
 ```
 
-This repair branch requires its development version for installed-package checks;
-use the v0.2.0 tag's tests when checking the published v0.2.0 artifacts.
+This UNRELEASED repair branch retains package version `0.2.0`. Its pre-c026
+baseline is commit `be4619b`; record the exact integration commit used to build,
+including any uncommitted changes. Version and filename alone cannot distinguish
+a repair build from immutable published v0.2.0 assets. Keep them in separate
+build/output directories and identify each by checksum. Use matching repair
+tests for repair artifacts and the v0.2.0 tag's tests for published assets.
 Replace the artifact path with your build location. Extract the matching source
 archive into a separate directory, change to that directory, install test
 dependencies and check the installed wheel without pytest's source-path setting:
@@ -74,6 +91,12 @@ archive installed instead of the wheel. Record the artifact hashes, Python
 and dependency versions, commands and actual outcomes. The
 [release validation page](docs/validation/README.md) points to published evidence;
 local success is not a claim that CI or every supported environment passed.
+
+**Fresh c026 wheel and source-distribution installation results are PENDING.**
+The new receipt is reserved as `docs/validation/c026_installation_evidence.json`
+until fresh checks are recorded. The existing
+[repair installation receipt](docs/validation/repair_installation_evidence.json)
+belongs to the previous development version and is historical evidence only.
 
 ## Report Problems
 

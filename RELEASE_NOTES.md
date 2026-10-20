@@ -1,6 +1,48 @@
 # Release Notes
 
-## 0.2.1.dev20261021 - Unreleased Numerical Repair
+## UNRELEASED - c026 Repair (Package Version 0.2.0)
+
+Branch `repair/prior-coordinates-20261021` extends the pre-c026 repair baseline
+`be4619b`. Package version `0.2.0` is retained; record the exact integration
+commit and artifact hashes to identify a build. Published v0.2.0 assets remain
+immutable and distinct. No new release, tag or merge to main is announced.
+
+- Changes the Laplace acceptance path for narrowly eligible precision-limited
+  search endpoints. Independent gradient schedules, strict Hessian checks,
+  curvature-scale gradients and local objective probes must agree at the unchanged
+  endpoint. This is not a claim that all acceptance rules are unchanged.
+- An accepted integral has `status="success"` and
+  `method_details.precision_recovery.status="accepted"`. Its nonconverged optimizer
+  remains `optimization_status="failed"` in that record, with the original
+  failure reason and warning. Failed derivative records are not relabelled successful.
+- Explicit `optimization.stationarity_tolerance`, including explicit `1e-5`,
+  is binding. Omission permits curvature-relative recovery only after strict
+  eligibility checks; it is not equivalent to explicitly supplying the default.
+- Keeps the prior repair's BFGS default `gtol=1e-6` under default settings and
+  both `1e-3` Hessian/stationarity-impact thresholds. Scientific inputs, priors,
+  full covariance handling and normalization are unchanged. No automatic alternate
+  optimizer, multistart, endpoint move or partial normalization is added.
+
+Source validation records five targeted passes of ten originally failing OXC
+cases, each with 10/10 cases and 40/40 candidate integrals successful. For c026,
+maximum differences from an independent high-precision **local Laplace** reference
+are `4.631482208861115e-8` in posterior probability and `2.357708501765643e-7` in
+log marginal likelihood, not errors against exact nonlinear integration.
+TAC c003/c036/c037 retain their baseline results; TAC c078 still fails with no
+posterior normalization. These checks are not a full-matrix rerun.
+
+Merged source regression evidence is **1463 passed, 2 skipped, 0 remaining
+failures**, combining a full-suite run and affected-module rerun, not one
+all-green invocation. **Fresh c026 installation results are PENDING**; prior
+development installation passes do not validate the current build. See the
+[c026 validation note](docs/validation/c026_repair_20261021.md) and
+[compact source receipt](docs/validation/c026_source_evidence.json).
+
+## Historical 0.2.1.dev20261021 - Pre-c026 Numerical Repair
+
+The following record describes the earlier development snapshot and its installed
+artifacts. Its version label, c026 deferral and test counts are historical, not
+the current branch identity or c026 installation acceptance.
 
 Branch `repair/prior-coordinates-20261021` is an independent repair based on
 v0.2.0. `0.2.1.dev20261021` is a development identifier only, not a new release,

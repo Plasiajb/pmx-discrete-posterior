@@ -109,6 +109,9 @@ def compute_posterior(*, model, individual_data, observations, candidate_states,
         if point.shape != effects.mean.shape:
             raise InputError("initial_point must match the active random-effect dimension")
         resolve_hessian_options(options["derivatives"])
+        # 保留显式梯度容差的来源，不把校验器补入的默认值冒充用户要求 / Preserve explicit tolerance provenance, not a validator-inserted default.
+        if "stationarity_tolerance" not in (numerical_options or {}).get("optimization", {}):
+            options["optimization"].pop("stationarity_tolerance")
     rows = []
     for state in states:
         state_id = state["state_id"]

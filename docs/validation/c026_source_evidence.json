@@ -1,0 +1,84 @@
+{
+  "schema": "c026-development-evidence-v1",
+  "scope": "Targeted development evidence from independent repair source, not full-matrix release acceptance",
+  "source_tree_sha256": "7f81f16aab0bacfe8823950070840892fc2da2fb98af6aeea6c47f8930047da9",
+  "regression": {
+    "scope": "full-suite run plus affected-module rerun after restoring historical fixtures; not one all-green invocation",
+    "counts": {
+      "passed": 1463,
+      "skipped": 2
+    },
+    "remaining_failures": 0,
+    "source_receipt_sha256": "7fec2cc589669dffea273c66e8156e179c132665b7db153c6f50917505c24e48"
+  },
+  "protected_file_count": 357,
+  "protected_files_unchanged": true,
+  "oxc_c026": {
+    "residual_sd_mg_L": 1E-06,
+    "state_order": [
+      "none",
+      "only0h",
+      "only12h",
+      "both"
+    ],
+    "posterior": [
+      1.946437201922152E-07,
+      0.006974892682067626,
+      0.724294305100751,
+      0.26873060757346123
+    ],
+    "range": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "sample_sd": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "statuses": [
+      "success",
+      "success",
+      "success",
+      "success",
+      "success"
+    ],
+    "all_ten_oxc_statuses": [
+      {
+        "success": 10
+      },
+      {
+        "success": 10
+      },
+      {
+        "success": 10
+      },
+      {
+        "success": 10
+      },
+      {
+        "success": 10
+      }
+    ],
+    "ten_case_ids": [
+      "c008",
+      "c011",
+      "c013",
+      "c018",
+      "c020",
+      "c026",
+      "c046",
+      "c071",
+      "c073",
+      "c078"
+    ],
+    "reference_kind": "Independent 50/80-digit local Laplace reference, not exact nonlinear integration",
+    "maximum_posterior_difference": 4.631482208861115E-08,
+    "maximum_log_integral_difference": 2.357708501765643E-07,
+    "all_four_states_retain_precision_warnings": true,
+    "source_receipt_sha256": "615a36b5878f12d68a61643568ae4913d8a9b3f5a9f3c2c2ec1fe06e571919d0"
+  }
+}

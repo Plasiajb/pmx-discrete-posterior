@@ -1,6 +1,6 @@
 # pmx-discrete-posterior
 
-**Development 0.2.1.dev20261021 | Python >=3.11 | MIT**
+**0.2.0 | UNRELEASED repair branch | Python >=3.11 | MIT**
 
 Compute model-conditional posterior probabilities over a finite set of
 predefined pharmacometric states, such as alternative dosing histories.
@@ -15,28 +15,36 @@ and assumptions, not direct evidence of adherence or standalone clinical decisio
 
 ## Unreleased Numerical Repair
 
-Branch `repair/prior-coordinates-20261021` uses the development identifier
-`0.2.1.dev20261021` for an independent repair based on v0.2.0. It adds
-covariance-standardized Laplace coordinates and optimization diagnostics,
-preserving the full Hessian and Jacobian, scientific models, priors and
-independent acceptance thresholds. This is not a new GHQ backend, release, tag or merge
-to the main branch; published v0.2.0 artifacts remain unchanged.
+Branch `repair/prior-coordinates-20261021` retains package version `0.2.0`.
+The c026 integration extends commit `be4619b` (the pre-c026 repair baseline);
+identify a repair build by its exact commit and artifact hashes, not version alone.
+This is UNRELEASED work, not a new tag, release or merge to main. Immutable
+published v0.2.0 assets are unchanged and do not contain this repair.
 
-The production BFGS default is now `min(1e-6, stationarity_tolerance / 10)`,
-giving `gtol=1e-6` with the default `stationarity_tolerance=1e-5`. Explicit
-`gtol=1e-7` remains supported. This changes the search stopping tolerance,
-not the independent gradient, Hessian or stationarity acceptance gates.
+The branch retains covariance-standardized Laplace coordinates, the full Hessian
+and Jacobian. The c026 repair **changes the acceptance path**: a narrowly eligible
+precision-limited endpoint can yield an accepted integral after independent
+curvature-relative and local consistency checks. The nonconverged optimizer
+remains `failed` in `method_details.precision_recovery`, with its original reason
+and a warning. No fallback optimizer, endpoint move or partial normalization is
+introduced; scientific inputs and priors are unchanged.
 
-An earlier TAC c036/c037 comparison recorded precision loss at `gtol=1e-7`
-and complete posteriors at explicit `gtol=1e-6`, with all four candidates per
-case passing the original independent checks. This supports the default choice,
-but is not a fresh full-matrix run or five-repeat validation of the new default.
-After this default change, fresh wheel and source-distribution installations
-passed 1176 and 1165 tests respectively, with both OXC/TAC reference examples
-verified. These overlapping test groups were checked on Windows with Python 3.12.
-See the [repair scope and validation status](docs/validation/repair_20261021.md)
-for artifact identities, source-regression evidence, deferred cases and remaining
-full-matrix and release checks.
+Explicit `optimization.stationarity_tolerance`, including an explicitly supplied
+default `1e-5`, remains binding. Omitting it permits curvature-relative recovery
+only after strict eligibility and consistency checks. The BFGS default
+`min(1e-6, stationarity_tolerance / 10)` (normally `gtol=1e-6`) and both `1e-3`
+Hessian/stationarity-impact thresholds are unchanged by c026. See the
+[acceptance contract](docs/api.md#precision-limited-recovery).
+
+Source evidence records five targeted passes of ten originally failing OXC cases,
+including c026, not a full sensitivity-matrix rerun. TAC c078 still fails.
+The **1463 passed, 2 skipped, 0 remaining failures** result combines a full-suite
+run with an affected-module rerun; it is not one all-green invocation.
+**Fresh c026 wheel and source-distribution installation results: PENDING.**
+See the [c026 validation note](docs/validation/c026_repair_20261021.md) and
+[compact source receipt](docs/validation/c026_source_evidence.json).
+Earlier development-version and installation results remain
+[historical evidence](docs/validation/repair_20261021.md).
 
 ## Install
 
@@ -44,12 +52,14 @@ The [GitHub repository](https://github.com/Plasiajb/pmx-discrete-posterior) is
 private; repository and release downloads require access. This package is not
 published on PyPI. Runtime dependencies are NumPy >=1.26 and SciPy >=1.16.2,<2.
 
-For the development repair, use a separate source checkout of its branch:
+For the unreleased repair, use a separate source checkout of its branch and
+record the exact commit (the branch can advance):
 
 ```bash
 git clone https://github.com/Plasiajb/pmx-discrete-posterior.git
 cd pmx-discrete-posterior
 git switch repair/prior-coordinates-20261021
+git rev-parse HEAD
 python -m venv .venv
 ```
 
@@ -60,6 +70,9 @@ Activate with `.venv\Scripts\Activate.ps1` in PowerShell or
 python -m pip install .
 python examples/posterior_reference.py OXC
 ```
+
+Repair builds retain `0.2.0` filenames; keep them separate from published assets
+and record checksums. Fresh installation acceptance is pending.
 
 For the unchanged v0.2.0 release archives, download the wheel, source archive and checksum file
 from the [GitHub releases](https://github.com/Plasiajb/pmx-discrete-posterior/releases).
@@ -119,6 +132,10 @@ posterior. Invalid inputs raise `InputError`. Numerical or model-execution
 failure returns `status="failed"` with a reason and all candidate rows;
 positive-prior posterior values remain `None`, even for successful integrals.
 The package never drops failed candidates and renormalizes the remainder.
+
+An accepted precision recovery is integral success, not optimizer convergence.
+Retain the per-candidate `method_details.precision_recovery` record and its
+`warning` even when the complete posterior succeeds.
 
 An exactly zero prior skips integration, keeps the candidate with
 `status="skipped_zero_prior"`, and returns posterior `0.0`. Inputs for that

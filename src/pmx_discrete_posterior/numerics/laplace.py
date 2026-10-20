@@ -4,9 +4,10 @@
 """
 
 import math
+from copy import deepcopy
 
 import numpy as np
-from scipy.linalg import cholesky, norm
+from scipy.linalg import cholesky, norm, solve_triangular
 
 from ..interfaces.inputs.integration_method import validate_integration_method
 from ..interfaces.inputs.numerical_options import resolve_hessian_options, validate_numerical_options
@@ -14,12 +15,136 @@ from ..interfaces.protocols import ConditionalLogLikelihood, RandomEffectDistrib
 from ..interfaces.results import IntegrationResult, validate_integration_result
 from ..interfaces.validation import InputError, numeric_array, scalar
 from .coordinates import PriorCoordinates
-from .derivatives import _EvaluationError, _ScalarObjective, hessian
+from .derivatives import _EvaluationError, _ScalarObjective, gradient, hessian
 from .optimization import minimize
 
 
 CURVATURE_LOG_INTEGRAL_ATOL = 1e-3
 STATIONARITY_LOG_INTEGRAL_ATOL = 1e-3
+
+
+def _gradient_estimate(record, shape):
+    """功能 / Function: 读取有限梯度证据，不改变求导状态 / Read finite gradient evidence without changing derivative status.
+    输入 / Inputs: 原求导记录及坐标形状 / Original derivative record and coordinate shape.
+    输出 / Outputs: 梯度和非负经验误差；无有效证据则拒绝 / Gradient and nonnegative empirical error, rejecting absent evidence.
+    """
+    evidence = record if record["status"] == "success" else record["method_details"].get("precision_limited_candidate")
+    if evidence is None:
+        raise _EvaluationError("no finite precision-limited gradient evidence")
+    estimate = numeric_array(evidence["gradient"], name="recovery gradient")
+    error = numeric_array(evidence["estimated_error"], name="recovery gradient error")
+    if estimate.shape != shape or error.shape != shape or np.any(error < 0):
+        raise _EvaluationError("invalid recovery gradient shape or error")
+    return estimate, error
+
+
+def _precision_endpoint(objective, optimum, derivative_options, explicit_tolerance, recovery):
+    """功能 / Function: 独立检查因求导精度停止的末点 / Independently examine an endpoint stopped by derivative precision.
+    输入 / Inputs: 同一目标、失败优化记录、求导设置、可选显式梯度上限和诊断 / Same objective, failed optimization, derivative options, optional explicit gradient limit and diagnostics.
+    输出 / Outputs: 原末点、原目标值、梯度及误差；仍须通过Hessian和局部检查 / Original endpoint/value and gradient/error, still requiring curvature and local checks.
+    不将优化失败改写为收敛，不改变末点 / Do not relabel optimizer failure as convergence or move the endpoint.
+    """
+    failure = optimum["method_details"].get("gradient_failure", {})
+    if failure.get("phase") != "search" or "result" not in failure:
+        raise _EvaluationError(optimum["failure_reason"])
+    point = numeric_array(failure["point"], name="precision-limited point")
+    _gradient_estimate(failure["result"], point.shape)
+    records = [optimum["method_details"].get(key, {}) for key in
+               ("last_objective_evaluation", "best_objective_evaluation")]
+    if any(not np.array_equal(record.get("point"), point) for record in records):
+        raise _EvaluationError("precision-limited point is not both the last and best main objective point")
+    checked = _ScalarObjective(objective)
+    value = checked(point, fresh=True)
+    if checked(point, fresh=True) != value or any(record.get("value") != value for record in records):
+        raise _EvaluationError("precision-limited objective value changed on reevaluation")
+    estimates = []
+    # 非嵌套的起始步长；每次仍使用已有双步长求导 / Nonnested starts, retaining the existing two-schedule differentiator.
+    for multiplier in (1., 1.3):
+        settings = deepcopy(derivative_options)
+        settings["backend_options"]["initial_step"] *= multiplier
+        record = gradient(objective, point, settings)
+        estimate, error = _gradient_estimate(record, point.shape)
+        estimates.append((estimate, error))
+        recovery["gradient_checks"].append({
+            "status": record["status"], "gradient": estimate.tolist(), "estimated_error": error.tolist(),
+            "method_details": record["method_details"], "initial_step": settings["backend_options"]["initial_step"]})
+    (g, e), (other, other_error) = estimates
+    if np.any(np.abs(g-other) > e+other_error):
+        raise _EvaluationError("independent gradient step schedules disagree beyond their estimated errors")
+    envelope = np.maximum(e, np.abs(g-other)+other_error)
+    bound = float(np.max(np.abs(g)+envelope))
+    recovery["gradient_inf_with_error"] = bound
+    if explicit_tolerance is not None and bound > explicit_tolerance:
+        raise _EvaluationError("precision recovery does not satisfy explicit stationarity_tolerance")
+    return point, value, g, envelope
+
+
+def _check_local_probes(objective, point, value, matrix, matrix_error, g, g_error, recovery):
+    """功能 / Function: 用可分辨的局部目标变化复核导数 / Cross-check derivatives using resolvable local objective changes.
+    输入 / Inputs: 末点、Hessian及梯度证据 / Endpoint, Hessian and gradient evidence.
+    输出 / Outputs: 记录对称四分之一曲率宽度探针；不相符则拒绝 / Record symmetric quarter-curvature-width probes, rejecting inconsistency.
+    仅作局部一致性筛查，不估计Laplace近似误差 / A local consistency screen, not an estimate of Laplace approximation error.
+    """
+    scale = np.sqrt(np.diag(matrix))
+    factor = cholesky((matrix / scale[:, None]) / scale[None, :], lower=True)
+    steps = .25 * solve_triangular(factor.T, np.eye(len(point)), lower=False) / scale[:, None]
+    checked = _ScalarObjective(objective)
+    for direction in steps.T:
+        for sign in (-1, 1):
+            probe = point + sign * direction
+            displacement = probe-point
+            if not np.any(displacement):
+                raise _EvaluationError("local probe displacement is unresolved")
+            actual = checked(probe, fresh=True) - value
+            quadratic = .5 * displacement @ matrix @ displacement
+            expected = g @ displacement + quadratic
+            uncertainty = g_error @ np.abs(displacement) + .5 * np.abs(displacement) @ matrix_error @ np.abs(displacement)
+            roundoff = 32 * np.finfo(float).eps * max(1., abs(value), abs(actual+value))
+            discrepancy = abs(actual-expected)
+            recovery["local_probes"].append({"point": probe.tolist(), "actual_change": float(actual),
+                "predicted_change": float(expected), "discrepancy": float(discrepancy),
+                "estimated_derivative_uncertainty": float(uncertainty), "roundoff_screen": roundoff})
+            if (not np.isfinite([quadratic, expected, uncertainty, discrepancy, roundoff]).all()
+                    or quadratic <= roundoff or uncertainty+roundoff > STATIONARITY_LOG_INTEGRAL_ATOL / 4
+                    or discrepancy > STATIONARITY_LOG_INTEGRAL_ATOL):
+                raise _EvaluationError("local probe does not resolve or support the derivative-based quadratic change")
+
+
+def _check_local_gradient(objective, point, matrix, matrix_error, g, g_error,
+                          derivative_options, explicit_tolerance, recovery):
+    """功能 / Function: 在曲率尺度下复核梯度，防止粗步长漏掉局部变化 / Recheck gradients at the curvature scale to detect features missed by coarse steps.
+    输入 / Inputs: 原末点、已核验Hessian及误差、原梯度和设置 / Original endpoint, checked Hessian/error, previous gradient and options.
+    输出 / Outputs: 转回原优化坐标的梯度/误差及局部驻点误差；不移动末点 / Gradient/error in optimization coordinates and mode-error screen, without moving the endpoint.
+    """
+    scale = np.sqrt(np.diag(matrix))
+    factor = cholesky((matrix / scale[:, None]) / scale[None, :], lower=True)
+    transform = solve_triangular(factor.T, np.eye(len(point)), lower=False) / scale[:, None]
+
+    def local_objective(values):
+        """功能 / Function: 仅变换求导坐标 / Transform derivative coordinates only.
+        输入 / Inputs: 局部坐标 / Local coordinates. 输出 / Outputs: 同一原目标 / Same original objective.
+        """
+        return objective(point + transform @ values)
+
+    record = gradient(local_objective, np.zeros_like(point), derivative_options)
+    local_g, local_error = _gradient_estimate(record, point.shape)
+    # A^T H A理论为I；矩阵运算偏差也计入误差 / A^T H A is theoretically I; include numerical discrepancy in its error.
+    curvature_error = np.abs(transform).T @ matrix_error @ np.abs(transform)
+    curvature_error += np.abs(transform.T @ matrix @ transform - np.eye(len(point)))
+    curvature_error = np.maximum(curvature_error, curvature_error.T)
+    bound = float(np.max(np.abs(local_g)+local_error))
+    _, _, mode_error = _curvature_terms(np.eye(len(point)), curvature_error, bound)
+    mapped_g = scale * (factor @ local_g)
+    mapped_error = scale * (np.abs(factor) @ local_error)
+    recovery["local_gradient_check"] = {
+        "status": record["status"], "gradient": local_g.tolist(), "estimated_error": local_error.tolist(),
+        "coordinate_system": "local_curvature", "method_details": record["method_details"],
+        "estimated_log_integral_error_from_stationarity": mode_error}
+    if np.any(np.abs(mapped_g-g) > mapped_error+g_error):
+        raise _EvaluationError("local curvature-scale gradient disagrees with prior-scale gradient evidence")
+    if explicit_tolerance is not None and np.max(np.abs(mapped_g)+mapped_error) > explicit_tolerance:
+        raise _EvaluationError("local curvature-scale gradient exceeds explicit stationarity_tolerance")
+    return mapped_g, mapped_error, mode_error
 
 
 def _joint_objective(conditional_log_likelihood, random_effect_distribution):
@@ -119,7 +244,7 @@ def integrate(
     输入 / Inputs: 确定性似然、同坐标分布、显式laplace方法及已有数值选项 / Deterministic likelihood, same-coordinate distribution, explicit laplace method and existing options.
     输出 / Outputs: IntegrationResult；非法设置抛InputError，执行失败返回failed/None及原因 / IntegrationResult; invalid settings raise InputError, execution failures return failed/None with reasons.
     起点和返回众数用原始效应坐标；优化与求导步长用协方差标准化坐标 / Starts and returned modes use original effects; optimization and derivative steps use covariance-standardized coordinates.
-    无多起点或自动重试，不证明全局众数 / No multistart or automatic retry; no global-mode guarantee.
+    无多起点或备用优化器；精度受限末点须独立复核，不证明全局众数 / No multistart or fallback optimizer; precision-limited endpoints require independent checks, not a global-mode guarantee.
     """
     method = validate_integration_method(integration_method)
     if method != "laplace":
@@ -137,6 +262,9 @@ def integrate(
     if "ghq" in options:
         raise InputError("Laplace does not consume GHQ options")
     optimization_options = options["optimization"]
+    # 默认绝对驻点检查属于优化器；用户显式指定时也约束恢复路径 / The default absolute check belongs to the optimizer; explicit user limits also constrain recovery.
+    explicit_tolerance = (optimization_options["stationarity_tolerance"]
+                          if "stationarity_tolerance" in (numerical_options or {}).get("optimization", {}) else None)
     point = optimization_options.pop("initial_point", mean).copy()
     if point.shape != mean.shape:
         raise InputError("initial_point must match the active random-effect dimension")
@@ -177,13 +305,25 @@ def integrate(
             optimum = minimize(objective, standardized_start, optimization_options)
             details["optimization"] = optimum["method_details"]
             details["optimization"]["coordinate_system"] = "prior_standardized"
+            recovery = None
             if optimum["status"] != "success":
-                raise _EvaluationError(optimum["failure_reason"])
-            mode = optimum["minimizer"]
+                failure = optimum["method_details"].get("gradient_failure", {})
+                if "precision_limited_candidate" not in failure.get("result", {}).get("method_details", {}):
+                    raise _EvaluationError(optimum["failure_reason"])
+                recovery = {"status": "rejected", "optimization_status": optimum["status"],
+                            "failure_reason": optimum["failure_reason"], "gradient_checks": [], "local_probes": []}
+                details["precision_recovery"] = recovery
+                details["stage"] = "precision_recovery"
+                mode, mode_value, g, g_error = _precision_endpoint(
+                    objective, optimum, derivative_options, explicit_tolerance, recovery)
+                gradient_bound = recovery["gradient_inf_with_error"]
+            else:
+                mode, mode_value = optimum["minimizer"], optimum["objective_value"]
+                gradient_bound = optimum["method_details"]["gradient_inf_with_error"]
             details.update(conditional_mode=coordinates.to_original(mode).tolist(),
                            standardized_mode=mode.tolist(),
-                           objective_value=math.fsum((optimum["objective_value"], coordinates.log_abs_det)),
-                           standardized_objective_value=optimum["objective_value"], stage="hessian")
+                           objective_value=math.fsum((mode_value, coordinates.log_abs_det)),
+                           standardized_objective_value=mode_value, stage="hessian")
             curvature = hessian(objective, mode, derivative_options)
             details["hessian"] = curvature["method_details"]
             details["hessian"]["coordinate_system"] = "prior_standardized"
@@ -191,17 +331,34 @@ def integrate(
                 raise _EvaluationError(curvature["failure_reason"])
             details["stage"] = "curvature"
             logdet, error, mode_error = _curvature_terms(curvature["hessian"], curvature["estimated_error"],
-                                                        optimum["method_details"]["gradient_inf_with_error"])
+                                                        gradient_bound)
             details.update(log_determinant=math.fsum((logdet, -2*coordinates.log_abs_det)),
                            standardized_log_determinant=logdet, estimated_log_integral_error_from_hessian=error,
                            estimated_log_integral_error_from_stationarity=mode_error, stage="stationarity")
             if mode_error > STATIONARITY_LOG_INTEGRAL_ATOL:
                 raise _EvaluationError(f"estimated local mode contribution to log integral {mode_error:.6g} exceeds 1e-3")
+            if recovery is not None:
+                details["stage"] = "local_gradient"
+                g, g_error, local_mode_error = _check_local_gradient(
+                    objective, mode, curvature["hessian"], curvature["estimated_error"], g, g_error,
+                    derivative_options, explicit_tolerance, recovery)
+                mode_error = max(mode_error, local_mode_error)
+                details["estimated_log_integral_error_from_stationarity"] = mode_error
+                if mode_error > STATIONARITY_LOG_INTEGRAL_ATOL:
+                    raise _EvaluationError(f"curvature-scale local mode contribution to log integral {mode_error:.6g} exceeds 1e-3")
+                details["stage"] = "local_probes"
+                _check_local_probes(objective, mode, mode_value, curvature["hessian"],
+                                    curvature["estimated_error"], g, g_error, recovery)
             details["stage"] = "formula"
             # 同一z坐标的密度与曲率，Jacobian已在目标中计入 / Density and curvature both in z; the objective already includes the Jacobian.
-            value = math.fsum((-optimum["objective_value"], .5 * dimension * math.log(2 * math.pi), -.5 * logdet))
+            value = math.fsum((-mode_value, .5 * dimension * math.log(2 * math.pi), -.5 * logdet))
             if not math.isfinite(value):
                 raise _EvaluationError("non-finite Laplace log integral; not a proven zero likelihood")
+            if recovery is not None:
+                recovery.update(status="accepted", warning=(
+                    "Optimizer stopped at a precision-limited gradient; the unchanged endpoint passed "
+                    "independent curvature-relative stationarity and local consistency checks. "
+                    "Optimizer convergence and global optimality are not claimed."))
         result.update(status="success", log_marginal_likelihood=value)
         details["stage"] = "complete"
     except Exception as exc:

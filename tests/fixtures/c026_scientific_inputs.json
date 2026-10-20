@@ -1,0 +1,162 @@
+{
+  "individual_data": {
+    "covariates": {
+      "BW": 25
+    },
+    "occasions": [],
+    "dosing_prehistory": {
+      "events": [
+        {
+          "time": -12,
+          "amount": 300,
+          "amount_unit": "mg",
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ],
+      "regimen": {
+        "period": 12,
+        "anchor_time": -12,
+        "time_unit": "h",
+        "events": [
+          {
+            "offset": 0,
+            "amount": 300,
+            "amount_unit": "mg",
+            "route": "oral",
+            "compartment": "depot"
+          }
+        ]
+      }
+    },
+    "initialization": {
+      "mode": "steady_state",
+      "start_time": -12,
+      "event_phase": "before_events",
+      "steady_state": {
+        "parameter_rule": "fixed_reference",
+        "reference_occasion_id": null
+      }
+    }
+  },
+  "observations": [
+    {
+      "record_id": "0",
+      "time": 24,
+      "time_unit": "h",
+      "value_unit": "mg/L",
+      "value": 12
+    }
+  ],
+  "candidate_states": [
+    {
+      "state_id": "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681",
+      "events": []
+    },
+    {
+      "state_id": "state_6cf511a7706e8318ba9c59ca6e9e74e347b31829a559efe8fa33b861b64644e9",
+      "events": [
+        {
+          "time": 0,
+          "amount": 300,
+          "amount_unit": "mg",
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ]
+    },
+    {
+      "state_id": "state_207324eb5bdd241659fde078e9c0b6feeeb160423e270da304daaa5b8390de69",
+      "events": [
+        {
+          "time": 12,
+          "amount": 300,
+          "amount_unit": "mg",
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ]
+    },
+    {
+      "state_id": "state_50241cf258a49601695e85381a33eb515611e03f51a0bad796d3089b8665d42f",
+      "events": [
+        {
+          "time": 0,
+          "amount": 300,
+          "amount_unit": "mg",
+          "route": "oral",
+          "compartment": "depot"
+        },
+        {
+          "time": 12,
+          "amount": 300,
+          "amount_unit": "mg",
+          "route": "oral",
+          "compartment": "depot"
+        }
+      ]
+    }
+  ],
+  "priors": {
+    "state_944c7ce98f10ddebf79258da1fee55f539dacafb4c78ffb6746e1a1d71ee1681": 0.25,
+    "state_6cf511a7706e8318ba9c59ca6e9e74e347b31829a559efe8fa33b861b64644e9": 0.25,
+    "state_207324eb5bdd241659fde078e9c0b6feeeb160423e270da304daaa5b8390de69": 0.25,
+    "state_50241cf258a49601695e85381a33eb515611e03f51a0bad796d3089b8665d42f": 0.25
+  },
+  "model": {
+    "parameters": {
+      "values": {
+        "k0": 0.624,
+        "kmax": 0.233,
+        "k50": 8.97,
+        "gamma": 219,
+        "normalization_weight": 70,
+        "CL_p": 1.68,
+        "V_p": 14.7,
+        "ka": 0.83,
+        "sigma": 0.000001,
+        "omega_0_0": 0.0122457142458844
+      },
+      "units": {
+        "k0": "1",
+        "kmax": "1",
+        "k50": "kg",
+        "gamma": "1",
+        "normalization_weight": "kg",
+        "CL_p": "L/h",
+        "V_p": "L",
+        "ka": "1/h",
+        "sigma": "mg/L",
+        "omega_0_0": "1"
+      }
+    },
+    "iiv": {
+      "names": [
+        "CL"
+      ],
+      "distribution": "normal",
+      "covariance_parameters": [
+        [
+          "omega_0_0"
+        ]
+      ]
+    },
+    "iov": null,
+    "residual_model": {
+      "distribution": "normal",
+      "error_type": "additive",
+      "parameter_names": {
+        "sd": "sigma"
+      },
+      "dependence": "conditionally_independent"
+    },
+    "random_effects_dependence": "independent_blocks",
+    "parameter_model": {
+      "covariate_names": [
+        "BW"
+      ],
+      "relations_source": "examples/reference_models.py"
+    },
+    "predict_source": "examples/reference_models.py"
+  }
+}

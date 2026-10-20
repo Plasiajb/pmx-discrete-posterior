@@ -144,6 +144,16 @@ def _differentiate(objective, evaluation_point, derivative_options, degree=1):
             else:
                 result[key] = value
                 result["status"] = "success"
+        # 功能 / Function: 保留有限的受限梯度供独立积分诊断，不升级求导状态 / Preserve a finite limited gradient for independent integral diagnostics, without upgrading derivative status.
+        # 输入 / Inputs: 两组实际估计、误差和后端状态 / Two estimates, errors and backend states.
+        # 输出 / Outputs: 仅诊断候选；模型异常、非有限值和未知后端失败不保留 / Diagnostic candidate only; exclude model errors, nonfinite values and unknown failures.
+        if (degree == 1 and result["status"] == "failed"
+                and np.isfinite(first_value).all() and np.isfinite(estimate).all()
+                and np.isfinite(error).all() and np.all(error >= 0)
+                and all(np.isin(r.status, (0, -1, -2)).all() for r in runs)):
+            details["precision_limited_candidate"] = {
+                "gradient": estimate.tolist(), "estimated_error": error.tolist(),
+            }
     except (_EvaluationError, FloatingPointError, OverflowError, np.linalg.LinAlgError) as exc:
         result["failure_reason"] = f"{type(exc).__name__}: {exc}"
         details["nfev"] = checked.nfev

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pmx-discrete-posterior"
-version = "0.2.1.dev20261021"
+version = "0.2.0"
 description = "Model-based posterior probabilities for discrete pharmacometric states"
 readme = "README.md"
 requires-python = ">=3.11"
