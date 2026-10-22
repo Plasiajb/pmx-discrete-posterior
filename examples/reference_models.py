@@ -148,7 +148,8 @@ def load_reference(name):
         iov = {"names": ["CL", "V1"], "distribution": "normal", "occasion_key": "occasion_id",
                "covariance_parameters": _covariance_refs(np.array(raw["omega"])[4:6, 4:6], "pi", values, units)}
         candidates = [{"state_id": s["state_event_id"], "events": [_event(e["time_h"], e["amount_mg"]) for e in s["events"]]} for s in raw["states"]]
-        observations = [{"record_id": str(i), "time": t, "value": y, "time_unit": "h", "value_unit": "ng/mL"} for i, (t, y) in enumerate(zip(raw["times"], raw["observations"]))]
+        observations = [{"record_id": str(i), "time": t, "value": y, "time_unit": "h", "value_unit": "ng/mL",
+                         "event_phase": "before_events"} for i, (t, y) in enumerate(zip(raw["times"], raw["observations"]))]
         relations, predictor, error_type, role = _tac_relations, LinearPredictor(_tac_system), "proportional", "coefficient_sd"
     refs = _covariance_refs(iiv_matrix, "omega", values, units)
     model = {"parameters": {"values": values, "units": units}, "parameter_model": {"covariate_names": list(covariates), "relations": relations},

@@ -2,6 +2,14 @@
 
 **0.2.0 | c026 repaired distribution | 2026-10-21 | Python >=3.11 | MIT**
 
+**Current source patch (2026-10-22):** `main` also supports explicit observation
+ordering at parameter/dose boundaries. The TAC reference mapper requests
+`event_phase="before_events"`; omitted fields keep the previous behavior.
+See the [observation-phase contract](docs/observation_phase.md).
+The existing `v0.2.0` tag and release attachments are unchanged and do not
+contain this source patch. To use it, clone `main`, record the resolved commit
+and install that checkout. The package version remains `0.2.0`.
+
 Compute model-conditional posterior probabilities over a finite set of
 predefined pharmacometric states, such as alternative dosing histories.
 Supply a model, individual data, observations, candidate histories and their
@@ -43,11 +51,12 @@ Activate with `.venv\Scripts\Activate.ps1` in PowerShell or
 python -m pip install --force-reinstall --no-cache-dir ./pmx_discrete_posterior-0.2.0-py3-none-any.whl
 ```
 
-Alternatively, install from a fresh checkout of the repaired `v0.2.0` tag.
-Use `--branch main` instead for current source, and always record the resolved commit:
+For the TAC observation-phase patch, install current `main` source and record
+the resolved commit. The existing `v0.2.0` tag reproduces the earlier c026
+release without this boundary patch:
 
 ```bash
-git clone --branch v0.2.0 https://github.com/Plasiajb/pmx-discrete-posterior.git
+git clone --branch main https://github.com/Plasiajb/pmx-discrete-posterior.git
 cd pmx-discrete-posterior
 git rev-parse HEAD
 python -m pip install --force-reinstall --no-cache-dir .

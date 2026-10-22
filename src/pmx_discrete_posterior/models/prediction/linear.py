@@ -73,7 +73,7 @@ class LinearPredictor:
 
     def __call__(self, *, individual_parameters, candidate_state, prediction_records, individual_data):
         """功能 / Function: 初始化、传播、给药及读出浓度 / Initialize, propagate, dose and read concentrations.
-        输入 / Inputs: 已解析参数及predict标准四组输入 / Four standard predict inputs with resolved parameters.
+        输入 / Inputs: 已解析参数及predict标准四组输入；记录可指定event_phase / Four standard inputs; records may specify event_phase.
         输出 / Outputs: record_ids、values、units；不自动续给药 / Predictions without automatic future doses.
         """
         records = validate_records(prediction_records, observed=False)
@@ -101,6 +101,13 @@ class LinearPredictor:
             if system["time_unit"] != records[0]["time_unit"] or system["concentration_unit"] != records[0]["value_unit"]:
                 raise InputError("linear system and observation units differ")
         current = next(i for i, s in enumerate(segments) if s == parameters_at(ip, start))
+        # 功能 / Function: 拒绝未定义的初始化边界读出 / Reject ambiguous readout at an initial switch.
+        # 输入 / Inputs: 初始参数段与切换前请求 / Initial segment and pre-event requests.
+        # 输出 / Outputs: 明确错误；不猜测初始药量对应的前段 / Explicit error; no inferred pre-switch initialization.
+        if current > 0 and segments[current]["start"] == start and any(
+            r["time"] == start and r.get("event_phase") == "before_events" for r in records
+        ):
+            raise InputError("before_events at an initial parameter switch requires an earlier initialization start")
         reference = systems[current]
         state_names = reference["state_names"]
         state = np.zeros(len(state_names))
@@ -124,8 +131,9 @@ class LinearPredictor:
                                      anchor_time=regimen["anchor_time"], start_time=start, input_events=resolved)
             state, pending = initial["values"], initial["pending_inputs"]
         # 功能 / Function: 明确事件优先级 / Define event priority explicitly.
-        # 输入 / Inputs: 参数边界、给药、观测 / Boundaries, doses, observations.
-        # 输出 / Outputs: switch(0) -> input(1) -> sample(2)，保留同时间记录 / Stable same-time event order.
+        # 输入 / Inputs: 参数边界、给药、逐记录event_phase / Boundaries, doses and per-record event_phase.
+        # 输出 / Outputs: sample_before(-1) -> switch(0) -> input(1) -> sample_after(2).
+        # 未填写保持sample_after，药量不因切换缩放 / Omission keeps sample_after; switches do not rescale amounts.
         schedule = [(s["start"], 0, i, i) for i, s in enumerate(segments) if start < s["start"] <= end]
         schedule.extend((e["time"], 1, i, e["values"]) for i, e in enumerate(pending))
         for index, event in enumerate([*common_events, *candidate_events], start=len(pending)):
@@ -135,7 +143,8 @@ class LinearPredictor:
             system = systems[next(i for i, s in enumerate(segments) if s == segment)]
             vector, lag = _dose_input(event, system)
             schedule.append((clock_add(event["time"], lag), 1, index, vector))
-        schedule.extend((r["time"], 2, i, i) for i, r in enumerate(records))
+        schedule.extend((r["time"], -1 if r.get("event_phase") == "before_events" else 2, i, i)
+                        for i, r in enumerate(records))
         result, last = np.empty(len(records)), start
         for time, priority, _, value in sorted(schedule, key=lambda row: row[:3]):
             if time > end:

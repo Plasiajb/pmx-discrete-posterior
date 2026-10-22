@@ -26,7 +26,7 @@ See the [runnable README example](../README.md#minimal-call).
 |---|---|
 | `model` | `parameters`, `parameter_model`, `iiv`, `iov`, `residual_model`, `predict`, and explicit `random_effects_dependence="independent_blocks"`. See the [model contract](models.md). |
 | `individual_data` | `covariates`, `occasions`, `dosing_prehistory`, `initialization`. |
-| `observations` | Nonempty ordered list of records with `record_id`, `time`, `time_unit`, `value`, `value_unit`. |
+| `observations` | Nonempty ordered list of records with `record_id`, `time`, `time_unit`, `value`, `value_unit`; optional `event_phase` selects same-time readout order. See [observation phase](observation_phase.md). |
 | `candidate_states` | Nonempty ordered list of `{"state_id": ..., "events": [...]}` mappings with unique IDs. |
 | `priors` | Mapping from every candidate ID to a finite probability in [0, 1], summing to one. Zero is allowed; unnormalized weights are rejected. |
 | `integration_method` | Exactly `"laplace"` or `"ghq"`; no automatic fallback. |

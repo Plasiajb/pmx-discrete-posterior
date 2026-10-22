@@ -1,5 +1,20 @@
 # Release Notes
 
+## Current Source - TAC Observation Phase (2026-10-22)
+
+- Optional per-record `event_phase` accepts `before_events` or `after_events`.
+  The default remains parameter switch, due input, then concentration readout.
+- `LinearPredictor` can read concentration before same-time switches and inputs,
+  without shifting time or rescaling amounts. Undefined pre-switch readout at
+  initialization is rejected. Custom predictors must honor explicit phases or
+  reject unsupported requests.
+- The TAC reference mapper explicitly uses `before_events`, matching this study's
+  convention. OXC mapping, optimization, Hessian, Laplace, normalization and
+  numerical thresholds are unchanged. No case-ID-specific branch is added.
+- Package version remains 0.2.0. This is an additive source commit, not replacement
+  of the existing v0.2.0 tag/assets or historical experiments. Install the patched
+  checkout to use the new field. See [contract and scope](docs/observation_phase.md).
+
 ## v0.2.0 - c026 Repaired Distribution (2026-10-21)
 
 This distribution replaces the original v0.2.0 release assets while retaining

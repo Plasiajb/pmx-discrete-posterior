@@ -111,9 +111,10 @@ provides an optional matrix-exponential compartment predictor. Construct it as
 
 This helper supports piecewise parameters, lagged inputs and the three
 initialization modes above. At coincident times, it switches occasion
-parameters, applies inputs, then samples concentration. This ordering differs
-from the legacy TAC adapter; boundary observations need explicit migration
-checks. Steady-state initialization is recomputed at the current random effects
+parameters, applies inputs, then samples concentration by default. Records with
+`event_phase="before_events"` are read before same-time switches and due inputs,
+as required by the TAC study mapper. See the [phase contract](observation_phase.md)
+for initialization and custom-predictor rules. Steady-state initialization is recomputed at the current random effects
 using fixed reference-occasion parameters.
 
 Units are matched as strings, not converted. The helper does not provide

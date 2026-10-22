@@ -48,6 +48,8 @@ class Predict(Protocol):
         输入 / Inputs: 参数分段、候选事件、不含实测值的请求、初始化/共同前史/occasion / Parameters, events, value-free requests and initialization/history/occasions.
         输出 / Outputs: 同长度非负浓度向量、逐记录标识和单位 / Same-length nonnegative concentrations with record identities and units.
         初始化在预测器内部完成；不重复施加IIV/IOV、不抽样残差 / Initialize inside the predictor; do not reapply IIV/IOV or sample residuals.
+        显式event_phase须遵循或报错，不得静默忽略 / Honor explicit event_phase or reject it; never silently ignore it.
+        before_events先读出再切换和输入；after_events相反 / before_events reads before switches/inputs; after_events reads after them.
         """
         ...
 

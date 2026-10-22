@@ -72,9 +72,10 @@ def test_tac_reference_matches_existing_adapter_away_from_switches(eta, state_in
     assert likelihood == pytest.approx(expected_ll, rel=1e-10, abs=1e-10)
 
 
-def test_tac_switch_boundary_intentionally_uses_new_occasion():
+def test_tac_explicit_after_events_uses_new_occasion():
     case = examples.load_reference("TAC")
     case["observations"][0]["time"] = 12
+    case["observations"][0]["event_phase"] = "after_events"
     raw = json.loads((ROOT / "tests/fixtures/TAC_C003.json").read_text())
     old = tac_model.ResolvedCase.from_dict(raw)
     eta = np.zeros(10)
