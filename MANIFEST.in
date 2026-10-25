@@ -3,6 +3,7 @@ include CONTRIBUTING.md SECURITY.md GITHUB_RELEASE_CHECKLIST.md
 include examples/posterior_reference.py examples/reference_models.py
 include examples/posterior_scenario.py examples/scenario_inputs.py
 recursive-include tests *.py *.json
+prune tests/_tmp*
 include tests/pytest.ini
 recursive-include docs *.md *.json
 include tools/verify_reference.py

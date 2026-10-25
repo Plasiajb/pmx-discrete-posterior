@@ -506,4 +506,3 @@ def load_scenario(model_name, case_number=None, *, input_json=None):
             raise
     return {"identity": identity, "inputs": inputs,
             "mapping_adjustments": _mapping_adjustments(raw, model, inputs, caught)}
-
