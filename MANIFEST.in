@@ -1,10 +1,14 @@
 include README.md LICENSE RELEASE_NOTES.md CITATION.cff
 include CONTRIBUTING.md SECURITY.md GITHUB_RELEASE_CHECKLIST.md
 include examples/posterior_reference.py examples/reference_models.py
+include examples/posterior_scenario.py examples/scenario_inputs.py
 recursive-include tests *.py *.json
 include tests/pytest.ini
 recursive-include docs *.md *.json
 include tools/verify_reference.py
 prune examples/manuscript_current
 prune examples/manuscript_demos
+include examples/README.md
+include examples/manuscript_current/catalog.json
+recursive-include examples/manuscript_current/inputs *.json
 global-exclude __pycache__ *.py[cod]

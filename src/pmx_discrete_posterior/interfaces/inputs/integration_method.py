@@ -7,11 +7,14 @@ from ..validation import InputError
 
 
 def validate_integration_method(integration_method):
-    """功能 / Function: 区分Laplace与GHQ选择 / Validate the Laplace/GHQ selection.
-    输入 / Inputs: 精确小写字符串laplace或ghq / Exact lowercase string laplace or ghq.
+    """功能 / Function: 校验唯一原生Laplace路线 / Validate the sole native Laplace route.
+    输入 / Inputs: 精确小写字符串laplace / Exact lowercase string laplace.
     输出 / Outputs: 原标识或InputError，不静默替换 / Original identifier or InputError, no fallback.
-    接受名称不表示相应积分器已实现 / Accepting a name does not imply an implemented integrator.
+    外部R aghq不是本包后端 / External R aghq is not a package backend.
     """
-    if not isinstance(integration_method, str) or integration_method not in ("laplace", "ghq"):
-        raise InputError("integration_method must be laplace or ghq")
+    if isinstance(integration_method, str) and integration_method == "ghq":
+        raise InputError("native GHQ has been removed; external R aghq is a separate documented workflow, "
+                         "not a package backend; integration_method must be 'laplace' (no fallback)")
+    if not isinstance(integration_method, str) or integration_method != "laplace":
+        raise InputError("integration_method must be 'laplace'; external R aghq is not a package backend")
     return integration_method

@@ -1,11 +1,11 @@
 # Validation evidence
 
-## Repaired 0.2.0 Release (2026-10-21)
+## Reader Release (2026-10-25)
 
-The c026 repaired distribution replaces the original v0.2.0 release assets
-without changing package version `0.2.0`. The original five assets and tag bundle
-have been backed up and hash-checked, not relabelled. Version and filename alone
-cannot distinguish old, prior-acceptance and newly rebuilt artifacts.
+The reader distribution includes c026 recovery, the TAC observation-phase patch
+and portable scenario entrypoints without changing package version `0.2.0`.
+The preceding release assets and tag bundle have been backed up and hash-checked,
+not relabelled. Version and filename alone cannot identify the build.
 
 The [v0.2.0 release](https://github.com/Plasiajb/pmx-discrete-posterior/releases/tag/v0.2.0)
 carries fresh `VALIDATION.json`, `VALIDATION.md` and `SHA256SUMS.txt` for
@@ -58,11 +58,24 @@ development snapshots are retained by the maintainers, not distributed here.
 ## Scope
 
 Reference agreement is numerical verification, not a clinical evaluation.
-The c026 source checks include five targeted passes of ten originally failing
-OXC cases, not a full sensitivity-matrix rerun. TAC c078 still fails and returns
-no complete posterior. The complete manuscript sensitivity matrix has not been
-rerun with the c026 repaired distribution.
-Its earlier implementation and evidence remain at `manuscript-20261018`.
+The later formal manuscript experiments covered 83 OXC and 135 TAC inputs,
+including their references, with five attempts per input. Their outcomes are
+summarized below. These are previously completed experiments, not fresh tests of
+the reader release. Their exact package and bridge snapshots remain distinct.
+
+| Formal route | Attempts | Successful attempts | Recorded failure |
+| --- | ---: | ---: | --- |
+| Python Laplace, OXC | 415 | 415 | None |
+| Python Laplace, TAC | 675 | 670 | C078, five attempts |
+| External R aghq, OXC | 415 | 410 | C026, five attempts |
+| External R aghq, TAC | 675 | 670 | C078, five attempts |
+
+The OXC and retained TAC Laplace computations used the c026 snapshot;
+TAC C107/C110 used the boundary-patched snapshot. External R TAC likewise
+combines retained and boundary-patched attempts. No old outputs are relabelled
+as calculations from the reader build. See [source and acceptance records](manuscript_sources.md).
+Fresh reader-release tests and sampled reruns are listed separately in the
+release's `VALIDATION.json`, with their actual source and artifact hashes.
 
 Precision recovery retains failed-optimizer diagnostics and explicit warnings.
 Integral success does not establish optimizer convergence, a global mode or
@@ -71,7 +84,8 @@ the normal BFGS default is `gtol=1e-6`. No automatic optimizer/integration
 fallback or partial posterior normalization is introduced. See the
 [acceptance contract](../api.md#precision-limited-recovery).
 
-The retained prior-centered GHQ implementation is not an external R
-`aghq` backend. OXC has a reference check; a TAC low-order calculation or
-budget-rejection test does not establish high-order TAC GHQ accuracy.
-See [GHQ scope](../ghq.md).
+The previous Python GHQ implementations have been removed from the current
+release. They are distinct from the manuscript's external R `aghq` route.
+For external R results, order-change thresholds are diagnostic only; valid complete
+outputs are not rejected for exceeding them. Actual numerical failures remain
+failures. See [external R comparison](../manuscript_aghq.md).

@@ -29,8 +29,8 @@ See the [runnable README example](../README.md#minimal-call).
 | `observations` | Nonempty ordered list of records with `record_id`, `time`, `time_unit`, `value`, `value_unit`; optional `event_phase` selects same-time readout order. See [observation phase](observation_phase.md). |
 | `candidate_states` | Nonempty ordered list of `{"state_id": ..., "events": [...]}` mappings with unique IDs. |
 | `priors` | Mapping from every candidate ID to a finite probability in [0, 1], summing to one. Zero is allowed; unnormalized weights are rejected. |
-| `integration_method` | Exactly `"laplace"` or `"ghq"`; no automatic fallback. |
-| `numerical_options` | `None` or supported method-specific settings. GHQ requires explicit settings. |
+| `integration_method` | Exactly `"laplace"`; unsupported methods fail before computation. |
+| `numerical_options` | `None` or supported Laplace settings. |
 
 Unknown fields are rejected. Values and units must be explicit; the package
 does not sort records, infer missing doses, convert units or decode state IDs.
@@ -83,9 +83,9 @@ need rechecking in the new coordinates. The c026 acceptance path below differs
 from that original distribution; the Hessian and stationarity-impact thresholds
 remain `1e-3`.
 
-GHQ accepts only a `ghq` group, with `variant`, `orders`,
-`log_integral_atol`, `posterior_atol`, `max_nodes`.
-See [GHQ settings](ghq.md). Mixing GHQ and Laplace settings is an input error.
+The previous `ghq` method and numerical-options group have been removed.
+The manuscript's [external R comparison](manuscript_aghq.md) is not a package
+backend; the API does not redirect a GHQ request to Laplace.
 For complete validation rules, see
 [numerical_options.py](../src/pmx_discrete_posterior/interfaces/inputs/numerical_options.py).
 
@@ -149,7 +149,7 @@ numerical checks, not a global mode or equality with an exact integral.
 Invalid static inputs raise `InputError` before candidate calculations.
 Model callbacks or numerical operations that fail during integration are
 reported in the result. If any positive-prior candidate fails, or normalization
-or GHQ posterior checks fail, the overall status is `"failed"`. All candidates
+fails, the overall status is `"failed"`. All candidates
 and completed integrals remain available, but non-skipped posterior values
 are `None`. Do not renormalize a surviving subset.
 

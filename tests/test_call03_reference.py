@@ -9,7 +9,7 @@ import math
 import numpy as np
 import pytest
 
-from test_ghq_example import cli
+from cli_helpers import cli
 from test_posterior_binding import declared_reference
 from test_posterior_reference_models import INDEPENDENT_LOGS, LEGACY_LOGS, LEGACY_POSTERIORS
 

@@ -130,13 +130,13 @@ class Integrator(Protocol):
     """功能 / Function: 约定逐候选边际似然积分接口 / Specify per-candidate marginal-likelihood integration.
     输入 / Inputs: 条件似然回调、随机效应分布、方法名及数值设置 / Conditional likelihood, effect distribution, method and options.
     输出 / Outputs: 对数边际似然及计算状态 / Log marginal likelihood and calculation status.
-    仅定义接口；numerics实现Laplace和先验中心GHQ / Interface only; numerics implements Laplace and prior-centered GHQ.
+    仅定义接口；numerics仅实现原生Laplace / Interface only; numerics implements native Laplace only.
     """
 
     def __call__(
         self, *, conditional_log_likelihood: ConditionalLogLikelihood,
         random_effect_distribution: RandomEffectDistributionProtocol,
-        integration_method: Literal["laplace", "ghq"],
+        integration_method: Literal["laplace"],
         numerical_options: Mapping[str, Any] | None = None,
     ) -> IntegrationResult:
         """功能 / Function: 对当前候选的随机效应积分 / Integrate random effects for the current candidate.

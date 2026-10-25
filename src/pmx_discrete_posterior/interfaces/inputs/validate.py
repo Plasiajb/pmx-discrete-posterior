@@ -33,8 +33,6 @@ def validate_inputs(*, model, individual_data, observations, candidate_states, p
             raise InputError("additive residual SD and observation concentration units must match")
     method = validate_integration_method(integration_method)
     options = validate_numerical_options(numerical_options)
-    if (method == "ghq") != ("ghq" in options):
-        raise InputError("GHQ requires its explicit settings; Laplace does not consume GHQ options")
     active_effects = any(ref is not None and checked_model["parameters"]["values"][ref] > 0
                          for spec in (checked_model["iiv"], checked_model["iov"]) if spec is not None
                          for i, row in enumerate(spec["covariance_parameters"]) for ref in (row[i],))

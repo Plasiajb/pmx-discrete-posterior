@@ -1,6 +1,33 @@
 # Release Notes
 
-## Current Source - TAC Observation Phase (2026-10-22)
+## v0.2.0 - Reader Release (2026-10-25)
+
+This same-version replacement includes the previously source-only TAC
+observation-phase patch and current-API manuscript sensitivity examples. The
+prior c026 release files and tag have been backed up with their original hashes.
+Use this release's checksum file and validation receipts to identify the actual
+build. The Laplace integrator, optimizer, derivatives, model calculations and
+normalization remain unchanged from `dd57050`.
+
+- Adds a case-selecting Laplace reader for 83 OXC and 135 TAC inputs, including
+  their references. It calls the installed package rather than cached results.
+- Preserves the accepted scenario mapping, omitted numerical-option semantics,
+  TAC pre-event observations and explicit covariance-roundoff warnings.
+- Removes the prior-centered Python GHQ backend and old research GHQ examples.
+  Requests for `integration_method="ghq"` now fail explicitly, without fallback.
+- Retains the old coupled two-route demos in the `manuscript-20261018`
+  archive, not in the current source tree.
+- Documents the current external R `aghq` manuscript comparison without
+  bundling R, an R execution bridge or another GHQ backend.
+- Reorders public installation and example documentation around reader tasks.
+- Adds Linux installed-distribution CI alongside the Windows checks.
+- Does not modify the reference CLI's compact diagnostic serialization.
+
+These API-removal, reader and distribution changes are not a new set of formal five-repeat
+experiments. Existing experimental snapshots and results are not relabelled as
+this release. The release's `VALIDATION.json` records its own fresh checks.
+
+## Source Patch - TAC Observation Phase (2026-10-22)
 
 - Optional per-record `event_phase` accepts `before_events` or `after_events`.
   The default remains parameter switch, due input, then concentration readout.
@@ -11,9 +38,10 @@
 - The TAC reference mapper explicitly uses `before_events`, matching this study's
   convention. OXC mapping, optimization, Hessian, Laplace, normalization and
   numerical thresholds are unchanged. No case-ID-specific branch is added.
-- Package version remains 0.2.0. This is an additive source commit, not replacement
-  of the existing v0.2.0 tag/assets or historical experiments. Install the patched
-  checkout to use the new field. See [contract and scope](docs/observation_phase.md).
+- At publication on 2026-10-22, this was a source-only commit with package version
+  0.2.0; the tag/assets were not replaced then. The 2026-10-25 reader release now
+  includes it. Historical experiments retain their original source identities.
+  See [contract and scope](docs/observation_phase.md).
 
 ## v0.2.0 - c026 Repaired Distribution (2026-10-21)
 

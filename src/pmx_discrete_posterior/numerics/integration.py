@@ -4,7 +4,7 @@
 """
 
 from ..interfaces.inputs.integration_method import validate_integration_method
-from . import ghq, laplace
+from . import laplace
 
 
 def integrate(*, conditional_log_likelihood, random_effect_distribution,
@@ -14,7 +14,6 @@ def integrate(*, conditional_log_likelihood, random_effect_distribution,
     输出 / Outputs: 所选积分器的IntegrationResult / Selected integrator's IntegrationResult.
     """
     method = validate_integration_method(integration_method)
-    implementation = laplace.integrate if method == "laplace" else ghq.integrate
-    return implementation(conditional_log_likelihood=conditional_log_likelihood,
-                          random_effect_distribution=random_effect_distribution,
-                          integration_method=method, numerical_options=numerical_options)
+    return laplace.integrate(conditional_log_likelihood=conditional_log_likelihood,
+                             random_effect_distribution=random_effect_distribution,
+                             integration_method=method, numerical_options=numerical_options)

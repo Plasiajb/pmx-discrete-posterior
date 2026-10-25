@@ -96,7 +96,7 @@ jobs:
         with:
           name: distributions
           path: .github/_ci/dist
-      - name: Clean-installed TAC Laplace, curvature and bounded GHQ regressions
+      - name: Clean-installed TAC Laplace and curvature regressions
         shell: pwsh
         run: |
           ./.github/scripts/test-installed.ps1 -Distribution wheel -Dependencies ${{ matrix.environment.dependencies }} -Selection slow -Reference TAC
@@ -104,6 +104,43 @@ jobs:
         if: always()
         with:
           name: tac-${{ matrix.environment.python }}
-          path: .github/_ci/wheel-slow/results/*
+          path: .github/_ci/wheel-*-slow/results/*
+          if-no-files-found: warn
+          retention-days: 14
+
+  linux-installed:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        environment:
+          - python: "3.11"
+            dependencies: minimum
+          - python: "3.12"
+            dependencies: current
+        distribution: [wheel, sdist]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.environment.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: distributions
+          path: .github/_ci/dist
+      - name: Clean-installed Linux quick suite and real OXC example
+        shell: bash
+        run: >-
+          python -B .github/scripts/test_installed.py
+          --distribution ${{ matrix.distribution }}
+          --dependencies ${{ matrix.environment.dependencies }}
+          --selection quick --reference OXC
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-installed-${{ matrix.environment.python }}-${{ matrix.distribution }}
+          path: .github/_ci/*-quick/results/*
           if-no-files-found: warn
           retention-days: 14

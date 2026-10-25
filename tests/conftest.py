@@ -16,7 +16,7 @@ def pytest_addoption(parser):
 
 def pytest_configure(config):
     config.addinivalue_line("markers", "quick: portable component, analytic and fast reference regressions")
-    config.addinivalue_line("markers", "slow: full TAC Laplace/curvature or bounded ten-dimensional GHQ")
+    config.addinivalue_line("markers", "slow: full TAC Laplace/curvature regressions")
     if config.getoption("--require-installed"):
         import pmx_discrete_posterior
 

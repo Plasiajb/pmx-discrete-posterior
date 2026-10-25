@@ -121,7 +121,7 @@ class PosteriorResult(TypedDict):
     """
 
     status: Literal["success", "failed"]
-    integration_method: Literal["laplace", "ghq"]
+    integration_method: Literal["laplace"]
     state_results: list[StateResult]
     failure_reason: str | None
     method_details: NotRequired[dict[str, Any]]

@@ -58,6 +58,7 @@ python examples/reference_models.py
 
 Those are conditional model evaluations, not posterior probabilities.
 
-For retained OXC quadrature, see the [GHQ guide](ghq.md). High-order TAC GHQ
-accuracy is not accepted. For the older manuscript examples, use the
+For the manuscript quadrature comparison, see the
+[external R aghq documentation](manuscript_aghq.md). It is not a package method.
+For the older manuscript examples, use the
 [separate legacy checkout](migration.md#reproduce-the-manuscript).

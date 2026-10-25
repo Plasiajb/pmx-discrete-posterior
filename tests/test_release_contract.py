@@ -34,8 +34,8 @@ CORE_FILES = (
     "models/prediction/initialization.py",
     "models/prediction/linear.py",
     "numerics/__init__.py",
+    "numerics/coordinates.py",
     "numerics/derivatives.py",
-    "numerics/ghq.py",
     "numerics/integration.py",
     "numerics/laplace.py",
     "numerics/optimization.py",
@@ -53,10 +53,11 @@ REFERENCE_HASHES = {
 def test_current_core_source_inventory_is_complete():
     """功能 / Function: 核对当前核心文件并打印审计清单 / Check core files and print an audit inventory.
     输入 / Inputs: src下的Python文件 / Python files under src.
-    输出 / Outputs: 必需文件及语法检查，不约束未来附加文件 / Required-file and syntax checks, allowing additions.
+    输出 / Outputs: 32份原生源文件与语法检查 / Exact 32-file native source inventory and syntax checks.
     """
     actual = {path.relative_to(PACKAGE).as_posix() for path in PACKAGE.rglob("*.py")}
-    assert set(CORE_FILES) <= actual, sorted(set(CORE_FILES) - actual)
+    assert len(CORE_FILES) == 32
+    assert set(CORE_FILES) == actual, sorted(set(CORE_FILES) ^ actual)
     for relative in sorted(actual):
         source = PACKAGE / relative
         payload = source.read_bytes()

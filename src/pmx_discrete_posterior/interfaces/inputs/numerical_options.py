@@ -84,16 +84,11 @@ def resolve_hessian_options(derivative_options):
 
 def validate_numerical_options(numerical_options):
     """功能 / Function: 检查当前已实现的数值选项 / Validate currently implemented numerical options.
-    输入 / Inputs: Laplace优化/求导组，或显式GHQ组 / Laplace optimization/derivative groups, or an explicit GHQ group.
+    输入 / Inputs: Laplace优化及求导组 / Laplace optimization and derivative groups.
     输出 / Outputs: 可直接分发的独立设置副本 / Independent settings ready for dispatch.
-    先验中心GHQ不使用优化/求导设置，不允许混填 / Prior-centered GHQ does not consume optimization/derivative settings; mixed groups are rejected.
     """
     options = {} if numerical_options is None else numerical_options
-    fields(options, (), ("optimization", "derivatives", "ghq"), name="numerical_options")
-    if "ghq" in options:
-        if set(options) != {"ghq"}:
-            raise InputError("prior_centered GHQ accepts only the ghq group, not optimization or derivatives")
-        return {"ghq": resolve_ghq_options(options["ghq"])}
+    fields(options, (), ("optimization", "derivatives"), name="numerical_options")
     optimization = options.get("optimization", {})
     fields(optimization, (), ("method", "initial_point", "backend_options", "stationarity_tolerance"), name="optimization")
     backend, tolerance = resolve_optimization_options({k: v for k, v in optimization.items() if k != "initial_point"})
@@ -107,27 +102,3 @@ def validate_numerical_options(numerical_options):
     result_derivatives = {"backend": "scipy", "atol": derivatives["atol"], "rtol": derivatives["rtol"],
                           "backend_options": {k: v for k, v in derivatives.items() if k not in ("atol", "rtol")}}
     return {"optimization": result_optimization, "derivatives": result_derivatives}
-
-
-def resolve_ghq_options(ghq_options):
-    """功能 / Function: 校验显式GHQ阶数与接纳设置 / Validate explicit GHQ orders and acceptance settings.
-    输入 / Inputs: prior_centered、至少三阶、两个绝对容差及每候选累计调用上限 / prior_centered, at least three orders, two absolute tolerances and a per-candidate cumulative evaluation cap.
-    输出 / Outputs: 独立配置；不自动选择阶数、容差或预算 / Independent settings, without inferred orders, tolerances or budgets.
-    max_nodes包含节点评价及每阶首节点的一次重复核验 / max_nodes includes node evaluations and one repeated first-node check per order.
-    """
-    fields(ghq_options, ("variant", "orders", "log_integral_atol", "posterior_atol", "max_nodes"), (), name="ghq")
-    if not isinstance(ghq_options["variant"], str) or ghq_options["variant"] != "prior_centered":
-        raise InputError("only prior_centered GHQ is supported; no adaptive fallback")
-    orders = ghq_options["orders"]
-    if not isinstance(orders, (list, tuple)) or len(orders) < 3:
-        raise InputError("GHQ orders must be a sequence of at least three positive integers")
-    orders = [_positive_integer(order, "GHQ order") for order in orders]
-    if any(a >= b for a, b in zip(orders, orders[1:])):
-        raise InputError("GHQ orders must be strictly increasing")
-    posterior_atol = scalar(ghq_options["posterior_atol"], positive=True, name="posterior_atol")
-    if posterior_atol >= 1:
-        raise InputError("posterior_atol must be less than 1")
-    return {"variant": "prior_centered", "orders": orders,
-            "log_integral_atol": scalar(ghq_options["log_integral_atol"], positive=True, name="log_integral_atol"),
-            "posterior_atol": posterior_atol,
-            "max_nodes": _positive_integer(ghq_options["max_nodes"], "max_nodes")}

@@ -68,8 +68,8 @@ python -m pip install --force-reinstall --no-cache-dir /path/to/dist/pmx_discret
 python -c "from importlib.metadata import version; import pmx_discrete_posterior as p; print(version('pmx-discrete-posterior'), p.__file__)"
 ```
 
-The c026 repaired distribution dated 2026-10-21 retains version `0.2.0` and
-replaces the original release assets. The original five assets and tag bundle
+The reader distribution dated 2026-10-25 retains version `0.2.0` and
+replaces the previous release assets. The previous five assets and tag bundle
 have been backed up and hash-checked. Keep backups separate and retain their
 original checksums and provenance; never relabel them as repaired builds.
 Build the release from the exact clean commit used by its tag/main, recording

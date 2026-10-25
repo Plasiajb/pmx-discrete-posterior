@@ -1,7 +1,7 @@
 """功能 / Function: 离散状态后验计算开发包 / Discrete-state posterior development package.
 输入 / Inputs: 显式模型、个体数据、观测及候选 / Explicit model, individual data, observations and candidates.
-输出 / Outputs: 输入/结果校验、模型评价、Laplace/GHQ积分与完整后验 / Input/result validation, model evaluation, Laplace/GHQ integration and complete posteriors.
-公开入口compute_posterior支持Laplace和先验中心GHQ / Public compute_posterior supports Laplace and prior-centered GHQ.
+输出 / Outputs: 输入/结果校验、模型评价、Laplace积分与完整后验 / Input/result validation, model evaluation, Laplace integration and complete posteriors.
+公开入口compute_posterior仅支持原生Laplace / Public compute_posterior supports native Laplace only.
 """
 
 __all__ = ["compute_posterior"]

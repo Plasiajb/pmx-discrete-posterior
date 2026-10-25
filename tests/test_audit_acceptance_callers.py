@@ -288,23 +288,21 @@ def test_call03_callback_exception_is_model_execution_error(callback):
     print("MODEL_FAILURE", json.dumps(result, allow_nan=False))
 
 
-def test_call03_real_numerical_budget_rejection_is_not_input_or_callback_error():
+def test_call03_real_laplace_iteration_rejection_is_not_input_or_callback_error():
     """功能 / Function: 核对数值拒绝的独立原因 / Check the distinct numerical rejection reason.
-    输入 / Inputs: 合法OXC及不足节点预算 / Valid OXC and insufficient node budget.
-    输出 / Outputs: node_budget失败、全行保留、无后验；不审计GHQ准确性 / Budget failure, retained rows and no posterior; not a GHQ accuracy audit.
+    输入 / Inputs: 合法OXC及一次优化迭代 / Valid OXC with one optimization iteration.
+    输出 / Outputs: 优化失败、全行保留、无后验 / Optimization failure, retained rows and no posterior.
     """
     case = _case()
-    case["integration_method"] = "ghq"
-    case["numerical_options"] = {"ghq": {"variant": "prior_centered", "orders": [3, 5, 7],
-        "log_integral_atol": 1e-6, "posterior_atol": 1e-6, "max_nodes": 1}}
+    case["numerical_options"] = {"optimization": {"backend_options": {"maxiter": 1}}}
     result = compute_posterior(**case)
     assert result["status"] == "failed"
     assert len(result["state_results"]) == 4
     for row in result["state_results"]:
-        assert row["method_details"]["stage"] == "node_budget"
+        assert row["method_details"]["stage"] == "optimization"
         assert row["posterior_probability"] is None and row["log_marginal_likelihood"] is None
         assert "InputError" not in row["failure_reason"] and "ModelExecutionError" not in row["failure_reason"]
-    print("NUMERICAL_REJECTION", json.dumps(result, allow_nan=False))
+    print("NUMERICAL_REJECTION", result)
 
 
 def _run_python(arguments):
@@ -331,31 +329,43 @@ def test_call03_cli_argument_errors_are_nonzero(arguments):
     assert "usage:" in run.stderr and run.stdout == ""
 
 
-def test_call03_cli_rejects_invalid_numeric_input_without_claiming_numeric_result():
-    """功能 / Function: 记录新CLI对语义输入错误的实际约定 / Record the new CLI's semantic-input-error behavior.
-    输入 / Inputs: 所有字段齐全但负容差 / Complete flags with a negative tolerance.
-    输出 / Outputs: 非零和InputError，无failed结果JSON；不强加旧退出2 / Nonzero with InputError and no failed-result JSON; no legacy exit-2 requirement.
+def test_call03_cli_rejects_removed_ghq_flags_without_claiming_numeric_result():
+    """功能 / Function: 拒绝已移除的GHQ参数 / Reject removed GHQ arguments.
+    输入 / Inputs: 旧GHQ参数和负容差 / Old GHQ flags and a negative tolerance.
+    输出 / Outputs: 退出2，无数值结果 / Exit 2 without a numerical result.
     """
     run = _run_python(["examples/posterior_reference.py", "OXC", "--method", "ghq", "--ghq-orders", "3", "5", "7",
         "--log-integral-atol", "-1", "--posterior-atol", "1e-6", "--max-nodes", "1"])
-    assert run.returncode != 0
-    assert "InputError" in run.stderr and run.stdout == ""
+    assert run.returncode == 2
+    assert "usage:" in run.stderr and run.stdout == ""
 
 
 def test_call03_cli_real_numerical_rejection_exits_one():
     """功能 / Function: 真实CLI数值拒绝不能成功退出 / Real CLI numerical rejection must not exit successfully.
-    输入 / Inputs: 合法OXC及不足节点预算 / Valid OXC with insufficient budget.
-    输出 / Outputs: 退出1和含node_budget的failed JSON / Exit 1 and failed JSON with node_budget.
+    输入 / Inputs: 合法OXC及内存注入的一次优化迭代 / Valid OXC with an in-memory one-iteration limit.
+    输出 / Outputs: 退出1和原紧凑failed JSON / Exit 1 and the original compact failed JSON.
     """
-    run = _run_python(["examples/posterior_reference.py", "OXC", "--method", "ghq", "--ghq-orders", "3", "5", "7",
-        "--log-integral-atol", "1e-6", "--posterior-atol", "1e-6", "--max-nodes", "1"])
+    script = textwrap.dedent('''\
+        import runpy
+        import sys
+        import pmx_discrete_posterior as package
+        original = package.compute_posterior
+        def limited(**kwargs):
+            kwargs["numerical_options"] = {"optimization": {"backend_options": {"maxiter": 1}}}
+            return original(**kwargs)
+        package.compute_posterior = limited
+        sys.argv = ["posterior_reference.py", "OXC"]
+        runpy.run_path("examples/posterior_reference.py", run_name="__main__")
+    ''')
+    run = _run_python(["-c", script])
     assert run.returncode == 1 and run.stderr == ""
     result = json.loads(run.stdout)
     assert result["status"] == "failed"
     expected = {s["state_id"]: s["events"] for s in reference.load_reference("OXC")["candidate_states"]}
     for row in result["state_results"]:
         assert row["posterior_probability"] is None
-        assert row["method_details"]["stage"] == "node_budget"
+        assert row["status"] == "failed" and row["failure_reason"]
+        assert "method_details" not in row
         assert row["events"] == expected[row["state_id"]]
 
 

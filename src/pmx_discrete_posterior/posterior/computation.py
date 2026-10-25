@@ -3,12 +3,10 @@
 输出 / Outputs: 保留全部候选的后验结果 / Posterior result preserving every candidate.
 """
 
-import math
-
 from ..interfaces.inputs import resolve_hessian_options, validate_inputs
 from ..interfaces.protocols import ConditionalLogLikelihood
 from ..interfaces.results import PosteriorResult, validate_integration_result, validate_posterior_result
-from ..interfaces.validation import InputError, scalar
+from ..interfaces.validation import InputError
 from ..models.likelihood import conditional_log_likelihood
 from ..models.parameter_resolution import resolve_parameters
 from ..models.prediction import evaluate_prediction, prepare_prediction_records
@@ -46,44 +44,6 @@ def _bind_likelihood(*, model, individual_data, observations, candidate_state,
     return likelihood
 
 
-def _ghq_posterior(rows, priors, states, settings, details):
-    """功能 / Function: 用同阶完整积分检查后验稳定性 / Check posterior stability using complete matched-order integrals.
-    输入 / Inputs: 成功逐状态结果、先验、候选、GHQ设置及检查记录 / Successful state results, priors, candidates, GHQ settings and diagnostics.
-    输出 / Outputs: 最后一阶的概率；失败抛异常并保留已做检查 / Final-order probabilities; failure raises while retaining performed checks.
-    复用normalize；不重算积分，不混用不同阶数 / Reuse normalize without reintegration or mixing orders.
-    """
-    active = [row for row in rows if row["prior_probability"] > 0]
-    if all(row.get("method_details", {}).get("scope") == "direct" for row in active):
-        return normalize({row["state_id"]: row["log_marginal_likelihood"] for row in rows}, priors, candidate_states=states)
-    histories = {}
-    for row in active:
-        history = row.get("method_details", {}).get("order_results", [])
-        if not isinstance(history, list) or [item.get("order") for item in history] != settings["orders"]:
-            raise FloatingPointError("GHQ posterior requires complete matching order histories for all positive-prior states")
-        if history[-1]["log_marginal_likelihood"] != row["log_marginal_likelihood"]:
-            raise FloatingPointError("GHQ final integral differs from its last order estimate")
-        histories[row["state_id"]] = history
-    previous = None
-    for index, order in enumerate(settings["orders"]):
-        logs = {row["state_id"]: (histories[row["state_id"]][index]["log_marginal_likelihood"]
-                                  if row["prior_probability"] > 0 else None) for row in rows}
-        probabilities = normalize(logs, priors, candidate_states=states)
-        delta = max(abs(probabilities[key] - previous[key]) for key in priors) if previous is not None else None
-        log_roundoff = max(scalar(history[index]["estimated_log_integral_roundoff"], minimum=0,
-                                 name="estimated_log_integral_roundoff") for history in histories.values())
-        # softmax在log输入上的无穷范数灵敏度不超过1/2；输入误差仍只是经验估计 / Softmax has infinity-norm sensitivity at most 1/2; input errors remain empirical estimates.
-        posterior_roundoff = min(1., .5 * log_roundoff + 8 * math.ulp(1.))
-        details["posterior_order_results"].append({"order": order, "probabilities": probabilities, "max_change": delta,
-                                                    "estimated_posterior_roundoff": posterior_roundoff})
-        if posterior_roundoff > settings["posterior_atol"] / 4:
-            details["posterior_stability_passed"] = False
-            raise FloatingPointError("GHQ log-estimate resolution/roundoff cannot support posterior_atol")
-        previous = probabilities
-    details["posterior_stability_passed"] = all(item["max_change"] <= settings["posterior_atol"]
-                                                for item in details["posterior_order_results"][-2:])
-    if not details["posterior_stability_passed"]:
-        raise FloatingPointError("GHQ final two posterior changes exceed posterior_atol")
-    return probabilities
 
 
 def compute_posterior(*, model, individual_data, observations, candidate_states,
@@ -91,7 +51,7 @@ def compute_posterior(*, model, individual_data, observations, candidate_states,
     """功能 / Function: 调度全部候选、积分并计算后验概率 / Integrate candidates and calculate posterior probabilities.
     输入 / Inputs: model模型与显式独立性声明；individual_data个体信息；observations观测历史；candidate_states候选历史；priors归一化先验；integration_method积分方法；numerical_options可选数值设置 / Model with explicit independence declarations, individual data, observations, candidate histories, normalized priors, integration method and optional numerical options.
     输出 / Outputs: 按候选顺序的PosteriorResult；非法输入抛InputError，计算失败保留逐状态积分且不作局部归一化 / Ordered PosteriorResult; invalid input raises InputError, execution failure preserves per-state integrals without partial normalization.
-    支持Laplace与先验中心GHQ；零先验跳过积分并保留为零后验 / Supports Laplace and prior-centered GHQ; zero-prior states skip integration and retain zero posterior.
+    仅支持原生Laplace；零先验跳过积分并保留为零后验 / Supports native Laplace only; zero-prior states skip integration and retain zero posterior.
     """
     checked = validate_inputs(model=model, individual_data=individual_data, observations=observations,
                               candidate_states=candidate_states, priors=priors,
@@ -134,18 +94,12 @@ def compute_posterior(*, model, individual_data, observations, candidate_states,
     failed_ids = [row["state_id"] for row in rows if row["status"] == "failed"]
     output = {"status": "failed", "integration_method": checked["integration_method"],
               "state_results": rows, "failure_reason": None}
-    if checked["integration_method"] == "ghq":
-        output["method_details"] = {"posterior_atol": options["ghq"]["posterior_atol"],
-                                     "posterior_stability_passed": None, "posterior_order_results": []}
     if failed_ids:
         output["failure_reason"] = f"integration failed for positive-prior candidates {failed_ids}; posterior not normalized"
     else:
         try:
-            if checked["integration_method"] == "ghq":
-                probabilities = _ghq_posterior(rows, priors, states, options["ghq"], output["method_details"])
-            else:
-                probabilities = normalize({row["state_id"]: row["log_marginal_likelihood"] for row in rows},
-                                          priors, candidate_states=states)
+            probabilities = normalize({row["state_id"]: row["log_marginal_likelihood"] for row in rows},
+                                      priors, candidate_states=states)
         except (FloatingPointError, InputError, KeyError, TypeError) as exc:
             output["failure_reason"] = f"normalization or posterior stability: {exc}"
         else:

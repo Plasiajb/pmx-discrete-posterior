@@ -1,15 +1,18 @@
 # Release checklist
 
-1. Confirm the target repository and its intended visibility. The 0.2.0
-   delivery keeps this repository private; PyPI publication is not part of it.
+1. Confirm the target repository and its intended visibility. The repository
+   is public as of 2026-10-25; PyPI publication is not part of this delivery.
 2. Preserve the prior manuscript implementation at `manuscript-20261018`.
    Normally, do not move existing tags or rewrite published commits. The
-   maintainer-authorized 2026-10-21 c026 republication retains version 0.2.0:
+   maintainer-authorized 2026-10-25 reader republication retains version 0.2.0:
    back up the original tag, release metadata and all attachments before
    updating v0.2.0. Keep the old commit recoverable, use an exact expected-old
    tag lease, and disclose the replacement in the release notes.
-3. Run the portable component tests and both reference examples. Verify
-   the production modules and reference inputs against the accepted source.
+3. Run portable component tests, both references and representative sensitivity
+   cases from the installed package. Verify production modules and scientific
+   inputs against the accepted source. Confirm old Python GHQ is absent and
+   its method is rejected. External R `aghq` is documented, not bundled or
+   tested as part of this package release.
 4. Review the Git diff and distribution file lists for credentials, personal
    paths, internal records, caches and unrelated artifacts.
 5. Build wheel and sdist from the release source. Install each into a clean

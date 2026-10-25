@@ -52,9 +52,10 @@ See the [runnable example](../README.md#minimal-call), [API](api.md) and
 
 Not every old configuration is supported. v0.2 has normal additive or
 proportional residual error, not combined error. Its built-in linear predictor
-switches parameters, applies doses, then samples at coincident times; the
-legacy TAC adapter uses a different boundary order. Check boundary samples,
-initialization, units and covariance ordering, not only a version string.
+defaults to parameter switches, doses, then concentration readout at coincident
+times. The boundary-patched build also supports explicit `before_events`, used
+by the manuscript TAC mapper. Check boundary samples, initialization, units and
+covariance ordering, not only a version string.
 
 A numerical failure leaves positive-prior posteriors unavailable. It must not
 be converted into a zero likelihood or a normalized subset. Removal of old
@@ -63,10 +64,19 @@ were repaired.
 
 ## Reproduce The Manuscript
 
+For the current manuscript inputs with the repaired 0.2.0 package, use the
+[scenario reader](scenario_examples.md). The current external comparison uses
+[R aghq](manuscript_aghq.md), documented separately and not bundled as a package
+backend. The former Python `ghq` method and its settings are no longer supported.
+The catalog JSON inputs are shared; their old Python runners
+are not current-API callers.
+
+### Historical October 18 Snapshot
+
 The tag `manuscript-20261018` preserves the pre-v0.2 source snapshot
 (commit prefix `408f28f`). Use it for **both**
-`examples/manuscript_current` and `examples/manuscript_demos`, which remain
-at their original paths. Do not run them against the v0.2 source or in its
+`examples/manuscript_current` and `examples/manuscript_demos` in that historical
+checkout. Do not run them against the v0.2 source or in its
 virtual environment.
 
 From a parent directory, create a separate checkout and environment:
@@ -79,7 +89,7 @@ python -m venv .venv-manuscript
 
 Use Python 3.12 for this environment. Activate with
 `.venv-manuscript\Scripts\Activate.ps1` in PowerShell or
-`source .venv-manuscript/bin/activate` on POSIX. For the current manuscript
+`source .venv-manuscript/bin/activate` on POSIX. For the historical manuscript
 catalog:
 
 ```bash
@@ -96,6 +106,7 @@ October 1 two-case demos, follow `examples/manuscript_demos/README.md` and
 its own requirements in a dedicated environment.
 
 The original 0.1.4 wheel is not interchangeable with this manuscript source
-tag. Historical sensitivity results belong to that workflow; the full
-sensitivity matrix has **not** been replayed with v0.2.0. Saved NONMEM
-comparators in legacy demos are not fresh NONMEM executions.
+tag. Results from that workflow retain their historical identity. Later c026
+and TAC-boundary experiments use separately recorded sources; the current
+reader release does not relabel them. Saved NONMEM comparators in legacy demos
+are not fresh NONMEM executions.

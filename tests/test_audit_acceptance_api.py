@@ -23,10 +23,10 @@ def _event(amount=2.0, time=0.0):
     return {"time": time, "amount": amount, "amount_unit": "mg", "route": "iv", "compartment": "central"}
 
 
-@pytest.fixture(params=["laplace", "ghq"])
-def case(request):
+@pytest.fixture
+def case():
     """功能 / Function: 创建真实零维房室流程 / Create a real zero-dimensional compartment workflow.
-    输入 / Inputs: 积分路线；两者均走零维直接似然 / Integration route; both use direct zero-dimensional likelihood.
+    输入 / Inputs: 原生Laplace路线，走零维直接似然 / Native Laplace route using direct zero-dimensional likelihood.
     输出 / Outputs: 七组输入及调用记录；不模拟积分器 / Seven input groups and call records; no integrator mocks.
     """
     calls = {"relations": [], "predict": []}
@@ -76,11 +76,8 @@ def case(request):
                             "initialization": {"mode": "zero", "start_time": 0.0, "event_phase": "before_events"}},
         "observations": [{"record_id": "r1", "time": 1.0, "value": 1.0, "time_unit": "h", "value_unit": "mg/L"}],
         "candidate_states": [{"state_id": sid, "events": [_event()]} for sid in ("a", "b")],
-        "priors": {"a": 0.5, "b": 0.5}, "integration_method": request.param,
+        "priors": {"a": 0.5, "b": 0.5}, "integration_method": "laplace",
     }
-    if request.param == "ghq":
-        args["numerical_options"] = {"ghq": {"variant": "prior_centered", "orders": [3, 5, 7],
-                                             "log_integral_atol": 1e-8, "posterior_atol": 1e-8, "max_nodes": 32}}
     return args, calls
 
 
