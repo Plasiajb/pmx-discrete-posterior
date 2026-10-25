@@ -9,8 +9,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def cli(*arguments):
+def cli(*arguments, timeout=90):
     return subprocess.run([sys.executable, "-B", "examples/posterior_reference.py", *arguments],
-                          cwd=ROOT, capture_output=True, text=True, encoding="utf-8", timeout=90,
+                          cwd=ROOT, capture_output=True, text=True, encoding="utf-8", timeout=timeout,
                           env={**os.environ, "PYTHONPATH": "", "PYTHONDONTWRITEBYTECODE": "1",
                                "PYTHONIOENCODING": "utf-8"})

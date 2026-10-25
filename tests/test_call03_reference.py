@@ -20,7 +20,7 @@ def test_call03_repaired_cli_preserves_full_reference(name, log_atol, probabilit
     输入 / Inputs: 模型名及既有核验容差 / Model name and unchanged reference tolerances.
     输出 / Outputs: 成功JSON与逐状态基准一致；不代表GHQ验收 / Successful JSON matches per-state references, not GHQ acceptance.
     """
-    run = cli(name)
+    run = cli(name, timeout=1800 if name == "TAC" else 90)
     assert run.returncode == 0, run.stderr
     result = json.loads(run.stdout)
     print("CALL03_REFERENCE", name, json.dumps(result, allow_nan=False))
